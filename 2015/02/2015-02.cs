@@ -38,9 +38,9 @@ namespace _02
 
         private static string processInputFile(string FilePath)
         {
-            int[] results = processLine(FilePath);
-            int totalSquareFeetOfPaper = results[0];
-            int totalRibbon = results[1];
+            uint[] results = processLine(FilePath);
+            uint totalSquareFeetOfPaper = results[0];
+            uint totalRibbon = results[1];
 
             string result = "Processing " + FilePath + " // ";
             result += "Total square feet of paper: " + totalSquareFeetOfPaper + " // ";
@@ -49,64 +49,19 @@ namespace _02
             return result;
         }
 
-        private static int[] processLine(string FilePath)
+        private static uint[] processLine(string FilePath)
         {
-            int totalPaper = 0;
-            int totalRibbon = 0;
+            uint totalPaper = 0;
+            uint totalRibbon = 0;
 
             foreach(string line in File.ReadLines(FilePath))
             {
-                int[] dimensions = getDimensions(line);
-                totalPaper += getSquareFeetOfPaper(dimensions);
-                totalRibbon += getFeetOfRibbon(dimensions);
+                Present present = new Present(line);
+                totalPaper += present.PaperArea;
+                totalRibbon += present.RibbonLength;
             }
 
-            int[] result = new int[] { totalPaper, totalRibbon };
-            return result;
-        }
-
-        private static int[] getDimensions(string Text)
-        {
-            string[] terms = Text.Split('x');
-
-            int[] dimensions = new int[terms.Length];
-
-            for (int i = 0; i < terms.Length; i++)
-            {
-                dimensions[i] = int.Parse(terms[i]);
-            }
-
-            Array.Sort(dimensions);
-
-            return dimensions;
-        }
-
-        private static int getSquareFeetOfPaper(int[] Dimensions)
-        {
-            int l = Dimensions[0];
-            int w = Dimensions[1];
-            int h = Dimensions[2];
-
-            int surfaceArea = (2*l*w) + (2*w*h) + (2*h*l);
-            int slack = getSlack(Dimensions);
-
-            int squareFeetOfPaper = surfaceArea + slack;
-            return squareFeetOfPaper;
-        }
-
-        private static int getFeetOfRibbon(int[] Dimensions)
-        {
-            Array.Sort(Dimensions);
-            int ribbon = Dimensions[0]*2 + Dimensions[1]*2;
-            int bow = Dimensions[0]*Dimensions[1]*Dimensions[2];
-            int feetOfRibbon = ribbon + bow;
-            return feetOfRibbon;
-        }
-
-        private static int getSlack(int[] Dimensions)
-        {
-            Array.Sort(Dimensions);
-            int result = Dimensions[0] * Dimensions[1];
+            uint[] result = new uint[] { totalPaper, totalRibbon };
             return result;
         }
     }
