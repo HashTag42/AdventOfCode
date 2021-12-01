@@ -20,7 +20,7 @@ namespace _02
     {
         static void Main(string[] args)
         {
-            // Console.WriteLine( AddupSquareFeetOfPaper(@".\test.txt"));
+            Console.WriteLine( AddupSquareFeetOfPaper(@".\testInput.txt"));
             Console.WriteLine( AddupSquareFeetOfPaper(@".\input.txt"));
         }
 
@@ -36,7 +36,7 @@ namespace _02
 
         static int getSquareFeetOfPaper(string expression)
         {
-            var dimensions = splitDimensions(expression);
+            int[] dimensions = splitDimensions(expression);
             int l = dimensions[0];
             int w = dimensions[1];
             int h = dimensions[2];
