@@ -5,7 +5,7 @@
             // Use IntelliSense to find out which attributes exist for C# debugging
             // Use hover for the description of the existing attributes
             // For further information visit https://github.com/OmniSharp/omnisharp-vscode/blob/master/debugger-launchjson.md
-            "name": ".NET Core Launch (console)",
+            "name": "2021-01",
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
@@ -18,9 +18,29 @@
             "stopAtEntry": false
         },
         {
-            "name": ".NET Core Attach",
+            "name": "2015-02",
             "type": "coreclr",
-            "request": "attach"
-        }
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/2015/2015-02/bin/Debug/net5.0/2015-02.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/2015/2015-02",
+            "console": "internalConsole",
+            "stopAtEntry": false
+        },
+        {
+            "name": "2015-01",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/2015/2015-01/bin/Debug/net5.0/2015-01.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/2015/2015-01",
+            "console": "internalConsole",
+            "stopAtEntry": false
+        },
+
+
+
     ]
 }
