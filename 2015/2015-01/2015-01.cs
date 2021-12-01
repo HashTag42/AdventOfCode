@@ -36,7 +36,7 @@ using System.IO;
     What is the position of the character that causes Santa to first enter the basement?
 */
 
-namespace _01
+namespace _2015_01
 {
     class Program
     {

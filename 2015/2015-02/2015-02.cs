@@ -26,7 +26,7 @@ A present with dimensions 1x1x10 requires 1+1+1+1 = 4 feet of ribbon to wrap the
 How many total feet of ribbon should they order?
 */
 
-namespace _02
+namespace _2015_02
 {
     class Program
     {
@@ -38,7 +38,7 @@ namespace _02
 
         private static string processInputFile(string FilePath)
         {
-            uint[] results = processLine(FilePath);
+            uint[] results = processLines(FilePath);
             uint totalSquareFeetOfPaper = results[0];
             uint totalRibbon = results[1];
 
@@ -49,7 +49,7 @@ namespace _02
             return result;
         }
 
-        private static uint[] processLine(string FilePath)
+        private static uint[] processLines(string FilePath)
         {
             uint totalPaper = 0;
             uint totalRibbon = 0;
