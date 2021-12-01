@@ -3,8 +3,6 @@ using System.IO;
 
 // Puzzle: https://adventofcode.com/2021/day/1
 
-
-
 namespace _2021_01
 {
     class Program
@@ -17,36 +15,55 @@ namespace _2021_01
 
         private static string processFile(string FilePath)
         {
-            uint result = processLines(FilePath);
-            string theString = "Processing " + FilePath + " // ";
-            theString += "Increased count: " + result;
+            uint[] results = processLines(FilePath);
 
-            return theString;
+            uint increasedCount = results[0];
+            uint increasedSumCount = results[1];
+
+            string message = "Processing " + FilePath + " // ";
+            message += "Increased count: " + increasedCount + " // ";
+            message += "Rolling sum increased count: " + increasedSumCount;
+
+            return message;
         }
 
-        private static uint processLines(string FilePath)
+        private static uint[] processLines(string FilePath)
         {
-            uint increasedCount = 0;
-            uint previous = 0;
-            uint current = 0;
-            uint lineCount = 1;
+            uint previous2          = 0;
+            uint previous1          = 0;
+            uint current            = 0;
+            uint increasedCount     = 0;
+
+            uint currentRollingSum  = 0;
+            uint priorRollingSum    = 0;
+            uint increasedSumCount  = 0;
+
+            uint lineCount          = 1;
 
             foreach(string line in File.ReadLines(FilePath))
             {
-                previous = current;
-                current  = uint.Parse(line);
-                if (lineCount > 1)
+                previous2   = previous1;
+                previous1   = current;
+                current     = uint.Parse(line);
+
+                priorRollingSum     = currentRollingSum;
+                currentRollingSum   = previous2 + previous1 + current;
+
+                if ((lineCount > 1) && (current > previous1))
                 {
-                    if (current > previous)
-                    {
-                        increasedCount++;
-                    }
+                    increasedCount++;
                 }
+
+                if ((lineCount > 3) && (currentRollingSum > priorRollingSum))
+                {
+                    increasedSumCount++;
+                }
+
                 lineCount++;
             }
 
-            return increasedCount;
+            uint[] result = new uint[] { increasedCount, increasedSumCount };
+            return result;
         }
-
     }
 }
