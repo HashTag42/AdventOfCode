@@ -38,7 +38,7 @@ namespace _01
                 char c = text[i];
                 if ('(' == c)
                 {
-                    floor ++;
+                    floor++;
                 }
                 else if (')' == c)
                 {
