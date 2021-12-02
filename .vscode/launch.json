@@ -1,0 +1,52 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "2021-02",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build_2021-02",
+            "program": "${workspaceFolder}/2021/2021-02/bin/Debug/net5.0/2021-02.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/2021/2021-02",
+            "console": "internalConsole",
+            "stopAtEntry": false
+        },
+        {
+            "name": "2021-01",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build_2021-01",
+            "program": "${workspaceFolder}/2021/2021-01/bin/Debug/net5.0/2021-01.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/2021/2021-01",
+            "console": "internalConsole",
+            "stopAtEntry": false
+        },
+        {
+            "name": "2015-02",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build_2015-02",
+            "program": "${workspaceFolder}/2015/2015-02/bin/Debug/net5.0/2015-02.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/2015/2015-02",
+            "console": "internalConsole",
+            "stopAtEntry": false
+        },
+        {
+            "name": "2015-01",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build_2015-01",
+            "program": "${workspaceFolder}/2015/2015-01/bin/Debug/net5.0/2015-01.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/2015/2015-01",
+            "console": "internalConsole",
+            "stopAtEntry": false
+        },
+    ]
+}
