@@ -40,7 +40,6 @@ namespace _2021_02
             return message;
         }
 
-
         private static Coordinates processFilePart1(string FilePath)
         {
             uint position   = 0;
