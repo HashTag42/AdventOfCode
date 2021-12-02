@@ -15,17 +15,17 @@ namespace _2021_02
 
         private static string processFile(string FilePath)
         {
-            uint[] result = processLines(FilePath);
+            Coordinates result = processLines(FilePath);
 
-            string  message  = "Processing " + FilePath + " // ";
-                    message += "Position: " + result[0] + " // ";
-                    message += "Depth = " + result[1]   + " // ";
-                    message += "Product = " + (result[0]*result[1]) ;
+            string  message  = "Processing "    + FilePath + " // ";
+                    message += "Position: "     + result.Position + " // ";
+                    message += "Depth = "       + result.Depth   + " // ";
+                    message += "Product = "     + result.Multiplied ;
 
             return message;
         }
 
-        private static uint[] processLines(string FilePath)
+        private static Coordinates processLines(string FilePath)
         {
             uint position   = 0;
             uint depth      = 0;
@@ -54,8 +54,9 @@ namespace _2021_02
                 }
             }
 
-            uint[] result = new uint[] { position, depth };
-            return result;
+            Coordinates coordinates = new Coordinates( position, depth);
+
+            return coordinates;
         }
     }
 }
