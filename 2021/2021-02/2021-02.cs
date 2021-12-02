@@ -10,9 +10,9 @@ namespace _2021_02
         static void Main(string[] args)
         {
             Console.WriteLine(getPart1(@".\inputTest.txt"));
-            Console.WriteLine(getPart1(@".\input.txt"));
-
             Console.WriteLine(getPart2(@".\inputTest.txt"));
+
+            Console.WriteLine(getPart1(@".\input.txt"));
             Console.WriteLine(getPart2(@".\input.txt"));
         }
 
@@ -20,10 +20,11 @@ namespace _2021_02
         {
             Coordinates result = processFilePart1(FilePath);
 
-            string  message  = "Processing "    + FilePath + " // ";
-                    message += "Position: "     + result.Position + " // ";
-                    message += "Depth = "       + result.Depth   + " // ";
-                    message += "Product = "     + result.Multiplied ;
+            string  message  = "Processing " + FilePath + " // ";
+                    message += "Part 1 // ";
+                    message += "Position: " + result.Position + " // ";
+                    message += "Depth = " + result.Depth   + " // ";
+                    message += "Answer = " + result.Multiplied ;
 
             return message;
         }
@@ -32,10 +33,11 @@ namespace _2021_02
         {
             Coordinates result = processFilePart2(FilePath);
 
-            string  message  = "Processing "    + FilePath          + " // ";
-                    message += "Position: "     + result.Position   + " // ";
-                    message += "Depth = "       + result.Depth      + " // ";
-                    message += "Product = "     + result.Multiplied + " // ";
+            string  message  = "Processing " + FilePath + " // ";
+                    message += "Part 2 // ";
+                    message += "Position: " + result.Position + " // ";
+                    message += "Depth = " + result.Depth + " // ";
+                    message += "Answer = " + result.Multiplied;
 
             return message;
         }
@@ -88,8 +90,8 @@ namespace _2021_02
                 switch(command)
                 {
                     case "forward":
-                        position    += value;
-                        depth       += aim * value;
+                        position += value;
+                        depth += aim * value;
                         break;
 
                     case "down":
