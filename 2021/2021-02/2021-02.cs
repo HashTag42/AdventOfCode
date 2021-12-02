@@ -9,13 +9,16 @@ namespace _2021_02
     {
         static void Main(string[] args)
         {
-            Console.WriteLine(processFile(@".\inputTest.txt"));
-            Console.WriteLine(processFile(@".\input.txt"));
+            Console.WriteLine(getPart1(@".\inputTest.txt"));
+            Console.WriteLine(getPart1(@".\input.txt"));
+
+            Console.WriteLine(getPart2(@".\inputTest.txt"));
+            Console.WriteLine(getPart2(@".\input.txt"));
         }
 
-        private static string processFile(string FilePath)
+        private static string getPart1(string FilePath)
         {
-            Coordinates result = processLines(FilePath);
+            Coordinates result = processFilePart1(FilePath);
 
             string  message  = "Processing "    + FilePath + " // ";
                     message += "Position: "     + result.Position + " // ";
@@ -25,7 +28,20 @@ namespace _2021_02
             return message;
         }
 
-        private static Coordinates processLines(string FilePath)
+        private static string getPart2(string FilePath)
+        {
+            Coordinates result = processFilePart2(FilePath);
+
+            string  message  = "Processing "    + FilePath          + " // ";
+                    message += "Position: "     + result.Position   + " // ";
+                    message += "Depth = "       + result.Depth      + " // ";
+                    message += "Product = "     + result.Multiplied + " // ";
+
+            return message;
+        }
+
+
+        private static Coordinates processFilePart1(string FilePath)
         {
             uint position   = 0;
             uint depth      = 0;
@@ -55,6 +71,42 @@ namespace _2021_02
             }
 
             Coordinates coordinates = new Coordinates( position, depth);
+
+            return coordinates;
+        }
+
+        private static Coordinates processFilePart2(string FilePath)
+        {
+            uint position   = 0;
+            uint depth      = 0;
+            uint aim        = 0;
+            foreach(string line in File.ReadLines(FilePath))
+            {
+                string[] terms  = line.Split(' ');
+                string command  = terms[0];
+                uint value      = uint.Parse(terms[1]);
+
+                switch(command)
+                {
+                    case "forward":
+                        position    += value;
+                        depth       += aim * value;
+                        break;
+
+                    case "down":
+                        aim += value;
+                        break;
+
+                    case "up":
+                        aim -= value;
+                        break;
+
+                    default:
+                        break;
+                }
+            }
+
+            Coordinates coordinates = new Coordinates(position, depth);
 
             return coordinates;
         }
