@@ -2,17 +2,21 @@ using System;
 
 public class BinaryString
 {
-    public string strValue { get; set; }
-
-    public int ToInt()
-    {
-        double value = 0;
-        for(int x = 0; x < strValue.Length; x++) {
-            int cValue = int.Parse(strValue[x].ToString());
-            int power = strValue.Length - x - 1;
-            value += cValue * Math.Pow(2, power);
+    private string strValue {
+        set {
+            intValue = 0;
+            for(int x = 0; x < value.Length; x++) {
+                int cValue = int.Parse(value[x].ToString());
+                int power = value.Length - x - 1;
+                intValue += cValue * (int) Math.Pow(2, power);
+            }
         }
-        return (int) value;
+    }
+
+    private int intValue;
+
+    public int ToInt() {
+        return intValue;
     }
 
     public BinaryString(string inStr) {
