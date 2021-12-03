@@ -7,17 +7,12 @@ namespace _2021_03
     {
         static void Main(string[] args)
         {
-            string FilePath = @".\inputTest.txt";
-            // string FilePath = @".\input.txt";
-
-            Console.WriteLine(solve_2021_03_Part1(FilePath));
+            Console.WriteLine(solvePuzzle_2021_03_Part1(@".\inputTest.txt", 5)); // Expected result: 198
+            Console.WriteLine(solvePuzzle_2021_03_Part1(@".\input.txt", 12)); // Expected result: 3374136
         }
 
-        private static int solve_2021_03_Part1(string FilePath) {
-            const int rowLength = 5;
-
-            int[,] summary = new int[rowLength,4];
-
+        private static int solvePuzzle_2021_03_Part1(string FilePath, int rowLength) {
+            int[,] summary = new int[rowLength,2];
             foreach(string line in File.ReadLines(FilePath)) {
                 int x = 0;
                 foreach(char c in line) {
@@ -30,20 +25,17 @@ namespace _2021_03
                 }
             }
 
+            string gammaRateString = null;
+            string epsilonRateString = null;
             for(int x = 0; x < rowLength; x++) {
                 if(summary[x,0] > summary[x,1]) {
-                    summary[x,2] = 0;
-                    summary[x,3] = 1;
+                    gammaRateString += '0';
+                    epsilonRateString += '1';
                 } else {
-                    summary[x,2] = 1;
-                    summary[x,3] = 0;
+                    gammaRateString += '1';
+                    epsilonRateString += '0';
                 }
             }
-
-            printMatrix(summary);
-
-            string gammaRateString = "10110";
-            string epsilonRateString = "01001";
 
             BinaryString gammaRate = new BinaryString(gammaRateString);
             BinaryString epsilonRate = new BinaryString(epsilonRateString);
