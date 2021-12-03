@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Diagnostics;
 
 // Puzzle: https://adventofcode.com/2021/day/2
 
@@ -18,98 +19,54 @@ namespace _2021_02
 
         private static string getPart1(string FilePath)
         {
-            Coordinates result = processFilePart1(FilePath);
-
+            uint answer = solvePart1(FilePath);
             string  message  = "Processing " + FilePath + " // ";
                     message += "Part 1 // ";
-                    message += "Position: " + result.Position + " // ";
-                    message += "Depth = " + result.Depth   + " // ";
-                    message += "Answer = " + result.Multiplied ;
+                    message += "Answer = " + answer;
 
             return message;
         }
 
         private static string getPart2(string FilePath)
         {
-            Coordinates result = processFilePart2(FilePath);
-
+            uint answer = solvePart2(FilePath);
             string  message  = "Processing " + FilePath + " // ";
                     message += "Part 2 // ";
-                    message += "Position: " + result.Position + " // ";
-                    message += "Depth = " + result.Depth + " // ";
-                    message += "Answer = " + result.Multiplied;
-
+                    message += "Answer = " + answer;
             return message;
         }
 
-        private static Coordinates processFilePart1(string FilePath)
-        {
+        private static uint solvePart1(string inputPath) {
             uint position   = 0;
             uint depth      = 0;
-            foreach(string line in File.ReadLines(FilePath))
-            {
+            foreach(string line in File.ReadLines(inputPath)) {
                 string[] terms  = line.Split(' ');
                 string command  = terms[0];
                 uint value      = uint.Parse(terms[1]);
-
-                switch(command)
-                {
-                    case "forward":
-                        position += value;
-                        break;
-
-                    case "down":
-                        depth += value;
-                        break;
-
-                    case "up":
-                        depth -= value;
-                        break;
-
-                    default:
-                        break;
+                switch(command) {
+                    case "forward": position += value; break;
+                    case "down": depth += value; break;
+                    case "up": depth -= value; break;
                 }
             }
-
-            Coordinates coordinates = new Coordinates( position, depth);
-
-            return coordinates;
+            return (position * depth);
         }
 
-        private static Coordinates processFilePart2(string FilePath)
-        {
-            uint position   = 0;
-            uint depth      = 0;
-            uint aim        = 0;
-            foreach(string line in File.ReadLines(FilePath))
-            {
+        private static uint solvePart2(string FilePath) {
+            uint position = 0;
+            uint depth    = 0;
+            uint aim      = 0;
+            foreach(string line in File.ReadLines(FilePath)) {
                 string[] terms  = line.Split(' ');
                 string command  = terms[0];
                 uint value      = uint.Parse(terms[1]);
-
-                switch(command)
-                {
-                    case "forward":
-                        position += value;
-                        depth += aim * value;
-                        break;
-
-                    case "down":
-                        aim += value;
-                        break;
-
-                    case "up":
-                        aim -= value;
-                        break;
-
-                    default:
-                        break;
+                switch(command) {
+                    case "forward": position += value; depth += aim * value; break;
+                    case "down": aim += value; break;
+                    case "up": aim -= value; break;
                 }
             }
-
-            Coordinates coordinates = new Coordinates(position, depth);
-
-            return coordinates;
+            return (position * depth);
         }
     }
 }
