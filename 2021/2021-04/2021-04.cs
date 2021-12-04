@@ -6,10 +6,12 @@ using System.Diagnostics;
 namespace _2021_04 {
     class Program {
         static void Main(string[] args) {
-            // The expected results are <PART1> and <PART2>
+
+            // The expected results are 4512 and <PART2>
             Console.WriteLine(SolvePuzzleUsingFile(@".\inputTest.txt"));
-            // The expected results are <PART1> and <PART2>
-            // Console.WriteLine(SolvePuzzleUsingFile(@".\input.txt"));
+
+            // The expected results are 31424 and <PART2>
+            Console.WriteLine(SolvePuzzleUsingFile(@".\input.txt"));
         }
 
         private static string SolvePuzzleUsingFile(string FilePath) {
@@ -30,17 +32,30 @@ namespace _2021_04 {
                 List<string> boardInput = input.GetRange(firstLineIndex, lineCount);
                 BingoBoard newBoard = new BingoBoard(boardInput);
                 boards.Add(newBoard);
-                Console.WriteLine(newBoard);
+                // Console.WriteLine(newBoard);
             }
 
-            // TODO: Draw numbers to determine the winning board
+            // Draw numbers to determine the winning board
+            int winningNumber = -1;
+            int sumUnmarkedCells = -1;
+            string numbersLine = input[0];
+            string[] numbers = numbersLine.Split(',');
+            foreach(string number in numbers) {
+                int num = int.Parse(number);
+                foreach(BingoBoard board in boards) {
+                    board.MarkCell(num);
+                    if(board.IsBingo) {
+                        winningNumber = num;
+                        sumUnmarkedCells = board.SumUnmarkedCells();
+                        Debug.WriteLine("Winning number: {0}", winningNumber);
+                        Debug.WriteLine("Winning board number {0}", boards.IndexOf(board));
+                        Debug.WriteLine(board);
+                        goto Bingo;
+                    }
+                }
+            }
 
-            // TODO: Get the SumUnmarkedCells value from the winning board
-            int sumUnmarkedCells = boards[2].SumUnmarkedCells();
-
-            // TODO: Use the last drawn number
-            int winningNumber = 24;
-
+        Bingo:
             int score = sumUnmarkedCells * winningNumber;
             return score;
         }

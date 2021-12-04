@@ -1,17 +1,22 @@
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 
 public class BingoBoard {
 
-    public BingoCell[,] Board = new BingoCell[5,5];
+    private const int boardSize = 5;
 
-    public bool IsBingo { get; }
+    private BingoCell[,] Board = new BingoCell[boardSize,boardSize];
 
+    private bool _IsBingo { get; set;}
+    public bool IsBingo {
+        get => _IsBingo;
+    }
+
+    /// <summary>Returns the sum of the values for all unmarked cells in the board.</summary>
     public int SumUnmarkedCells() {
         int sum = 0;
-        for(int row = 0; row < 5; row++) {
-            for(int col = 0; col <5; col++) {
+        for(int row = 0; row < boardSize; row++) {
+            for(int col = 0; col <boardSize; col++) {
                 if(!Board[row,col].IsMarked) {
                     sum += Board[row,col].Number;
                 }
@@ -22,8 +27,8 @@ public class BingoBoard {
 
     public override string ToString()
     {   string result = null;
-        for(int row = 0; row < 5; row++) {
-            for(int col = 0; col < 5; col++) {
+        for(int row = 0; row < boardSize; row++) {
+            for(int col = 0; col < boardSize; col++) {
                 result += Board[row,col].Number.ToString("D2");
                 if(Board[row,col].IsMarked) {
                     result += "X ";
@@ -37,16 +42,46 @@ public class BingoBoard {
     }
 
     public bool MarkCell(int inNumber) {
-        for(int row = 0; row < 5; row++) {
-            for(int col = 0; col < 5; col++) {
+        for(int row = 0; row < boardSize; row++) {
+            for(int col = 0; col < boardSize; col++) {
                 if(Board[row,col].Number == inNumber) {
                     Board[row,col].IsMarked = true;
-                    // TODO: Invoke method to evaluate and update IsBingo status;
+                    if(EvaluateIfIsBingo()) {
+                        _IsBingo = true;
+                    }
                     return true;
                 }
             }
         }
         return false;
+    }
+
+    private bool EvaluateIfIsBingo() {
+        bool IsBingo = false;
+
+        for(int row = 0; row < boardSize; row++) {
+            for(int col = 0; col < boardSize; col++) {
+                if(!Board[row,col].IsMarked) {
+                    break;
+                }
+                if(col == boardSize-1) {
+                    return true;
+                }
+            }
+        }
+
+        for(int col = 0; col < boardSize; col++) {
+            for(int row = 0; row < boardSize; row++) {
+                if(!Board[row,col].IsMarked) {
+                    break;
+                }
+                if(row == boardSize-1) {
+                    return true;
+                }
+            }
+        }
+
+        return IsBingo;
     }
 
     public BingoBoard(List<string> input) {
@@ -61,8 +96,7 @@ public class BingoBoard {
             col = 0;
             row++;
         }
-        Board[2,2].IsMarked = true;
-        IsBingo = false;
+        _IsBingo = false;
     }
 
     public class BingoCell {
