@@ -8,9 +8,7 @@ public class BingoBoard {
     private BingoCell[,] Board = new BingoCell[boardSize,boardSize];
 
     private bool _IsBingo { get; set;}
-    public bool IsBingo {
-        get => _IsBingo;
-    }
+    public bool IsBingo { get => _IsBingo; }
 
     /// <summary>Returns the sum of the values for all unmarked cells in the board.</summary>
     public int SumUnmarkedCells() {
