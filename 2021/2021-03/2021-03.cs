@@ -8,17 +8,14 @@ namespace _2021_03
     {
         static void Main(string[] args)
         {
-            // Console.WriteLine(solvePart1(@".\inputTest.txt", 5)); // Expected result: 198
-            Console.WriteLine(solvePart1(@".\input.txt", 12)); // Expected result: 3374136
+            Console.WriteLine(solvePart1(@".\inputTest.txt", 5)); // Expected result: 198
+            Console.WriteLine(solvePart2(@".\inputTest.txt", 5)); // Expected result: 230
 
-            // Console.WriteLine(solvePart2(@".\inputTest.txt", 5)); // Expected result:
+            Console.WriteLine(solvePart1(@".\input.txt", 12)); // Expected result: 3374136
             Console.WriteLine(solvePart2(@".\input.txt", 12)); // Expected result: 4432698
         }
 
         private static int solvePart2(string FilePath, int RowLength) {
-            // int[,] summary = getSummary(FilePath, RowLength);
-            // printMatrix(summary);
-
             List<string> o2GeneratorRatingList = new List<string>();
             List<string> co2ScrubberRatingList = new List<string>();
             foreach(string line in File.ReadLines(FilePath)) {
@@ -28,7 +25,6 @@ namespace _2021_03
 
             int col;
 
-            // printList(o2GeneratorRatingList);
             col = 0;
             do {
                 int countZeros = 0;
@@ -49,13 +45,11 @@ namespace _2021_03
                 }
 
                 o2GeneratorRatingList.RemoveAll(x => !(x[col] == filter));
-                // printList(o2GeneratorRatingList);
                 col++;
             } while(o2GeneratorRatingList.Count > 1);
 
             BinaryString o2GeneratorRatingStr = new BinaryString(o2GeneratorRatingList[0]);
 
-            // printList(co2ScrubberRatingList);
             col = 0;
             do {
                 int countZeros = 0;
@@ -76,7 +70,6 @@ namespace _2021_03
                 }
 
                 co2ScrubberRatingList.RemoveAll(x => !(x[col] == filter));
-                // printList(co2ScrubberRatingList);
                 col++;
             } while(co2ScrubberRatingList.Count > 1);
 
@@ -110,8 +103,6 @@ namespace _2021_03
                     epsilonRateString += '0';
                 }
             }
-
-            printMatrix(summary);
 
             BinaryString gammaRate = new BinaryString(gammaRateString);
             BinaryString epsilonRate = new BinaryString(epsilonRateString);
