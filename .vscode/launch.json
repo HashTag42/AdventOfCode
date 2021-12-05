@@ -4,7 +4,17 @@
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
-
+        {
+            "name": "2021-05",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build_2021-05",
+            "program": "${workspaceFolder}/2021/2021-05/bin/Debug/net5.0/2021-05.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/2021/2021-05",
+            "console": "internalConsole",
+            "stopAtEntry": false
+        },
         {
             "name": "2021-04",
             "type": "coreclr",
