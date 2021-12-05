@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 
 class Board {
 
@@ -6,33 +7,29 @@ class Board {
 
     public Board() { }
 
-    /// <summary>Returns true if the line was added to the board.</summary>
-    public bool AddLine(string line) {
-        bool Added = false;
-
-        int startIndex = 0, length = line.IndexOf(',');
-        int x1 = int.Parse(line.Substring(startIndex, length));
-        startIndex = length + 1; length = line.IndexOf(' ') - startIndex;
-        int y1 = int.Parse(line.Substring(startIndex, length));
-        startIndex = line.IndexOf("> ") + 2; length = line.IndexOf(',', startIndex) - startIndex;
-        int x2 = int.Parse(line.Substring(startIndex, length));
-        startIndex = line.IndexOf(',', startIndex) + 1;
-        int y2 = int.Parse(line.Substring(startIndex));
-
+    public void AddLine(int x1, int y1, int x2, int y2, bool includeDiagonals) {
+        int xDistance = Math.Abs(x2 - x1);
+        int yDistance = Math.Abs(y2 - y1);
+        int xDirection = x1 <= x2 ? 1 : -1;
+        int yDirection = y1 <= y2 ? 1 : -1;
+        // do horizonal and vertical lines
         if((x1 == x2) || (y1 == y2)) {
-            int xDistance = Math.Abs(x2 - x1);
-            int yDistance = Math.Abs(y2 - y1);
-            int xDirection = x1 <= x2 ? 1 : -1;
-            int yDirection = y1 <= y2 ? 1 : -1;
             for(int x = 0; x <= xDistance; x++) {
                 for(int y = 0; y <= yDistance; y++) {
-                    _board[x1+(x*xDirection),y1+(y*yDirection)]++;
-                    Added = true;
+                    int row = x1 + (x * xDirection);
+                    int col = y1 + (y * yDirection);
+                    _board[row, col]++;
                 }
             }
         }
-
-        return Added;
+        // do diagonals, but only at exactly 45 degrees
+        if(includeDiagonals && (xDistance == yDistance)) {
+            for(int i = 0; i <= xDistance; i++) {
+                int row = x1 + (i * xDirection);
+                int col = y1 + (i * yDirection);
+                _board[row, col]++;
+            }
+        }
     }
 
     public int CountPoints(int number) {
@@ -52,12 +49,13 @@ class Board {
         for(int x = 0; x < maxSize; x++) {
             for(int y = 0; y < maxSize; y++) {
                 if(_board[y,x] == 0) {
-                    Console.Write('.');
+                    output += '.';
                 } else {
-                    Console.Write(_board[y,x]);
+                    output += _board[y,x];
                 }
+                output += ' ';
             }
-            Console.Write('\n');
+            output +='\n';
         }
         return output;
     }
