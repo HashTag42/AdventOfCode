@@ -9,10 +9,21 @@ namespace _2021_06
     {
         static void Main(string[] args)
         {
-            Console.WriteLine(SolvePuzzle(@".\testInput.txt", 80)); // Expect: 5934
-            Console.WriteLine(SolvePuzzle(@".\Input.txt", 80)); // Expect: 379414
-            Console.WriteLine(SolvePuzzle(@".\testInput.txt", 256)); // Expect: 26984457539
-            Console.WriteLine(SolvePuzzle(@".\Input.txt", 256)); // Expect: 1705008653296
+            Console.WriteLine(invokeSolvePuzzle(@".\testInput.txt", 80)); // Expect: 5934
+            Console.WriteLine(invokeSolvePuzzle(@".\Input.txt", 80)); // Expect: 379414
+            Console.WriteLine(invokeSolvePuzzle(@".\testInput.txt", 256)); // Expect: 26984457539
+            Console.WriteLine(invokeSolvePuzzle(@".\Input.txt", 256)); // Expect: 1705008653296
+        }
+
+        static string invokeSolvePuzzle(string FilePath, int Days) {
+            string message = null;
+            message += "Using " + FilePath + " & " + Days + " days.";
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
+            message += " // Answer: " + SolvePuzzle(FilePath, Days);
+            stopwatch.Stop();
+            message += " // Elapsed time: " + stopwatch.Elapsed;
+            return message;
         }
 
         static ulong SolvePuzzle(string FilePath, int Days) {
