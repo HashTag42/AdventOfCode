@@ -16,18 +16,14 @@ class Board {
         if((x1 == x2) || (y1 == y2)) {
             for(int x = 0; x <= xDistance; x++) {
                 for(int y = 0; y <= yDistance; y++) {
-                    int row = x1 + (x * xDirection);
-                    int col = y1 + (y * yDirection);
-                    _board[row, col]++;
+                    _board[x1 + (x * xDirection), y1 + (y * yDirection)]++;
                 }
             }
         }
         // do diagonals, but only at exactly 45 degrees
         if(includeDiagonals && (xDistance == yDistance)) {
             for(int i = 0; i <= xDistance; i++) {
-                int row = x1 + (i * xDirection);
-                int col = y1 + (i * yDirection);
-                _board[row, col]++;
+                _board[x1 + (i * xDirection), y1 + (i * yDirection)]++;
             }
         }
     }

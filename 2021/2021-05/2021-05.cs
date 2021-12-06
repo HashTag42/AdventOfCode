@@ -7,10 +7,8 @@ namespace _2021_05 {
         static void Main(string[] args) {
             Console.WriteLine(solvePart1(@".\testInput.txt")); // Expected: 5
             Console.WriteLine(solvePart2(@".\testInput.txt")); // Expected: 12
-            // Console.WriteLine(solvePart1(@".\testInput2.txt")); // Expected:
-            // Console.WriteLine(solvePart2(@".\testInput2.txt")); // Expected:
             Console.WriteLine(solvePart1(@".\input.txt")); // Expected: 6548
-            Console.WriteLine(solvePart2(@".\input.txt")); // Expected: ????. 19633 is too low.
+            Console.WriteLine(solvePart2(@".\input.txt")); // Expected: 19633.
         }
 
         static int solvePart1(string FilePath) {
