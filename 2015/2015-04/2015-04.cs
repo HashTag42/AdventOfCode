@@ -13,23 +13,28 @@ namespace _2015_04
         {
             List<PuzzleEntry> part1Entries = new List<PuzzleEntry>();
 
-            part1Entries.Add(new PuzzleEntry("abcdef", 609043));
-            part1Entries.Add(new PuzzleEntry("pqrstuv", 1048970));
-            part1Entries.Add(new PuzzleEntry("yzbqklnj", 282749));
+            part1Entries.Add(new PuzzleEntry("abcdef", 5, 609043));
+            part1Entries.Add(new PuzzleEntry("pqrstuv", 5, 1048970));
+            part1Entries.Add(new PuzzleEntry("yzbqklnj", 5, 282749));
+            part1Entries.Add(new PuzzleEntry("yzbqklnj", 6, 9962624));
 
             foreach(PuzzleEntry entry in part1Entries) {
-                Console.WriteLine(entry.result(solvePart1(entry.Input)));
+                Console.WriteLine(entry.result(solvePuzzle(entry.Input, entry.NumberOfZeros)));
             }
         }
 
-        static int solvePart1(string input) {
+        static int solvePuzzle(string Input, int NumberOfZeros) {
             string md5 = null;
+            string prefix = null;
+            for(int j = 0; j < NumberOfZeros; j ++) {
+                prefix += '0';
+            }
             int i = -1;
             do{
                 i++;
-                string number = input + i.ToString();
+                string number = Input + i.ToString();
                 md5 = calculateMD5(number);
-            } while (!(md5.Substring(0,5) == "00000"));
+            } while (!(md5.Substring(0,NumberOfZeros) == prefix));
 
             return i;
         }
