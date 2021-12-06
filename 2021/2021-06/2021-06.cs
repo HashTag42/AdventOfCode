@@ -8,11 +8,13 @@ namespace _2021_06
     {
         static void Main(string[] args)
         {
-            Console.WriteLine(solvePart1(@".\testInput.txt")); // Expect: 5934
-            Console.WriteLine(solvePart1(@".\Input.txt")); // Expect: 379414
+            // Console.WriteLine(solvePuzzle(@".\testInput.txt", 80)); // Expect: 5934
+            // Console.WriteLine(solvePuzzle(@".\Input.txt", 80)); // Expect: 379414
+            Console.WriteLine(solvePuzzle(@".\testInput.txt", 256)); // Expect: 26984457539
+            // Console.WriteLine(solvePuzzle(@".\Input.txt", 256)); // Expect: ?
         }
 
-        static int solvePart1(string FilePath) {
+        static int solvePuzzle(string FilePath, int Days) {
             // Read input list of lanternfish
             List<Lanternfish> group = new List<Lanternfish>();
             string line = File.ReadAllText(FilePath);
@@ -20,7 +22,8 @@ namespace _2021_06
             foreach(string u in units) {
                 group.Add(new Lanternfish(int.Parse(u)));
             }
-            for(int day = 0; day < 80; day++) {
+            for(int day = 0; day < Days; day++) {
+                Console.WriteLine("Day {0}", day);
                 int newFish = 0;
                 foreach(Lanternfish f in group) {
                     if(f.NextDay()) {
