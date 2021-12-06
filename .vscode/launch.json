@@ -5,6 +5,17 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "2021-06",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build_2021-06",
+            "program": "${workspaceFolder}/2021/2021-06/bin/Debug/net5.0/2021-06.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/2021/2021-06",
+            "console": "internalConsole",
+            "stopAtEntry": false
+        },
+        {
             "name": "2021-05",
             "type": "coreclr",
             "request": "launch",
@@ -56,6 +67,17 @@
             "program": "${workspaceFolder}/2021/2021-01/bin/Debug/net5.0/2021-01.dll",
             "args": [],
             "cwd": "${workspaceFolder}/2021/2021-01",
+            "console": "internalConsole",
+            "stopAtEntry": false
+        },
+        {
+            "name": "2015-05",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build_2015-05",
+            "program": "${workspaceFolder}/2015/2015-05/bin/Debug/net5.0/2015-05.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/2015/2015-05",
             "console": "internalConsole",
             "stopAtEntry": false
         },
