@@ -43,7 +43,7 @@ namespace _2021_06
             ulong[] newNumbers = new ulong[9];
             newNumbers[6] = Numbers[0];
             newNumbers[8] = Numbers[0];
-            for(int i = 0; i <= 7; i++) {
+            for(int i = 0; i < 8; i++) {
                 newNumbers[i] += Numbers[i+1];
             }
             return newNumbers;
