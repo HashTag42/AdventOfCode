@@ -5,6 +5,17 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "2021-08",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build_2021-08",
+            "program": "${workspaceFolder}/2021/2021-08/bin/Debug/net5.0/2021-08.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/2021/2021-08",
+            "console": "internalConsole",
+            "stopAtEntry": false
+        },
+        {
             "name": "2021-07",
             "type": "coreclr",
             "request": "launch",
