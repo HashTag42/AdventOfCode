@@ -5,6 +5,28 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "Puzzle",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build_Puzzle",
+            "program": "${workspaceFolder}/Classes/Puzzle/bin/Debug/net5.0/Puzzle.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/Classes/Puzzle",
+            "console": "internalConsole",
+            "stopAtEntry": false
+        },
+        {
+            "name": "2021-09",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build_2021-09",
+            "program": "${workspaceFolder}/2021/2021-09/bin/Debug/net5.0/2021-09.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/2021/2021-09",
+            "console": "internalConsole",
+            "stopAtEntry": false
+        },
+        {
             "name": "2021-08",
             "type": "coreclr",
             "request": "launch",
