@@ -1,11 +1,12 @@
 ﻿using System;
 using System.IO;
-using System.Collections;   // Needed to use the Stack class.
-using System.Diagnostics;   // Needed to use the Debug class.
+using System.Collections;           // Stack class
+using System.Collections.Generic;   // List class
+using System.Diagnostics;           // Debug
 
-/* --- Day 10: Syntax Scoring ---
-https://adventofcode.com/2021/day/10
+/*  --- Day 10: Syntax Scoring --- https://adventofcode.com/2021/day/10
 
+--- Part One ---
 You ask the submarine to determine the best route out of the deep-sea cave, but it only replies:
 
 Syntax error in navigation subsystem on line: all of them
@@ -55,6 +56,44 @@ Did you know that syntax checkers actually have contests to see who can get the 
 In the above example, an illegal ) was found twice (2*3= 6 points), an illegal ] was found once (57 points), an illegal } was found once (1197 points), and an illegal > was found once (25137 points). So, the total syntax error score for this file is 6+57+1197+25137= 26397 points!
 
 Find the first illegal character in each corrupted line of the navigation subsystem. What is the total syntax error score for those errors?
+
+--- Part Two ---
+Now, discard the corrupted lines. The remaining lines are incomplete.
+
+Incomplete lines don't have any incorrect characters - instead, they're missing some closing characters at the end of the line. To repair the navigation subsystem, you just need to figure out the sequence of closing characters that complete all open chunks in the line.
+
+You can only use closing characters (), ], }, or >), and you must add them in the correct order so that only legal pairs are formed and all chunks end up closed.
+
+In the example above, there are five incomplete lines:
+
+[({(<(())[]>[[{[]{<()<>> - Complete by adding }}]])})].
+[(()[<>])]({[<{<<[]>>( - Complete by adding )}>]}).
+(((({<>}<{<{<>}{[]{[]{} - Complete by adding }}>}>)))).
+{<[[]]>}<{[{[{[]{()[[[] - Complete by adding ]]}}]}]}>.
+<{([{{}}[<[[[<>{}]]]>[]] - Complete by adding ])}>.
+Did you know that autocomplete tools also have contests? It's true! The score is determined by considering the completion string character-by-character. Start with a total score of 0. Then, for each character, multiply the total score by 5 and then increase the total score by the point value given for the character in the following table:
+
+): 1 point.
+]: 2 points.
+}: 3 points.
+>: 4 points.
+So, the last completion string above - ])}> - would be scored as follows:
+
+Start with a total score of 0.
+Multiply the total score by 5 to get 0, then add the value of ] (2) to get a new total score of 2.
+Multiply the total score by 5 to get 10, then add the value of ) (1) to get a new total score of 11.
+Multiply the total score by 5 to get 55, then add the value of } (3) to get a new total score of 58.
+Multiply the total score by 5 to get 290, then add the value of > (4) to get a new total score of 294.
+The five lines' completion strings have total scores as follows:
+
+}}]])})] - 288957 total points.
+)}>]}) - 5566 total points.
+}}>}>)))) - 1480781 total points.
+]]}}]}]}> - 995444 total points.
+])}> - 294 total points.
+Autocomplete tools are an odd bunch: the winner is found by sorting all of the scores and then taking the middle score. (There will always be an odd number of scores to consider.) In this example, the middle score is 288957 because there are the same number of scores smaller and larger than it.
+
+Find the completion string for each incomplete line, score the completion strings, and sort the scores. What is the middle score?
 */
 
 namespace _2021_10
@@ -63,32 +102,36 @@ namespace _2021_10
     {
         static void Main(string[] args)
         {
-            // Console.WriteLine(SolvePuzzle(@".\inputTestValidChunks.txt"));
-            // Console.WriteLine(SolvePuzzle(@".\inputTestCorruptedChunks.txt"));
-            // Console.WriteLine(SolvePuzzle(@".\inputTest.txt")); // Expected: ?
-            Console.WriteLine(SolvePuzzle(@".\input.txt"));     // Expected: ?
+            // Expected answers: Part 1 = 26397, Part 2 = 288957
+            Console.WriteLine(SolvePuzzle(@".\inputTest.txt"));
+
+            // Expected answers: Part 1 = 290691, Part 2 = 2768166558
+            Console.WriteLine(SolvePuzzle(@".\input.txt"));
         }
 
         static string SolvePuzzle(string FilePath)
         {
-            string[] input= File.ReadAllLines(FilePath);
+            string[] lines= File.ReadAllLines(FilePath);
+            string[] answers= SolveBothParts(lines);
             string message= null;
             message+= "Using file: " + FilePath + "\n";
-            message+= "\t Part 1 answer: " + SolvePart1(input) + "\n";
-            message+= "\t Part 2 answer: " + SolvePart2(input) + "\n";
+            message+= "\t Part 1 answer: " + answers[0] + "\n";
+            message+= "\t Part 2 answer: " + answers[1] + "\n";
             return message;
         }
 
-        // Part 1: What is the total syntax error score for those errors?
-
-        static string SolvePart1(string[] Input)
+        static string[] SolveBothParts(string[] Input)
         {
+            string[] answers= new string[2];
             int syntaxErrorScore= 0;
-            string analysisResult= null;
+            ulong lineScore= 0;
+            List<ulong> scores = new List<ulong>();
+
             bool isLineAnalyzed= false;
             foreach(string line in Input)
             {
-                Debug.Write(line);
+                string lineDebug= line;
+                lineScore= 0;
                 isLineAnalyzed= false;
                 Stack myStack= new Stack();
                 foreach(char c in line)
@@ -104,8 +147,8 @@ namespace _2021_10
                             case ')': case ']': case '}': case '>':
                                 char top= (char) myStack.Peek();
 
-                                if(!IsCloseValid(top, c)) {
-                                    analysisResult= "corrupted";
+                                if(!IsCloserValid(top, c)) {
+                                    lineDebug+= " : corrupted";
                                     isLineAnalyzed= true;
                                     syntaxErrorScore+= Score(c);
                                 }
@@ -117,16 +160,42 @@ namespace _2021_10
 
                 if(!isLineAnalyzed)
                 {
-                    analysisResult= (myStack.Count > 0) ? "incomplete" : "valid";
+                    if(0 == myStack.Count)
+                    {
+                        lineDebug+= " : valid";
+                    }
+                    else
+                    {
+                        lineDebug+= " : incomplete";
+                        Object[] myArray= myStack.ToArray();
+                        string closers= null;
+                        for(int i = 0; i < myArray.GetLength(0); i++)
+                        {
+                            char c= (char) myArray[i];
+                            lineScore*= 5;
+                            closers+= c;
+                            switch (c)
+                            {
+                                case '(': lineScore+= 1; break;
+                                case '[': lineScore+= 2; break;
+                                case '{': lineScore+= 3; break;
+                                case '<': lineScore+= 4; break;
+                            }
+                        }
+                        scores.Add((ulong) lineScore);
+                        lineDebug+= " : " + closers + " : " + lineScore;
+                    }
                 }
-
-                Debug.Write(" : " + analysisResult + '\n');
+                Debug.WriteLine(lineDebug);
             }
+            scores.Sort();
 
-            return syntaxErrorScore.ToString();
+            answers[0]= syntaxErrorScore.ToString();
+            answers[1]= scores[scores.Count/2].ToString();
+            return answers;
         }
 
-        static bool IsCloseValid(char Top, char C)
+        static bool IsCloserValid(char Top, char C)
         {
             bool result= false;
             if((Top == '(') && (C == ')')) { result = true; }
@@ -147,29 +216,6 @@ namespace _2021_10
                 case '>': score= 25137; break;
             }
             return score;
-        }
-
-        static string SolvePart2(string[] Input)
-        {
-            string result= "Answer 2";
-            return result;
-        }
-    }
-
-    public class ChunkPair
-    {
-        public char OpensWith { get; init; }
-        public char ClosesWith { get; init; }
-
-        public bool IsValidClose(char inClosing)
-        {
-            return (ClosesWith == inClosing ? true: false);
-        }
-
-        public ChunkPair(char inOpensWith, char inClosesWith)
-        {
-            OpensWith= inOpensWith;
-            ClosesWith= inClosesWith;
         }
     }
 }
