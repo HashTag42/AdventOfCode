@@ -15,32 +15,37 @@ namespace _2021_11
     {
         static void Main(string[] args)
         {
-            // Console.WriteLine(SolvePuzzle(@".\inputTest0.txt", 2)); // Expected: 9
-            // Console.WriteLine(SolvePuzzle(@".\inputTest.txt", 100)); // Expected: 1656
-            Console.WriteLine(SolvePuzzle(@".\input.txt", 100));     // Expected: 1632
+            Console.WriteLine(SolvePuzzle(@".\inputTest0.txt", 2)); // Part 1: 9
+            Console.WriteLine(SolvePuzzle(@".\inputTest.txt", 100)); // Part 1: 1656
+            Console.WriteLine(SolvePuzzle(@".\inputTest.txt", 200)); // Part 2: 195
+            Console.WriteLine(SolvePuzzle(@".\input.txt", 100));     // Part 1: 1632
+            Console.WriteLine(SolvePuzzle(@".\input.txt", 1000));     // Part 1: 303
         }
 
         static string SolvePuzzle(string FilePath, int Steps)
         {
             string[] lines= File.ReadAllLines(FilePath);
 
+            string[] answers= SolvePuzzle(lines, Steps);
+
             string message= null;
             message+= "Using file: " + FilePath + "\n";
-            message+= "\t Part 1 answer: " + SolvePart1(lines, Steps) + "\n";
-            message+= "\t Part 2 answer: " + SolvePart2(lines, Steps) + "\n";
+            message+= "\t Part 1 answer: " + answers[0] + "\n";
+            message+= "\t Part 2 answer: " + answers[1] + "\n";
 
             return message;
         }
 
-        static string SolvePart1(string[] Lines, int Steps)
+        static string[] SolvePuzzle(string[] Lines, int Steps)
         {
-            DumboOctopusCell[,] board = BuildOctopiBoard(Lines);
-            Console.WriteLine("Before any steps:");
-            Console.WriteLine(BoardToString(board));
+            DumboOctopusCell[,] board= BuildOctopiBoard(Lines);
+            Debug.WriteLine("Before any steps:");
+            Debug.WriteLine(BoardToString(board));
 
             Queue<DumboOctopusCell> queue= new Queue<DumboOctopusCell>();
 
             uint flashesCount= 0;
+            int allOctopiFlashingStep= 0;
             for(int step= 1; step <= Steps; step++)
             {
                 // Step every octopus
@@ -62,7 +67,7 @@ namespace _2021_11
                 {
                     DumboOctopusCell flashingDumbo= queue.Peek();
                     int[,] offsets= { {-1,-1}, {-1,0}, {-1,+1}, {0,-1}, {0,+1}, {+1,-1}, {+1,0}, {+1,+1} };
-                    for(int i = 0; i < offsets.GetLength(0); i++)
+                    for(int i= 0; i < offsets.GetLength(0); i++)
                     {
                         int row= flashingDumbo.Row+offsets[i,0];
                         int col= flashingDumbo.Col+offsets[i,1];
@@ -86,13 +91,33 @@ namespace _2021_11
                     queue.Dequeue();
                 }
 
+                // Check if every octopus is flashing
+                if(0 == allOctopiFlashingStep) {
+                    bool allOctopiAreFlashing= true;
+                    foreach(DumboOctopusCell dumbo in board)
+                    {
+                        if(!dumbo.IsFlashing)
+                        {
+                            allOctopiAreFlashing= false;
+                            break;
+                        }
+                    }
+                    if(allOctopiAreFlashing)
+                    {
+                        allOctopiFlashingStep= step;
+                    }
+                }
+
+                // Stop all that flashing
                 foreach(DumboOctopusCell dumbo in board) { dumbo.StopFlashing(); }
 
-                Console.WriteLine("After step " + step + ":");
-                Console.WriteLine(BoardToString(board));
+                Debug.WriteLine("After step " + step + ":");
+                Debug.WriteLine(BoardToString(board));
+
             }
 
-            return flashesCount.ToString();
+            string[] answers= { flashesCount.ToString(), allOctopiFlashingStep.ToString() };
+            return answers;
         }
 
         static DumboOctopusCell[,] BuildOctopiBoard(string[] Input)
@@ -136,12 +161,6 @@ namespace _2021_11
                 output+= "(" + dumbo.Row + "," + dumbo.Col + ") ";
             }
             return output;
-        }
-
-        static string SolvePart2(string[] Lines, int Steps)
-        {
-            string result= "Answer 2";
-            return result;
         }
     }
 }
