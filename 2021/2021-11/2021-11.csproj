@@ -7,7 +7,6 @@
   </PropertyGroup>
 
 <ItemGroup>
-  <Compile Include="..\..\Classes\Board\Board.cs" />
   <Compile Include="..\..\Classes\Octopus\DumboOctopus\DumboOctopus.cs" />
   <Compile Include="..\..\Classes\Octopus\DumboOctopus\DumboOctopusCell\DumboOctopusCell.cs" />
 </ItemGroup>
