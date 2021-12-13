@@ -16,6 +16,17 @@
             "stopAtEntry": false
         },
         {
+            "name": "2021-11",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build_2021-11",
+            "program": "${workspaceFolder}/2021/2021-11/bin/Debug/net5.0/2021-11.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/2021/2021-11",
+            "console": "internalConsole",
+            "stopAtEntry": false
+        },
+        {
             "name": "2021-10",
             "type": "coreclr",
             "request": "launch",

@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net5.0</TargetFramework>
+    <RootNamespace>_2021_11</RootNamespace>
+  </PropertyGroup>
+
+<ItemGroup>
+  <Compile Include="..\..\Classes\Board\Board.cs" />
+  <Compile Include="..\..\Classes\Octopus\DumboOctopus\DumboOctopus.cs" />
+  <Compile Include="..\..\Classes\Octopus\DumboOctopus\DumboOctopusCell\DumboOctopusCell.cs" />
+</ItemGroup>
+
+</Project>
