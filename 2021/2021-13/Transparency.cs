@@ -71,14 +71,15 @@ class Transparency
     public override string ToString()
     {
         string output= null;
-        // for(int x=0; x < this.VirtualMaxRow; x++)
-        // {
-        //     for(int y=0; y < this.VirtualMaxCol; y++)
-        //     {
-        //         output+= Grid[x,y] == 0 ? '.' : '#';
-        //     }
-        //     output+= '\n';
-        // }
+        for(int x=0; x < this.VirtualMaxRow; x++)
+        {
+            for(int y=0; y < this.VirtualMaxCol; y++)
+            {
+                // Debug.Write(x + "," + y + " ");
+                output+= Grid[x,y] == 0 ? '.' : '#';
+            }
+            output+= '\n';
+        }
         output+= "Visible points = " + this.VisiblePoints;
         return output;
     }
