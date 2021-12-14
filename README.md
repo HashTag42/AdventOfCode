@@ -1,13 +1,15 @@
 # AdventOfCode
-Solutions to the Advent of Code puzzles from https://adventofcode.com/
+Solutions to the [Advent of Code](https://adventofcode.com/) puzzles
 
+---
+# [2021](https://adventofcode.com/2021)
 
-# 2021
+## [2021-14](https://github.com/HashTag42/AdventOfCode/tree/main/2021/2021-13) [Extended Polymerization](https://adventofcode.com/2021/day/14)
 
-## 2012-13 [Transparent Origami](https://adventofcode.com/2021/day/13)
+## [2021-13](https://github.com/HashTag42/AdventOfCode/tree/main/2021/2021-13) [Transparent Origami](https://adventofcode.com/2021/day/13)
 * Created a 'Point' class. Couldn't find an implementation on the .NET library.
 
-## 2021-12: [Passage Pathing](https://adventofcode.com/2021/day/12)
+## [2021-12](https://github.com/HashTag42/AdventOfCode/tree/main/2021/2021-12) [Passage Pathing](https://adventofcode.com/2021/day/12)
 * Created a 'Cave' class, including support for the IEquatable interface.
 
 ## [2021-11](https://github.com/HashTag42/AdventOfCode/tree/main/2021/2021-11): [Dumbo Octopus](https://adventofcode.com/2021/day/11)
@@ -15,39 +17,41 @@ Solutions to the Advent of Code puzzles from https://adventofcode.com/
 * Thought out the problem could be solved using a Queue and no recursion.
 * Designed the algorithm outling using a Excel spreadsheet.
 
-## 2021-10
+## [2021-10](https://github.com/HashTag42/AdventOfCode/tree/main/2021/2021-10) [Syntax Scoring](https://adventofcode.com/2021/day/10)
 
-## 2021-09 [Day 9: Smoke Basin](https://adventofcode.com/2021/day/9)
+## [2021-09](https://github.com/HashTag42/AdventOfCode/tree/main/2021/2021-09) [Smoke Basin](https://adventofcode.com/2021/day/9)
 
-## 2021-08
+## [2021-08](https://github.com/HashTag42/AdventOfCode/tree/main/2021/2021-08) [Seven Segment Search](https://adventofcode.com/2021/day/8)
+* Used chryptography fundaments to decode the inputs.
 
-## 2021-07
+## [2021-07](https://github.com/HashTag42/AdventOfCode/tree/main/2021/2021-07) [The Treachery of Whales](https://adventofcode.com/2021/day/7)
 
-## 2021-06
+## [2021-06](https://github.com/HashTag42/AdventOfCode/tree/main/2021/2021-06) [Lanternfish](https://adventofcode.com/2021/day/6)
 
-## 2021-05
+## [2021-05](https://github.com/HashTag42/AdventOfCode/tree/main/2021/2021-05) [Hydrothermal Venture](https://adventofcode.com/2021/day/5)
 
-## 2021-04
+## [2021-04](https://github.com/HashTag42/AdventOfCode/tree/main/2021/2021-04) [Giant Squid](https://adventofcode.com/2021/day/4)
 
-## 2021-03 [--- Day 3: Binary Diagnostic ---](https://adventofcode.com/2021/day/3)
+## [2021-03](https://github.com/HashTag42/AdventOfCode/tree/main/2021/2021-03) [Binary Diagnostic](https://adventofcode.com/2021/day/3)
 
-## 2021-02 [--- Day 2: Dive! ---](https://adventofcode.com/2021/day/2)
+## [2021-02](https://github.com/HashTag42/AdventOfCode/tree/main/2021/2021-02) [Dive!](https://adventofcode.com/2021/day/2)
 
-## 2021-01 [--- Day 1: Sonar Sweep ---](https://adventofcode.com/2021/day/1)
+## [2021-01](https://github.com/HashTag42/AdventOfCode/tree/main/2021/2021-01) [ Sonar Sweep](https://adventofcode.com/2021/day/1)
+---
 
-# 2015
+# [2015](https://adventofcode.com/2015)
 
-## 2015-06
+## [2015-06](https://github.com/HashTag42/AdventOfCode/tree/main/2015/2015-06) [Probably a Fire Hazard](https://adventofcode.com/2015/day/6)
 
-## 2015-05
+## [2015-05](https://github.com/HashTag42/AdventOfCode/tree/main/2015/2015-05) [Doesn't He Have Intern-Elves For This?](https://adventofcode.com/2015/day/5)
 
-## 2015-04
+## [2015-04](https://github.com/HashTag42/AdventOfCode/tree/main/2015/2015-04) [The Ideal Stocking Stuffer](https://adventofcode.com/2015/day/4)
 
-## 2015-03
+## [2015-03](https://github.com/HashTag42/AdventOfCode/tree/main/2015/2015-03) [Perfectly Spherical Houses in a Vacuum](https://adventofcode.com/2015/day/3)
 
-## 2015-02
+## [2015-02](https://github.com/HashTag42/AdventOfCode/tree/main/2015/2015-02) [I Was Told There Would Be No Math](https://adventofcode.com/2015/day/2)
 
-## 2015-01
+## [2015-01](https://github.com/HashTag42/AdventOfCode/tree/main/2015/2015-01) [Not Quite Lisp](https://adventofcode.com/2015/day/1)
 
 
 # Tips and Tricks
