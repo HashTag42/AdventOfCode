@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net5.0</TargetFramework>
+    <RootNamespace>_2021_12</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\..\Classes\Cave\Cave.cs"/>
+    <Compile Include="..\..\Classes\Puzzle\Puzzle.cs"/>
+    <Compile Include="..\..\Classes\Puzzle\PuzzlePart.cs"/>
+    <Compile Include="..\..\Classes\Puzzle\InputAnswerPair.cs"/>
+  </ItemGroup>
+
+</Project>
