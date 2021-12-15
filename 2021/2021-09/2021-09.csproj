@@ -6,4 +6,8 @@
     <RootNamespace>_2021_09</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Include="..\..\Classes\Point\Point.cs" />
+  </ItemGroup>
+
 </Project>
