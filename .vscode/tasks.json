@@ -14,7 +14,19 @@
             "problemMatcher": "$msCompile"
         },
         {
-            "label": "build",
+            "label": "build_2021-16",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/2021/2021-16/2021-16.csproj",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "build_2021-15",
             "command": "dotnet",
             "type": "process",
             "args": [
