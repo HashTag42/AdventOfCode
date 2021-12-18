@@ -18,7 +18,7 @@ Solutions to the [Advent of Code](https://adventofcode.com/) puzzles
 
 ### [2021-14](https://github.com/HashTag42/AdventOfCode/tree/main/2021/2021-13): [Extended Polymerization](https://adventofcode.com/2021/day/14)
 
-* Implementd the [IEquatable interface](https://docs.microsoft.com/en-us/dotnet/api/system.iequatable-1.equals?view=net-6.0).
+* Fully implemented the [.NET IEquatable interface](https://docs.microsoft.com/en-us/dotnet/api/system.iequatable-1.equals).
 
 
 ### [2021-13](https://github.com/HashTag42/AdventOfCode/tree/main/2021/2021-13): [Transparent Origami](https://adventofcode.com/2021/day/13)
@@ -77,7 +77,15 @@ Solutions to the [Advent of Code](https://adventofcode.com/) puzzles
 
 ### [2015-01](https://github.com/HashTag42/AdventOfCode/tree/main/2015/2015-01): [Not Quite Lisp](https://adventofcode.com/2015/day/1)
 
+___
 
 # Tips and Tricks
 
-Getting the length of a dimension in a multidimensional array: [`anArray.[GetLength](dimension)`](https://docs.microsoft.com/en-us/dotnet/api/system.array.getlength))`
+* Getting the length of a dimension in a multidimensional array:
+
+  `anArray.GetLength(dimension)`
+
+* Printing a list of chars:
+
+  `List<char> myChars = new List<char>("abcde");`
+  `Console.WriteLine(new string(myChars.ToArray()));`

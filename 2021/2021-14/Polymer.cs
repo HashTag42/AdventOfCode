@@ -18,7 +18,7 @@ public class Polymer
         for(int step = 1; step <= Steps; step++)
         {
             Step();
-            // Console.WriteLine("After step {0}: {1}", step, this);
+            Console.WriteLine("After step {0}: {1}", step, new string(Formula.ToArray()));
         }
     }
 
@@ -46,12 +46,12 @@ public class Polymer
         }
     }
 
-    public int MostCommonMinusLeastCommon()
+    public ulong MostCommonMinusLeastCommon()
     {
-        int result = 0;
+        ulong result = 0;
         const int uppercaseA = 65;
 
-        int[] charCounts = new int[26];
+        ulong[] charCounts = new ulong[26];
 
         foreach(char c in Formula)
         {
@@ -61,16 +61,16 @@ public class Polymer
         Array.Sort(charCounts);
         Array.Reverse(charCounts);
 
-        int most = charCounts[0];
-        int min = 0;
+        ulong most  = charCounts[0];
+        ulong least = 0;
         for(int i = 0; i < charCounts.GetLength(0); i++)
         {
             if(0 != charCounts[i])
             {
-                min = charCounts[i];
+                least = charCounts[i];
             }
         }
-        result = most - min;
+        result = most - least;
 
         return result;
     }

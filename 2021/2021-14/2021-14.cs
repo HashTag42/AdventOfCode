@@ -13,8 +13,8 @@ namespace _2021_14
     {
         static void Main(string[] args)
         {
-            // Polymer polymer = new Polymer(@".\inputTest.txt", 10);
-            Polymer polymer = new Polymer(@".\input.txt", 10);
+            Polymer polymer = new Polymer(@".\inputTest.txt", 4);
+            // Polymer polymer = new Polymer(@".\input.txt", 10);
 
             Console.WriteLine("Answer to part 1: " + polymer.MostCommonMinusLeastCommon());
         }
