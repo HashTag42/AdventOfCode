@@ -16,6 +16,28 @@
             "stopAtEntry": false
         },
         {
+            "name": "2021-18",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build_2021-18",
+            "program": "${workspaceFolder}/2021/2021-18/bin/Debug/net6.0/2021-18.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/2021/2021-18",
+            "console": "internalConsole",
+            "stopAtEntry": false
+        },
+        {
+            "name": "2021-17",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build_2021-17",
+            "program": "${workspaceFolder}/2021/2021-17/bin/Debug/net6.0/2021-17.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/2021/2021-17",
+            "console": "internalConsole",
+            "stopAtEntry": false
+        },
+        {
             "name": "2021-16",
             "type": "coreclr",
             "request": "launch",
