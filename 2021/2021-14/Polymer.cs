@@ -17,7 +17,7 @@ public class Polymer
     // The range of elements is from A-Z
     private const int constElementRange = 26;
 
-    public Polymer(string FilePath, int Steps)
+    public Polymer(string FilePath)
     {
         this.Instructions = new PolymerInstructions(File.ReadAllLines(FilePath));
         this.PairBuckets = new ulong[constElementRange, constElementRange];
@@ -26,15 +26,16 @@ public class Polymer
         InitializeBuckets(Instructions.Template);
         Debug.WriteLine(PairBucketsToString());
         Debug.WriteLine(ElementBucketsToString());
+    }
 
+    public void TakeSteps(int Steps)
+    {
         for(int step = 1; step <= Steps; step++)
         {
             Step();
             Debug.WriteLine(PairBucketsToString());
             Debug.WriteLine(ElementBucketsToString());
         }
-
-        Console.WriteLine("Using {0} && {1} steps: Answer = {2}", FilePath, Steps, this.GetAnswer());
     }
 
     private void InitializeBuckets(string Template)
@@ -44,8 +45,8 @@ public class Polymer
         {
             for(int j = 0; j < constElementRange; j++)
             {
-                char firstElement  = (char) (i + constElementOffset);
-                char secondElement = (char) (j + constElementOffset);
+                char firstElement  = IndexToElement(i);
+                char secondElement = IndexToElement(j);
             }
         }
 
@@ -58,20 +59,22 @@ public class Polymer
             ElementPair currentPair = new ElementPair(Template[i], Template[i+1]);
 
             // Increment the corresponding pair bucket
-            this.PairBuckets[Template[i]-constElementOffset, Template[i+1]-constElementOffset]++;
+            this.PairBuckets[ElementToIndex(Template[i]), ElementToIndex(Template[i+1])]++;
 
             // Increment the bucket for the first element in the pair
-            this.ElementBuckets[Template[i]-constElementOffset]++;
+            this.ElementBuckets[ElementToIndex(Template[i])]++;
         }
 
         // Increment the element bucket for the second element in the last pair
-        this.ElementBuckets[Template[lastChar]-constElementOffset]++;
+        this.ElementBuckets[ElementToIndex(Template[lastChar])]++;
     }
 
     private void Step()
     {
+        // Create a duplicate bucket of pairs on where to take actions according to each rule
         ulong[,] copyPairBuckets = new ulong[constElementRange,constElementRange];
         Array.Copy(this.PairBuckets, copyPairBuckets, constElementRange * constElementRange);
+
         for(int i = 0; i < constElementRange; i++)
         {
             for(int j = 0; j < constElementRange; j++)
@@ -79,28 +82,30 @@ public class Polymer
                 foreach(InsertionRule rule in this.Instructions.InsertionRules)
                 {
                     // Evaluate if current pair matches a rule
-                    char first  = (char)(i+constElementOffset);
-                    char second = (char)(j+constElementOffset);
+                    char first  = IndexToElement(i);
+                    char second = IndexToElement(j);
                     ElementPair currentPair = new ElementPair(first, second);
+
+                    // It's important that we use the original PairBuckets
                     if(currentPair == rule.Pair && this.PairBuckets[i,j] > 0)
                     {
                         Debug.WriteLine("Eureka! currentPair=" + currentPair + ", rule=" + rule);
 
+                        ulong currentCount = this.PairBuckets[i,j];
+
                         // Substracting the existing pair
-                        copyPairBuckets[i,j] -= this.PairBuckets[i,j];
+                        copyPairBuckets[i,j] -= currentCount;
 
                         // Incrementing the count for the first pair created by the rule
                         ElementPair firstPair = new ElementPair(currentPair.First, rule.Element);
-                        copyPairBuckets[firstPair.First-constElementOffset,
-                                        firstPair.Second-constElementOffset] += this.PairBuckets[i,j];
+                        copyPairBuckets[ElementToIndex(firstPair.First), ElementToIndex(firstPair.Second)] += currentCount;
 
                         // Incrementing the count for the secodn pair created by the rule
                         ElementPair secondPair = new ElementPair(rule.Element, currentPair.Second);
-                        copyPairBuckets[secondPair.First-constElementOffset,
-                                        secondPair.Second-constElementOffset] += this.PairBuckets[i,j];
+                        copyPairBuckets[ElementToIndex(secondPair.First), ElementToIndex(secondPair.Second)] += currentCount;
 
                         // Increment the bucket for the inserted element
-                        this.ElementBuckets[rule.Element-constElementOffset] += this.PairBuckets[i,j];
+                        this.ElementBuckets[ElementToIndex(rule.Element)] += currentCount;
 
                         // If a rule was found, no need to keep looking for other rules
                         break;
@@ -140,8 +145,8 @@ public class Polymer
             {
                 if(this.PairBuckets[i,j] > 0)
                 {
-                    char first  = (char)(i+constElementOffset);
-                    char second = (char)(j+constElementOffset);
+                    char first  = IndexToElement(i);
+                    char second = IndexToElement(j);
                     ElementPair pair = new ElementPair(first, second);
                     output += pair + ":" + this.PairBuckets[i,j] + " ";
                 }
@@ -159,11 +164,14 @@ public class Polymer
         {
             if(ElementBuckets[i] > 0)
             {
-                output += (char)(i + constElementOffset) + ":" + ElementBuckets[i] + " ";
+                output += IndexToElement(i) + ":" + ElementBuckets[i] + " ";
             }
         }
 
         return output;
     }
 
+    private int ElementToIndex(char Element) => (Element - constElementOffset);
+
+    private char IndexToElement(int Index) => ((char)(Index + constElementOffset));
 }

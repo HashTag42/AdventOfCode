@@ -18,6 +18,7 @@ Solutions to the [Advent of Code](https://adventofcode.com/) puzzles
 
 ### [2021-14](https://github.com/HashTag42/AdventOfCode/tree/main/2021/2021-13): [Extended Polymerization](https://adventofcode.com/2021/day/14)
 
+* An efficient solution is similar to that in 2021-06 (Lanternfish). Keep a list of buckets for the pairs, calculate the next step per bucket, and multiply the results per the number pairs in each bucket.
 * Fully implemented the [.NET IEquatable interface](https://docs.microsoft.com/en-us/dotnet/api/system.iequatable-1.equals).
 
 

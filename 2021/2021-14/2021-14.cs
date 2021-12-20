@@ -13,11 +13,26 @@ namespace _2021_14
     {
         static void Main(string[] args)
         {
-            Polymer polymer;
-            polymer = new Polymer(@".\inputTest.txt", 10); // Expect 1588
-            polymer = new Polymer(@".\inputTest.txt", 40); // Expect 2188189693529
-            polymer = new Polymer(@".\input.txt", 10);  // Expect 2010
-            polymer = new Polymer(@".\input.txt", 40);  // Expect 2437698971143
+            SolvePuzzle("inputTest.txt", 10);  // Expect 1588
+            SolvePuzzle("inputTest.txt", 40);  // Expect 2188189693529
+            SolvePuzzle("input.txt",     10);  // Expect 2010
+            SolvePuzzle("input.txt",     40);  // Expect 2437698971143
+        }
+
+        private static void SolvePuzzle(string FilePath, int Steps)
+        {
+            Stopwatch myStopwatch = new Stopwatch();
+
+            myStopwatch.Start();
+
+            Polymer myPolymer = new Polymer(FilePath);
+            myPolymer.TakeSteps(Steps);
+            ulong answer = myPolymer.GetAnswer();
+
+            myStopwatch.Stop();
+
+            Console.WriteLine("Using: {0} and {1} steps. Answer = {2}. // Elapsed time = {3}",
+                                FilePath, Steps, answer, myStopwatch.Elapsed);
         }
     }
 }
