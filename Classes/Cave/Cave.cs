@@ -17,20 +17,24 @@ class Cave: IEquatable<Cave>
     public override bool Equals(object Object)
     {
         bool isEqual= false;
+
         if(Object != null && Object is Cave)
         {
             isEqual= Equals(Object);
         }
+
         return isEqual;
     }
 
     public bool Equals(Cave Other)
     {
         bool isEqual= false;
+
         if(Other != null && this.Name == Other.Name)
         {
             isEqual= true;
         }
+
         return isEqual;
     }
 
@@ -38,4 +42,10 @@ class Cave: IEquatable<Cave>
     {
         return this.Name.GetHashCode();
     }
+
+    public override string ToString()
+    {
+        return (this.Name + ":" + this.Size);
+    }
+
 }

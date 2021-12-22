@@ -8,9 +8,7 @@
 
   <ItemGroup>
     <Compile Include="..\..\Classes\Cave\Cave.cs"/>
-    <Compile Include="..\..\Classes\Puzzle\Puzzle.cs"/>
-    <Compile Include="..\..\Classes\Puzzle\PuzzlePart.cs"/>
-    <Compile Include="..\..\Classes\Puzzle\InputAnswerPair.cs"/>
+    <Compile Include="..\..\Classes\Cave\CaveMap.cs"/>
   </ItemGroup>
 
 </Project>
