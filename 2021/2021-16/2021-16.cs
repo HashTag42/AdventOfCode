@@ -15,22 +15,11 @@ Console.WriteLine(binary);
 
 Console.WriteLine(Utilities.ConvertFromBinary("100"));
 
+List<string> input = new List<string>(File.ReadLines("input.txt"));
 
-class Packet
+foreach(string line in input)
 {
-    class Header
-    {
-        private enum type {literalType, operatorType};
-
-        class Version
-        {
-
-        }
-
-        class TypeID
-        {
-
-
-        }
-    }
+    Console.WriteLine(line);
 }
+
+Packet myPacket = new Packet();
