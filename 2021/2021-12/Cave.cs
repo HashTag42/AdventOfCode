@@ -1,9 +1,9 @@
 using System;   // IEquatable
 
+ enum CaveSize { Big, Small }
+
 class Cave: IEquatable<Cave>
 {
-    public enum CaveSize { Big, Small }
-
     public string Name { get; init; }
 
     public CaveSize Size { get; init; }

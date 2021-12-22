@@ -42,7 +42,6 @@ Solutions to the [Advent of Code](https://adventofcode.com/) puzzles
 
 * Used recursion to find all locations in a basin.
 
-
 ### [2021-08](https://github.com/HashTag42/AdventOfCode/tree/main/2021/2021-08): [Seven Segment Search](https://adventofcode.com/2021/day/8)
 * Used chryptography fundaments to decode the inputs.
 

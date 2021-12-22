@@ -6,9 +6,4 @@
     <RootNamespace>_2021_12</RootNamespace>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Compile Include="..\..\Classes\Cave\Cave.cs"/>
-    <Compile Include="..\..\Classes\Cave\CaveMap.cs"/>
-  </ItemGroup>
-
 </Project>
