@@ -1,6 +1,6 @@
 using System;   // IEquatable
 
- enum CaveSize { Big, Small }
+enum CaveSize { Big, Small }
 
 class Cave: IEquatable<Cave>
 {
@@ -45,7 +45,7 @@ class Cave: IEquatable<Cave>
 
     public override string ToString()
     {
-        return (this.Name + ":" + this.Size);
+        return (this.Name + " (" + this.Size + ")");
     }
 
 }

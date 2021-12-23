@@ -67,15 +67,17 @@ class CaveMap
     {
         string output = null;
 
+        output += "Caves:\n";
         foreach(Cave cave in this.CaveList)
         {
-            output += cave + "\n";
+            output += "\t" + cave + "\n";
         }
         output += "\n";
 
+        output += "Paths:\n";
         foreach(CavePath path in this.PathList)
         {
-            output += path + "\n";
+            output += "\t" + path + "\n";
         }
 
         return output;
