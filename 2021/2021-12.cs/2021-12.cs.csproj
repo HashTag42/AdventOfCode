@@ -8,4 +8,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Include="..\..\Classes\DefaultDict\DefaultDict.cs" />
+    <Compile Include="..\..\Classes\DefaultDictionary\DefaultDictionary.cs" />
+  </ItemGroup>
+
 </Project>
