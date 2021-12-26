@@ -90,6 +90,17 @@
             "args": ["input.txt"]
         },
         {
+            "name": "2021-12.cs",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build_2021-12.cs",
+            "program": "${workspaceFolder}/2021/2021-12.cs/bin/Debug/net6.0/2021-12.cs.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/2021/2021-12.cs",
+            "console": "internalConsole",
+            "stopAtEntry": false
+        },
+        {
             "name": "2021-12",
             "type": "coreclr",
             "request": "launch",
