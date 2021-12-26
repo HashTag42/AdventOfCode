@@ -2,7 +2,12 @@
 # https://adventofcode.com/2021/day/12
 # Code from https://old.reddit.com/r/adventofcode/comments/rehj2r/2021_day_12_solutions/ho7x83o/
 
-inFile = 'input.txt'
+from os import getcwd
+inFile = '.\\2021\\2021-12.py\\inputTest1.txt'
+# inFile = getcwd() + '\\2021\\2021-12.py\\inputTest1.txt'
+# inFile = getcwd() + '\\2021\\2021-12.py\\inputTest2.txt'
+# inFile = getcwd() + '\\2021\\2021-12.py\\inputTest3.txt'
+# inFile = getcwd() + '\\2021\\2021-12.py\\input.txt'
 
 from collections import defaultdict
 neighbours = defaultdict(list)

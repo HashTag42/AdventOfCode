@@ -82,6 +82,14 @@
             "stopAtEntry": false
         },
         {
+            "name": "2021-12.py",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/2021/2021-12.py/2021-12.py",
+            "console": "integratedTerminal",
+            "args": ["input.txt"]
+        },
+        {
             "name": "2021-12",
             "type": "coreclr",
             "request": "launch",

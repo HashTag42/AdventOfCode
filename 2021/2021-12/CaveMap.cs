@@ -56,7 +56,7 @@ class CaveMap
 
             if(CaveSize.small == CurrentNode.Size)
             {
-                if(1 == CurrentPart)
+                if(1 == Part)
                 {
                     return 0;
                 }
