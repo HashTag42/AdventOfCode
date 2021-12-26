@@ -2,12 +2,13 @@
 # https://adventofcode.com/2021/day/12
 # Code from https://old.reddit.com/r/adventofcode/comments/rehj2r/2021_day_12_solutions/ho7x83o/
 
+# inFile = '\\2021\\2021-12.py\\inputTest1.txt'
+# inFile = '\\2021\\2021-12.py\\inputTest2.txt'
+# inFile = '\\2021\\2021-12.py\\inputTest3.txt'
+inFile = '\\2021\\2021-12.py\\input.txt'
+
 from os import getcwd
-inFile = '.\\2021\\2021-12.py\\inputTest1.txt'
-# inFile = getcwd() + '\\2021\\2021-12.py\\inputTest1.txt'
-# inFile = getcwd() + '\\2021\\2021-12.py\\inputTest2.txt'
-# inFile = getcwd() + '\\2021\\2021-12.py\\inputTest3.txt'
-# inFile = getcwd() + '\\2021\\2021-12.py\\input.txt'
+inFile = getcwd() + inFile
 
 from collections import defaultdict
 neighbours = defaultdict(list)
@@ -28,4 +29,6 @@ def count(part, seen=[], cave='start'):
     return sum(count(part, seen+[cave], n)
                 for n in neighbours[cave])
 
-print(count(part=1), count(part=2))
+print("using: " + inFile)
+print(count(part=1))
+print(count(part=2))
