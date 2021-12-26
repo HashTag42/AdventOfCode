@@ -1,7 +1,7 @@
 using System;   // Required to use the IEquatable interface.
 
-/// This enum represents the possible cave sizes.
-enum CaveSize { Big, Small }
+/// This enum represents the possible sizes a cave can be.
+enum CaveSize { BIG, small }
 
 /// This class represents a cave.
 /// It supports the IEquatable interface.
@@ -14,13 +14,19 @@ class Cave: IEquatable<Cave>
     /// This property represents the cave size.
     public CaveSize Size { get; init; }
 
+    /// Default constructor
+    protected Cave()
+    {
+
+    }
+
     /// This constructor initializes the object.
     /// The cave size is derived from the casing in the Name string property.
     /// Big caves are written in uppercase; small caves are written in lowercase.
     public Cave(string Name)
     {
         this.Name= Name;
-        this.Size= (this.Name == this.Name.ToUpper()) ? CaveSize.Big : CaveSize.Small;
+        this.Size= (this.Name == this.Name.ToUpper()) ? CaveSize.BIG : CaveSize.small;
     }
 
     /// This method compares two instances of this object.

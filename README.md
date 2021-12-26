@@ -28,7 +28,7 @@ Solutions to the [Advent of Code](https://adventofcode.com/) puzzles
 
 ### [2021-12](https://github.com/HashTag42/AdventOfCode/tree/main/2021/2021-12): [Passage Pathing](https://adventofcode.com/2021/day/12)
 
-* Created a 'Cave' class, including support for the IEquatable interface.
+* Created a 'Cave' class, including full support for the IEquatable interface.
 
 ### [2021-11](https://github.com/HashTag42/AdventOfCode/tree/main/2021/2021-11): [Dumbo Octopus](https://adventofcode.com/2021/day/11)
 

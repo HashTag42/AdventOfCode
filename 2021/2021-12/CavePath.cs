@@ -4,33 +4,37 @@ using System.Collections.Generic;   // Required to use the List class.
 class CavePath
 {
     /// This property stores the caves in the path.
-    public List<Cave> Caves { get; private set; }
+    public List<CaveNode> CaveNodes { get; private set; }
 
     /// This method allows for the addition of a cave at the end of the path.
-    public void Push(Cave Cave) => this.Caves.Add(Cave);
+    public void Push(CaveNode CaveNode) => this.CaveNodes.Add(CaveNode);
 
     /// This method allows for the removal of the last cave in the path.
-    public void Pop() => this.Caves.RemoveAt(this.Caves.Count - 1);
+    public void Pop() => this.CaveNodes.RemoveAt(this.CaveNodes.Count - 1);
 
     /// Default constructor to initialize objects.
-    public CavePath() => this.Caves = new List<Cave>();
+    public CavePath() => this.CaveNodes = new List<CaveNode>();
 
     /// This constructor initializes the object with a specific cave at the start.
-    public CavePath(Cave StartCave) => this.Push(StartCave);
+    public CavePath(CaveNode StartCaveNode) : this() => this.Push(StartCaveNode);
 
     /// This constructor initializes the object with a spefic list of caves.
-    public CavePath(List<Cave> Caves) => this.Caves = Caves;
+    public CavePath(List<CaveNode> CaveNodes) => this.CaveNodes = CaveNodes;
 
     /// This override method provides a string representation of the object.
     public override string ToString()
     {
         string output = null;
-        foreach(Cave cave in this.Caves)
+        string separator = ",";
+
+        foreach(CaveNode caveNode in this.CaveNodes)
         {
-            output += cave.Name + ",";
+            output += caveNode.Name + separator;
         }
-        // Remove that last comma before returning:
-        return output.Remove(output.Length - 1);
+        // Remove the trailing separator
+        output = output.Substring(0, output.Length - separator.Length);
+
+        return output;
     }
 
 }

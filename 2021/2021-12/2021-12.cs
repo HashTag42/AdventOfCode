@@ -9,11 +9,10 @@ namespace _2021_12
     {
         static void Main(string[] args)
         {
-            CaveMap map = new CaveMap("inputTest1.txt");
-            // CaveMap map = new CaveMap("inputTest2.txt");
-            // CaveMap map = new CaveMap("inputTest3.txt");
-            // CaveMap map = new CaveMap("input.txt");
-            Console.WriteLine(map);
+            CaveMap map1 = new CaveMap("inputTest1.txt");
+            CaveMap map2 = new CaveMap("inputTest2.txt");
+            CaveMap map3 = new CaveMap("inputTest3.txt");
+            CaveMap map  = new CaveMap("input.txt");
         }
     }
 }
