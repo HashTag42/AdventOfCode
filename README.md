@@ -67,6 +67,8 @@ Solutions to the [Advent of Code](https://adventofcode.com/) puzzles
 
 ### [2015-06](https://github.com/HashTag42/AdventOfCode/tree/main/2015/2015-06): [Probably a Fire Hazard](https://adventofcode.com/2015/day/6)
 
+* Classes created: Command, Instructions, and Grid. Used tuples for coordinates.
+
 ### [2015-05](https://github.com/HashTag42/AdventOfCode/tree/main/2015/2015-05): [Doesn't He Have Intern-Elves For This?](https://adventofcode.com/2015/day/5)
 
 ### [2015-04](https://github.com/HashTag42/AdventOfCode/tree/main/2015/2015-04): [The Ideal Stocking Stuffer](https://adventofcode.com/2015/day/4)

@@ -13,18 +13,13 @@ namespace _2015_06
         {
             // string input = @".\inputTest.txt";
             string input = @".\input.txt";
-
             Instructions instructions = new Instructions(input);
 
-            Grid grid = new Grid();
+            Grid grid1 = new Grid(1, instructions);
+            Console.WriteLine(grid1.Sum());
 
-            foreach(Command cmd in instructions.Commands)
-            {
-                grid.Action(cmd);
-            }
-
-            Console.WriteLine(grid.Sum());
-            // 377035 was too low
+            Grid grid2 = new Grid(2, instructions);
+            Console.WriteLine(grid2.Sum());
         }
     }
 }
