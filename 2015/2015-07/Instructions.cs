@@ -7,10 +7,17 @@ class Instructions
 
     public Dictionary<string,Wire> Wires { get; set; }
 
+    public string OverrideWireName { get; set; }
+
+    public ushort OverrideValue;
+
+    /// Default constructor to initialize member fields and properties.
     public Instructions()
     {
         Commands = new List<Command>();
         Wires = new Dictionary<string, Wire>();
+        OverrideWireName = "";
+        OverrideValue = default;
         return;
     }
 
@@ -27,48 +34,53 @@ class Instructions
 
     public void ProcessCommands()
     {
-        List<Command> UnprocessedCommands = this.Commands.FindAll(cmd => !cmd.Processed);
-
-        for(int i = 0; i < UnprocessedCommands.Count; i++)
+        while(this.HasUnprocessedCommands())
         {
-            Command cmd = UnprocessedCommands[i];
-            Debug.Print($"Processing command: {cmd}");
-            ushort result    = default;
-            ushort[] numbers = new ushort[2];
-            try {
-                numbers = GetNumbers(cmd);
+            List<Command> unprocessedCommands = this.Commands.FindAll(cmd => !cmd.Processed);
+            for(int i = 0; i < unprocessedCommands.Count; i++)
+            {
+                Command cmd = unprocessedCommands[i];
+                ushort result    = default;
+                ushort[] numbers = new ushort[2];
+                try {
+                    numbers = GetNumbers(cmd);
 
-                switch (cmd.Type)
-                {
-                    case CommandType.Signal:
-                        result = numbers[0];
-                        break;
+                    switch (cmd.Type)
+                    {
+                        case CommandType.Signal:
+                            result = numbers[0];
+                            break;
 
-                    case CommandType.Not:
-                        result = (ushort)(~numbers[0]);
-                        break;
+                        case CommandType.Not:
+                            result = (ushort)(~numbers[0]);
+                            break;
 
-                    case CommandType.And:
-                        result = (ushort)(numbers[0] & numbers[1]);
-                        break;
+                        case CommandType.And:
+                            result = (ushort)(numbers[0] & numbers[1]);
+                            break;
 
-                    case CommandType.Or:
-                        result = (ushort)(numbers[0] | numbers[1]);
-                        break;
+                        case CommandType.Or:
+                            result = (ushort)(numbers[0] | numbers[1]);
+                            break;
 
-                    case CommandType.LShift:
-                        result = (ushort)(numbers[0] << numbers[1]);
-                        break;
+                        case CommandType.LShift:
+                            result = (ushort)(numbers[0] << numbers[1]);
+                            break;
 
-                    case CommandType.RShift:
-                        result = (ushort)(numbers[0] >> numbers[1]);
-                        break;
+                        case CommandType.RShift:
+                            result = (ushort)(numbers[0] >> numbers[1]);
+                            break;
+                    }
+                    if(cmd.WireName == this.OverrideWireName)
+                    {
+                        result = this.OverrideValue;
+                    }
+                    this.Wires[cmd.WireName].Set(result);
+                    cmd.Processed = true;
                 }
-                this.Wires[cmd.WireName].Set(result);
-                cmd.Processed = true;
-            }
-            catch {
-                // If a wire value has not yet been set, we'll skip the current command.
+                catch {
+                    // If a wire value has not yet been set, we'll skip the current command.
+                }
             }
         }
         return;
@@ -129,6 +141,14 @@ class Instructions
                 break;
         }
         return numbers;
+    }
+
+    public void ResetAllWires()
+    {
+        foreach(Wire wire in this.Wires.Values)
+        {
+            wire.Reset();
+        }
     }
 
     public bool HasUnprocessedCommands() => this.Commands.FindAll(cmd => !cmd.Processed).Count > 0;

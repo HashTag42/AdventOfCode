@@ -10,14 +10,18 @@ string input = @".\input.txt";
 
 Instructions instructions = new Instructions(input);
 
-while(instructions.HasUnprocessedCommands())
-{
-    instructions.ProcessCommands();
-}
-
-foreach(string wire in instructions.Wires.Keys)
-{
-    Debug.WriteLine($"{wire}: {instructions.Wires[wire]}");
-}
+instructions.ProcessCommands();
 
 Console.WriteLine(instructions.Wires["a"]);
+
+ushort tmp = instructions.Wires["a"].Value;
+
+Instructions newInstructions = new Instructions(input);
+
+newInstructions.OverrideWireName = "b";
+newInstructions.OverrideValue = tmp;
+
+newInstructions.ProcessCommands();
+
+Console.WriteLine(newInstructions.Wires["a"]);
+// 3176 is too low

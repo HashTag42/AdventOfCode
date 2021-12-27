@@ -1,7 +1,7 @@
 class Wire
 {
     public string Name { get; init; }
-    public ushort Value { get; private set; }
+    public ushort Value { get; set; }
 
     public bool HasValue { get; private set; }
 
@@ -20,5 +20,11 @@ class Wire
         this.HasValue = true;
     }
 
-    public override string ToString() => $"{this.Name}: HasValue: {this.HasValue} Value: {this.Value}";
+    public void Reset()
+    {
+        this.Value = default;
+        this.HasValue = false;
+    }
+
+    public override string ToString() => $"{this.Name}: {this.Value}";
 }

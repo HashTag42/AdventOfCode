@@ -68,7 +68,8 @@ Solutions to the [Advent of Code](https://adventofcode.com/) puzzles
 ### 2015-07 [Some Assembly Required](https://adventofcode.com/2015/day/7)
 
 * [Solution](https://github.com/HashTag42/AdventOfCode/tree/main/2015/2015-07).
-* Using [C# Bitwise and shift operators](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/operators/bitwise-and-shift-operators).
+* Classes created: Wire, Command, Instructions.
+* Used [C# Bitwise and shift operators](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/operators/bitwise-and-shift-operators).
 
 ### 2015-06: [Probably a Fire Hazard](https://adventofcode.com/2015/day/6)
 
