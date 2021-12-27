@@ -43,7 +43,10 @@ namespace _2021_12
                     List<string> neighbours = map.GetValues(cave);
                     foreach(string n in neighbours)
                     {
-                        stack.Push(n);
+                        if(n != "end")
+                        {
+                            stack.Push(n);
+                        }
                     }
                 }
             }
