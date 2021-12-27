@@ -65,19 +65,35 @@ Solutions to the [Advent of Code](https://adventofcode.com/) puzzles
 
 # [2015](https://adventofcode.com/2015)
 
-### [2015-06](https://github.com/HashTag42/AdventOfCode/tree/main/2015/2015-06): [Probably a Fire Hazard](https://adventofcode.com/2015/day/6)
+### 2015-07 [Some Assembly Required](https://adventofcode.com/2015/day/7)
 
+* [Solution](https://github.com/HashTag42/AdventOfCode/tree/main/2015/2015-07).
+* Using [C# Bitwise and shift operators](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/operators/bitwise-and-shift-operators).
+
+### 2015-06: [Probably a Fire Hazard](https://adventofcode.com/2015/day/6)
+
+* [Solution](https://github.com/HashTag42/AdventOfCode/tree/main/2015/2015-06).
 * Classes created: Command, Instructions, and Grid. Used tuples for coordinates.
 
-### [2015-05](https://github.com/HashTag42/AdventOfCode/tree/main/2015/2015-05): [Doesn't He Have Intern-Elves For This?](https://adventofcode.com/2015/day/5)
+### 2015-05: [Doesn't He Have Intern-Elves For This?](https://adventofcode.com/2015/day/5)
 
-### [2015-04](https://github.com/HashTag42/AdventOfCode/tree/main/2015/2015-04): [The Ideal Stocking Stuffer](https://adventofcode.com/2015/day/4)
+* [Solution](https://github.com/HashTag42/AdventOfCode/tree/main/2015/2015-05).
 
-### [2015-03](https://github.com/HashTag42/AdventOfCode/tree/main/2015/2015-03): [Perfectly Spherical Houses in a Vacuum](https://adventofcode.com/2015/day/3)
+### 2015-04: [The Ideal Stocking Stuffer](https://adventofcode.com/2015/day/4)
 
-### [2015-02](https://github.com/HashTag42/AdventOfCode/tree/main/2015/2015-02): [I Was Told There Would Be No Math](https://adventofcode.com/2015/day/2)
+* [Solution](https://github.com/HashTag42/AdventOfCode/tree/main/2015/2015-04).
 
-### [2015-01](https://github.com/HashTag42/AdventOfCode/tree/main/2015/2015-01): [Not Quite Lisp](https://adventofcode.com/2015/day/1)
+### 2015-03: [Perfectly Spherical Houses in a Vacuum](https://adventofcode.com/2015/day/3)
+
+* [Solution](https://github.com/HashTag42/AdventOfCode/tree/main/2015/2015-03).
+
+### 2015-02: [I Was Told There Would Be No Math](https://adventofcode.com/2015/day/2)
+
+* [Solution](https://github.com/HashTag42/AdventOfCode/tree/main/2015/2015-02).
+
+### 2015-01: [Not Quite Lisp](https://adventofcode.com/2015/day/1)
+
+* [Solution](https://github.com/HashTag42/AdventOfCode/tree/main/2015/2015-01).
 
 ___
 

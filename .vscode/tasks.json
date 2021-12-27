@@ -202,7 +202,7 @@
                 "${workspaceFolder}/2021/2021-04/2021-04.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
-            ],
+        ],
             "problemMatcher": "$msCompile"
         },
         {
@@ -236,6 +236,18 @@
             "args": [
                 "build",
                 "${workspaceFolder}/2021/2021-01/2021-01.csproj",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "build_2015-07",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/2015/2015-07/2015-07.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
