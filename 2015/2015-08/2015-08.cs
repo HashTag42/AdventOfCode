@@ -9,15 +9,18 @@ inputFile = @".\input.txt";
 
 int totalCharactersOfCode   = default;
 int totalCharactersInMemory = default;
+int totalEncodedCharacters  = default;
 
 foreach(string line in File.ReadAllLines(inputFile))
 {
     StringLiteral str = new StringLiteral(line);
     totalCharactersOfCode   += str.CharactersOfCode;
     totalCharactersInMemory += str.CharactersInMemory;
+    totalEncodedCharacters  += str.EncodedCharacters;
 }
 
-int answer = totalCharactersOfCode - totalCharactersInMemory;
-Console.WriteLine(answer);
-// 1365 is too high
-// 1608 is too high
+int answerPart1 = totalCharactersOfCode - totalCharactersInMemory;
+Console.WriteLine(answerPart1); // Expect: 1350
+
+int answerPart2 = totalCharactersOfCode + totalEncodedCharacters - totalCharactersOfCode;
+Console.WriteLine(answerPart2); // Expect: 2085
