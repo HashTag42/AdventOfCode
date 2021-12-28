@@ -65,6 +65,9 @@ Solutions to the [Advent of Code](https://adventofcode.com/) puzzles
 
 # [2015](https://adventofcode.com/2015)
 
+### 2015-08 [Day 8: Matchsticks](https://adventofcode.com/2015/day/8)
+
+
 ### 2015-07 [Some Assembly Required](https://adventofcode.com/2015/day/7)
 
 * [Solution](https://github.com/HashTag42/AdventOfCode/tree/main/2015/2015-07).
