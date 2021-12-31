@@ -5,6 +5,8 @@ class Map
 {
     public int ShortestDistance { get; private set; }
 
+    public int LongestDistance { get; private set; }
+
     private List<Connection> Connections { get; init; }
 
     private List<string> Cities { get; init; }
@@ -86,11 +88,16 @@ class Map
             }
             Debug.Write($"{count}: {string.Join(" -> ", route)} = {distance}" );
 
-            //
             if(distance < this.ShortestDistance)
             {
                 this.ShortestDistance = distance;
-                Debug.Write("\t New minimum distance!");
+                Debug.Write("\t New shortest distance!");
+            }
+
+            if(distance > this.LongestDistance)
+            {
+                this.LongestDistance = distance;
+                Debug.Write("\t New longest distance!");
             }
             Debug.Write(Environment.NewLine);
         }

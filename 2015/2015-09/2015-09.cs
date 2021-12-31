@@ -6,5 +6,5 @@ string inputFile = @".\input.txt";
 Map map = new Map(inputFile);
 
 Console.WriteLine(map);
-Console.WriteLine($"Shortest distance: {map.ShortestDistance}");
-// Expected: 251
+Console.WriteLine($"Shortest distance: {map.ShortestDistance}"); // Expected: 251
+Console.WriteLine($"Longest distance: {map.LongestDistance}"); // Expected: 898
