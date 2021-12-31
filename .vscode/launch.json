@@ -105,7 +105,7 @@
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build_2021-12",
-            "program": "${workspaceFolder}/2021/2021-12/bin/Debug/net5.0/2021-12.dll",
+            "program": "${workspaceFolder}/2021/2021-12/bin/Debug/net6.0/2021-12.dll",
             "args": [],
             "cwd": "${workspaceFolder}/2021/2021-12",
             "console": "internalConsole",

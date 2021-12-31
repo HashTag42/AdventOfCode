@@ -2,12 +2,14 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <RootNamespace>_2021_12</RootNamespace>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="..\..\Classes\DefaultDict\DefaultDict.cs" />
+    <Compile Include="..\..\Classes\GetPermutations\GetPermutations.cs" />
   </ItemGroup>
 
 </Project>
