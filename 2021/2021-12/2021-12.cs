@@ -7,6 +7,8 @@ inputFile = "inputTest1.txt";
 // inputFile = "inputTest2.txt";
 // inputFile = "inputTest3.txt";
 // inputFile = "input.txt";
-
 Console.WriteLine($"Using: {inputFile}");
+
+Graph graph = new Graph(inputFile);
+Console.WriteLine(graph);
 
