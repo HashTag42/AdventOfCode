@@ -9,7 +9,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="..\..\Classes\GetPermutations\GetPermutations.cs" />
+    <Compile Include="..\..\Classes\Graph\Node.cs" />
+    <Compile Include="..\..\Classes\UniqueList\UniqueList.cs" />
   </ItemGroup>
 
 </Project>

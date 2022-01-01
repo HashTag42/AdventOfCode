@@ -9,6 +9,6 @@ inputFile = "inputTest1.txt";
 // inputFile = "input.txt";
 Console.WriteLine($"Using: {inputFile}");
 
-Graph graph = new Graph(inputFile);
-Console.WriteLine(graph);
-
+CaveMap caveMap = new CaveMap(inputFile);
+Console.WriteLine(caveMap);
+Console.WriteLine(caveMap.PathCount);
