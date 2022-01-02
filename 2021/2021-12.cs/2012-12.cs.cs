@@ -1,12 +1,14 @@
-﻿#nullable disable
+﻿// Day 12: Passage Pathing
+// https://adventofcode.com/2021/day/12
+// Expected answer for part 1: 4241
+// Expected answer for part 2: 122134
 
 // var inFile = @".\inputTest1.txt";
 // var inFile = @".\inputTest2.txt";
 // var inFile = @".\inputTest3.txt";
 var inFile = @".\input.txt";
 
-DefaultDict neighbours = new DefaultDict();
-int sum = 0;
+DefaultDict<string,string> neighbours = new DefaultDict<string,string>();
 
 foreach(string line in File.ReadAllLines(inFile)) {
     string[] substrings = line.Split('-');
@@ -16,7 +18,8 @@ foreach(string line in File.ReadAllLines(inFile)) {
     neighbours.Add(B, A);
 }
 
-int Count(int Part, List<string> Seen, string Cave) {
+int Count(int Part, List<string> Seen, string Cave = "start") {
+    string s = String.Join(", ", Seen);
     if(Cave == "end") { return 1; }
     if(Seen.Contains(Cave)) {
         if(Cave == "start") { return 0; }
@@ -26,21 +29,13 @@ int Count(int Part, List<string> Seen, string Cave) {
         }
     }
     Seen.Add(Cave);
-    // int sum = 0;
-    List<string> theNeighbours = neighbours.GetValues(Cave);
-    foreach(string n in theNeighbours) {
-        sum += Count(Part, Seen, n);
+    int sum = 0;
+    foreach(string n in neighbours.GetValues(Cave)) {
+        sum += Count(Part, Seen.ToList(), n);
     }
     return sum;
 }
 
-Console.WriteLine($"Using {inFile}:");
-
-List <string> Seen = new List<string>();
-
-Seen.Clear(); sum = 0;
-Console.WriteLine(Count(1, Seen, "start"));
-
-Seen.Clear(); sum = 0;
-Console.WriteLine(Count(2, Seen, "start"));
-
+Console.WriteLine("using: " + inFile);
+Console.WriteLine(Count(1, new List<string>()));
+Console.WriteLine(Count(2, new List<string>()));

@@ -2,13 +2,10 @@
 # https://adventofcode.com/2021/day/12
 # Code from https://old.reddit.com/r/adventofcode/comments/rehj2r/2021_day_12_solutions/ho7x83o/
 
-# inFile = '\\2021\\2021-12.py\\inputTest1.txt'
-# inFile = '\\2021\\2021-12.py\\inputTest2.txt'
-# inFile = '\\2021\\2021-12.py\\inputTest3.txt'
-inFile = '\\2021\\2021-12.py\\input.txt'
-
-from os import getcwd
-inFile = getcwd() + inFile
+# inFile = 'inputTest1.txt'
+# inFile = 'inputTest2.txt'
+# inFile = 'inputTest3.txt'
+inFile = 'input.txt'
 
 from collections import defaultdict
 neighbours = defaultdict(list)
@@ -26,8 +23,10 @@ def count(part, seen=[], cave='start'):
             if part == 1: return 0
             else: part = 1
 
-    return sum(count(part, seen+[cave], n)
-                for n in neighbours[cave])
+    s = 0
+    for n in neighbours[cave]:
+        s += count(part, seen+[cave], n)
+    return s
 
 print("using: " + inFile)
 print(count(part=1))

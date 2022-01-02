@@ -11,3 +11,8 @@ dic.Add("A", "A2");
 dic.Add("B", "B1");
 
 Console.WriteLine(dic);
+
+// Expected output
+// A: A1 A2
+// C: C1
+// B: B2 B1
