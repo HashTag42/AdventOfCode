@@ -34,7 +34,7 @@ Solutions to the [Advent of Code](https://adventofcode.com/) puzzles
 
 ### 2021 Day 12: [Passage Pathing](https://adventofcode.com/2021/day/12)
 
-* [My Solution](https://github.com/HashTag42/AdventOfCode/tree/main/2021/2021-12)
+* [My Solution](https://github.com/HashTag42/AdventOfCode/tree/main/2021/2021-12.cs)
 * Created a 'Node' class, including full support for the IEquatable interface.
 
 ### 2021 Day 11: [Dumbo Octopus](https://adventofcode.com/2021/day/11)
