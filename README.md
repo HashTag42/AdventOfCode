@@ -92,6 +92,11 @@ Solutions to the [Advent of Code](https://adventofcode.com/) puzzles
 
 ## [2015](https://adventofcode.com/2015)
 
+### 2015 Day 10: [Elves Look, Elves Say](https://adventofcode.com/2015/day/10)
+
+* [My Solution](https://github.com/HashTag42/AdventOfCode/tree/main/2015/2015-10)
+* Implemented a 'LookAndSayNumber' class.
+
 ### 2015 Day 9: [All in a Single Night](https://adventofcode.com/2015/day/9)
 
 * [My Solution](https://github.com/HashTag42/AdventOfCode/tree/main/2015/2015-09)
