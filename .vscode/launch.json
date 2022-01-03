@@ -233,6 +233,17 @@
             "stopAtEntry": false
         },
         {
+            "name": "2015-11",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build_2015-11",
+            "program": "${workspaceFolder}/2015/2015-11/bin/Debug/net6.0/2015-11.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/2015/2015-11",
+            "console": "internalConsole",
+            "stopAtEntry": false
+        },
+        {
             "name": "2015-10",
             "type": "coreclr",
             "request": "launch",
