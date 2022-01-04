@@ -31,3 +31,15 @@ since i is not allowed.
 Your puzzle input is hxbxwxba. */
 
 Console.WriteLine("Hello, 2015-11!");
+
+string currentPassword = "";
+
+// currentPassword = "abcdefgh";
+// currentPassword = "ghijklmn";
+currentPassword = "hxbxwxba";
+
+Password password = new Password(currentPassword);
+
+Console.WriteLine(password.GetNextPassword());
+Console.WriteLine(password.GetNextPassword());
+

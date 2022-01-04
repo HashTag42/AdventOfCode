@@ -34,7 +34,7 @@ Solutions to the [Advent of Code](https://adventofcode.com/) puzzles
 
 ### 2021 Day 12: [Passage Pathing](https://adventofcode.com/2021/day/12)
 
-* [My Solution](https://github.com/HashTag42/AdventOfCode/tree/main/2021/2021-12.cs) is a port to C# from [this Python solution](https://old.reddit.com/r/adventofcode/comments/rehj2r/2021_day_12_solutions/ho7x83o/).
+* [My Solution](https://github.com/HashTag42/AdventOfCode/tree/main/2021/2021-12.cs) is a C# port of [this Python solution](https://old.reddit.com/r/adventofcode/comments/rehj2r/2021_day_12_solutions/ho7x83o/).
 * Created a C# 'DefaultDict' class to emulate what 'defaultdict' provides in Python.
 * Created a 'Node' class, including full support for the IEquatable interface.
 
@@ -95,7 +95,8 @@ Solutions to the [Advent of Code](https://adventofcode.com/) puzzles
 
 ### 2015 Day 11: [Corporate Policy](https://adventofcode.com/2015/day/11)
 
-* My Solution
+* [My Solution](https://github.com/HashTag42/AdventOfCode/tree/main/2015/2015-11)
+* Implmented a Password class.
 
 ### 2015 Day 10: [Elves Look, Elves Say](https://adventofcode.com/2015/day/10)
 
