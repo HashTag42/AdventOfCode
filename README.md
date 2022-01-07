@@ -97,7 +97,7 @@ Solutions to the [Advent of Code](https://adventofcode.com/) puzzles
 
 * [My Solution](https://github.com/HashTag42/AdventOfCode/tree/main/2015/2015-12)
 * Part 1: Used the [RegEx](https://docs.microsoft.com/en-us/dotnet/api/system.text.regularexpressions.regex) Class to find all digits in the input.
-* Part 2:
+* Part 2: ...
 
 ### 2015 Day 11: [Corporate Policy](https://adventofcode.com/2015/day/11)
 
