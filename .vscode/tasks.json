@@ -242,6 +242,18 @@
             "problemMatcher": "$msCompile"
         },
         {
+            "label": "build_2015-12",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/2015/2015-12/2015-12.csproj",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
             "label": "build_2015-11",
             "command": "dotnet",
             "type": "process",
