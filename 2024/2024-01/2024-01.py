@@ -3,15 +3,15 @@
 import os
 import re
 
-DEBUG = False
+DEBUG = True
 
 ################################################################################
 def main():
-    filename = "input.txt"
-    # filename = "inputTest.txt"
+    # filename = "input.txt"
+    filename = "inputTest.txt"
     printDebug(filename, locals())
 
-    with open(f"{os.path.dirname(__file__)}\{filename}", 'r') as file:
+    with open(f"{os.path.dirname(__file__)}\\{filename}", 'r') as file:
         list1, list2 = [], []
         dict1, dict2 = {}, {}
         for line in file:
@@ -26,7 +26,6 @@ def main():
     list2.sort()
     printDebug(list1, locals())
     printDebug(list2, locals())
-
     printDebug(dict1, locals())
     printDebug(dict2, locals())
 
