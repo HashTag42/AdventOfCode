@@ -7,8 +7,8 @@ bool DEBUG = true;
 ///////////////////////////////////////////////////////////////////////////////
 void main() {
     string filename;
-    // filename = @".\input.txt";
-    filename = @".\inputTest.txt";
+    filename = @".\input.txt";
+    // filename = @".\inputTest.txt";
     printDebug(filename);
 
     List<int> list1 = [];
@@ -63,7 +63,7 @@ void increaseDictCount(Dictionary<int,int> dict, int number) {
     try {
         p = dict[number];
     }
-    catch {
+    catch (KeyNotFoundException) {
         dict[number] = 0;
     }
     finally {
