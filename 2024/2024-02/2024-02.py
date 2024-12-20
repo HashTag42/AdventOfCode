@@ -2,36 +2,44 @@
 
 import re
 import os
-import sys
-sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'Modules'))
-from printDebug import printDebug # type: ignore
+import logging
+
+logging.basicConfig(level=logging.INFO, format='%(asctime)s  %(levelname)s: %(message)s')
 
 ################################################################################
 def main():
-    filename = "input.txt"
-    # filename = "testInput.txt"
-    printDebug(filename, locals())
+    process_file("inputTest.txt")   # Part 1 == 2, Part 2 ==
+    process_file("input.txt")       # Part 1 == 686, Part 2 ==
+################################################################################
 
-    total_safe_reports = 0
+################################################################################
+def process_file(filename):
+    logging.info(f"Processing file: {filename}...")
+
+    safe_reports_part1 = 0
+    safe_reports_part2 = 0
 
     with open(f"{os.path.dirname(__file__)}\\{filename}", 'r') as file:
-        total_safe_reports = 0
+        safe_reports_part1 = 0
+        safe_reports_part2 = 0
         for line in file:
-            printDebug(line, locals())
+            logging.debug(f"Processing line: {line}")
             numbers = re.findall(r'\d+', line)  #The regular expression '\d+' matches one or more digits.
-            if is_report_safe(numbers):
-                total_safe_reports += 1
+            if is_report_safe_part1(numbers):
+                safe_reports_part1 += 1
+            if is_report_safe_part2(numbers):
+                safe_reports_part2 += 1
 
-    print(f"Total safe reports in {filename} = {total_safe_reports}")
+    print(f"Part 1: Safe reports in {filename}: Part 1 == {safe_reports_part1}, Part 2 == {safe_reports_part2}")
 ################################################################################
 
 ################################################################################
-def is_report_safe(report):
+def is_report_safe_part1(report):
+
     is_report_safe = True
-    l = len(report)
     previous_diff = 0
 
-    for i in range(1, l):
+    for i in range(1, len(report)):
         diff = int(report[i]) - int(report[i-1])
         if diff == 0 or abs(diff) > 3:
             is_report_safe = False
@@ -44,7 +52,21 @@ def is_report_safe(report):
             break
         previous_diff = diff
 
-    printDebug(is_report_safe, locals())
+    logging.debug(f"Report: {report}, is_report_safe: {is_report_safe}")
+    return is_report_safe
+################################################################################
+
+################################################################################
+def is_report_safe_part2(report):
+
+    is_report_safe = False
+    for i in range (0, len(report)):
+        copy = report.copy()
+        copy.pop(i)
+        if is_report_safe_part1(copy):
+            is_report_safe = True
+
+    logging.debug(f"Report: {report}, is_report_safe: {is_report_safe}")
     return is_report_safe
 ################################################################################
 
