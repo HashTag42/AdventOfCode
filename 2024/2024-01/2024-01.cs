@@ -2,23 +2,25 @@
 
 using System.Text.RegularExpressions;
 
-bool DEBUG = true;
+// UNCOMMENT ONE OF THE FOLLOWING LINES
+var DEBUG = true;
+// var DEBUG = false;
+
+// UNCOMMENT ONE OF THE FOLLOWING LINES
+// var filename = @"input.txt";
+var filename = @"inputTest.txt";
 
 ///////////////////////////////////////////////////////////////////////////////
 void main() {
-    string filename;
-    filename = @".\input.txt";
-    // filename = @".\inputTest.txt";
     printDebug(filename);
 
-    List<int> list1 = [];
-    List<int> list2 = [];
-    Dictionary<int, int> dict1 = [];
-    Dictionary<int, int> dict2 = [];
+    List<int> list1 = [], list2 = [];
+    Dictionary<int, int> dict1 = [], dict2 = [];
 
     foreach(string line in File.ReadLines(filename)) {
-        string pattern = @"\d+";
-        MatchCollection matches = Regex.Matches(line, pattern);
+        // Parse each line into two numbers
+        // The regular expression '\d+' matches one or more digits.
+        MatchCollection matches = Regex.Matches(line, @"\d+");
         List<int> numbers = [];
         foreach (Match match in matches) {
             numbers.Add(int.Parse(match.Value));
@@ -38,7 +40,7 @@ void main() {
 
     var dif = 0;
     var similarity_score = 0;
-    for (int i = 0; i < list1.Count; i++) {
+    for (var i = 0; i < list1.Count; i++) {
         dif += Math.Abs(list1[i] - list2[i]);
         var factor = 0;
         try {
@@ -48,7 +50,7 @@ void main() {
             factor = 0;
         }
         finally {
-            similarity_score += factor * list1[i];
+            similarity_score += list1[i] * factor;
         }
     }
 
@@ -58,16 +60,16 @@ void main() {
 ///////////////////////////////////////////////////////////////////////////////
 
 ///////////////////////////////////////////////////////////////////////////////
-void increaseDictCount(Dictionary<int,int> dict, int number) {
+void increaseDictCount(Dictionary<int,int> dict, int key) {
     var p = 0;
     try {
-        p = dict[number];
+        p = dict[key];
     }
     catch (KeyNotFoundException) {
-        dict[number] = 0;
+        dict[key] = 0;
     }
     finally {
-        dict[number] = p+1;
+        dict[key] = p+1;
     }
 }
 ///////////////////////////////////////////////////////////////////////////////

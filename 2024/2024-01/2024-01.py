@@ -1,33 +1,37 @@
 # Puzzle: https://adventofcode.com/2024/day/1
 
-import os
 import re
 
+# UNCOMMENT ONE OF THE FOLLOWING LINES
 DEBUG = True
+# DEBUG = False
+
+# UNCOMMENT ONE OF THE FOLLOWING LINES
+# filename = "input.txt"
+filename = "inputTest.txt"
 
 ################################################################################
 def main():
-    # filename = "input.txt"
-    filename = "inputTest.txt"
-    printDebug(filename, locals())
+    printDebug(filename)
 
-    with open(f"{os.path.dirname(__file__)}\\{filename}", 'r') as file:
-        list1, list2 = [], []
-        dict1, dict2 = {}, {}
-        for line in file:
-            # Parse each line into two numbers
-            numbers = re.findall(r'\d+', line)  #The regular expression '\d+' matches one or more digits.
-            list1.append(numbers[0])
-            list2.append(numbers[1])
-            increaseDictCount(dict1, numbers[0])
-            increaseDictCount(dict2, numbers[1])
+    list1, list2 = [], []
+    dict1, dict2 = {}, {}
+
+    for line in open(filename, 'r'):
+        # Parse each line into two numbers
+        # The regular expression '\d+' matches one or more digits.
+        numbers = re.findall(r'\d+', line)
+        list1.append(numbers[0])
+        list2.append(numbers[1])
+        increaseDictCount(dict1, numbers[0])
+        increaseDictCount(dict2, numbers[1])
 
     list1.sort()
     list2.sort()
-    printDebug(list1, locals())
-    printDebug(list2, locals())
-    printDebug(dict1, locals())
-    printDebug(dict2, locals())
+    printDebug(list1)
+    printDebug(list2)
+    printDebug(dict1)
+    printDebug(dict2)
 
     dif = 0
     similarity_score = 0
@@ -57,10 +61,9 @@ def increaseDictCount(dict, key):
 ################################################################################
 
 ################################################################################
-def printDebug(var, namespace):
+def printDebug(text):
     if DEBUG:
-        var_name = [name for name, value in namespace.items() if value is var][0]
-        print(f"[DEBUG] {var_name} = {var}")
+        print(f"[DEBUG] {text}")
 ################################################################################
 
 if __name__ == "__main__":
