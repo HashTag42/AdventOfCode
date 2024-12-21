@@ -7,8 +7,8 @@ var DEBUG = true;
 // var DEBUG = false;
 
 // UNCOMMENT ONE OF THE FOLLOWING LINES
-// var filename = @"input.txt";
-var filename = @"inputTest.txt";
+// var filename = "input.txt";
+var filename = "inputTest.txt";
 
 ///////////////////////////////////////////////////////////////////////////////
 void main() {
