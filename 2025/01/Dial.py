@@ -1,5 +1,8 @@
 import re
 
+MIN = 0
+MAX = 99
+
 
 class Dial():
     def __init__(self) -> None:
@@ -14,20 +17,16 @@ class Dial():
 
         distance = int(distance)
         if direction == "R":
-            return self._rotate_right(distance)
+            factor = 1
         elif direction == "L":
-            return self._rotate_left(distance)
+            factor = -1
         else:
             raise ValueError("Unrecognized direction")
 
-    def _rotate_right(self, distance: int) -> int:
-        self.position += distance
-        if self.position > 99:
-            self.position -= 100
-        return self.position
+        self.position += factor * distance
+        if self.position < MIN:
+            self.position += MAX - MIN + 1
+        elif self.position > MAX:
+            self.position -= MAX - MIN + 1
 
-    def _rotate_left(self, distance: int) -> int:
-        self.position -= distance
-        if self.position < 0:
-            self.position += 100
         return self.position
