@@ -14,14 +14,14 @@ class Dial():
     def rotate(self, rotation: str) -> int:
         """Rotate the dial according to the rotation instruction and return the updated position."""
 
-        # Identify
+        # Break down the rotation instruction into direction and distance
         match = re.match(r'([A-Z])(\d+)', rotation)
         if match:
             direction, distance = match.groups()
         else:
             raise ValueError("Unrecognized rotation")
-
         distance = int(distance)
+
         if direction == "R":
             factor = 1
         elif direction == "L":
@@ -29,7 +29,7 @@ class Dial():
         else:
             raise ValueError("Unrecognized direction")
 
-        # Rotate the dial
+        # Rotate the dial. Correct the position if exceeded MAX
         self.position += factor * distance % LENGTH
         if self.position > MAX:
             self.position -= LENGTH
