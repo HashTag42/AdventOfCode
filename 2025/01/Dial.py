@@ -4,7 +4,7 @@ import re
 MIN = 0
 START = 50
 MAX = 99
-RANGE = MAX - MIN + 1
+LENGTH = MAX - MIN + 1
 
 
 class Dial():
@@ -13,6 +13,8 @@ class Dial():
 
     def rotate(self, rotation: str) -> int:
         """Rotate the dial according to the rotation instruction and return the updated position."""
+
+        # Identify
         match = re.match(r'([A-Z])(\d+)', rotation)
         if match:
             direction, distance = match.groups()
@@ -27,10 +29,9 @@ class Dial():
         else:
             raise ValueError("Unrecognized direction")
 
-        self.position += factor * distance
-        if self.position < MIN:
-            self.position += RANGE
-        elif self.position > MAX:
-            self.position -= RANGE
+        # Rotate the dial
+        self.position += factor * distance % LENGTH
+        if self.position > MAX:
+            self.position -= LENGTH
 
         return self.position
