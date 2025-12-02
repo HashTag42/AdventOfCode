@@ -1,14 +1,18 @@
 import re
 
+# General parameters
 MIN = 0
 MAX = 99
+START = 50
+RANGE = MAX - MIN + 1
 
 
 class Dial():
-    def __init__(self) -> None:
-        self.position: int = 50
+    def __init__(self, start: int = START) -> None:
+        self.position: int = start
 
     def rotate(self, rotation: str) -> int:
+        """Rotate the dial according to the rotation instruction and return the updated position."""
         match = re.match(r'([A-Z])(\d+)', rotation)
         if match:
             direction, distance = match.groups()
@@ -25,8 +29,8 @@ class Dial():
 
         self.position += factor * distance
         if self.position < MIN:
-            self.position += MAX - MIN + 1
+            self.position += RANGE
         elif self.position > MAX:
-            self.position -= MAX - MIN + 1
+            self.position -= RANGE
 
         return self.position
