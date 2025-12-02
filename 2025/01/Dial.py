@@ -1,9 +1,9 @@
 import re
 
-# General parameters
+# Dial constants
 MIN = 0
-MAX = 99
 START = 50
+MAX = 99
 RANGE = MAX - MIN + 1
 
 
