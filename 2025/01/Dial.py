@@ -4,16 +4,19 @@ import re
 MIN = 0
 START = 50
 MAX = 99
-LENGTH = MAX - MIN + 1
-assert MIN < START < MAX, "START must be between MIN and MAX"
-assert LENGTH > 0, "LENGTH must be positive"
 
 
 class Dial():
     ################################################################################
     # region CONSTRUCTOR
-    def __init__(self, start: int = START) -> None:
+    def __init__(self, start: int = START, min: int = MIN, max: int = MAX) -> None:
+        assert min < start < max, "START must be between MIN and MAX"
         self.position: int = start
+        self._start: int = start
+        self._min: int = min
+        self._max: int = max
+        self._length: int = max - min + 1
+        assert self._length > 0, "LENGTH must be greater than zero"
     # endregion
     ################################################################################
 
@@ -33,13 +36,13 @@ class Dial():
             self.position += direction
 
             # Handle wrapping
-            if self.position > MAX:
-                self.position = MIN
-            elif self.position < MIN:
-                self.position = MAX
+            if self.position > self._max:
+                self.position = self._min
+            elif self.position < self._min:
+                self.position = self._max
 
             # Count if we hit or crossed zero
-            if old_pos != MIN and self.position == MIN:
+            if old_pos != self._min and self.position == self._min:
                 clicks += 1
 
         return self.position, clicks

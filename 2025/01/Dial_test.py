@@ -1,11 +1,21 @@
-from Dial import Dial, START
+from Dial import Dial, START, MIN, MAX
 import pytest
 
 
 def test_Dial__init__():
+    dial = Dial(START, MIN, MAX)
+    assert isinstance(dial, Dial) is True
+    assert dial.position == START
+    assert dial._min == MIN
+    assert dial._start == START
+
+
+def test_Dial__init__default():
     dial = Dial()
     assert isinstance(dial, Dial) is True
     assert dial.position == START
+    assert dial._min == MIN
+    assert dial._start == START
 
 
 rotate_test_cases = [
@@ -29,7 +39,7 @@ rotate_test_cases = [
 
 @pytest.mark.parametrize("rotation, expected_position, expected_clicks", rotate_test_cases)
 def test_Dial_rotate(rotation: str, expected_position: int, expected_clicks: int):
-    dial = Dial()
+    dial = Dial(START, MIN, MAX)
     position, clicks = dial.rotate(rotation)
     assert position == expected_position
     assert clicks == expected_clicks
