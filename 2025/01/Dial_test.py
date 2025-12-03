@@ -11,7 +11,7 @@ def test_Dial__init__():
 rotate_test_cases = [
     # rotation, expected_position, expected_clicks
     ("L10", 40, 0),
-    ("L50", 0, 0),
+    ("L50", 0, 1),
     ("L51", 99, 1),
     ("L52", 98, 1),
     ("L100", 50, 1),
@@ -22,6 +22,7 @@ rotate_test_cases = [
     ("R51", 1, 1),
     ("R100", 50, 1),
     ("R210", 60, 2),
+    ("R250", 0, 3),
     ("R1000", 50, 10),
 ]
 
@@ -41,6 +42,7 @@ rotate_raises_test_cases = [
     ("5B"),     # Missing direction
     ("A5"),     # Incorrect direction
     ("LR5"),    # Incorrect direction
+    ("L5R"),    # Incorrect distance
 ]
 
 
