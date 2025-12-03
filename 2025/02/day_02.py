@@ -4,22 +4,19 @@ Puzzle: https://adventofcode.com/2025/day/2
 '''
 
 
-def add_invalid_IDs(file: str) -> int:
+def sum_invalid_IDs(file: str) -> int:
+    with open(file, 'r') as f:
+        ranges = f.read().strip().split(',')
     part1 = 0
-    with open(file, 'r') as input:
-        ranges = input.read().split(',')
-        for r in ranges:
-            first_ID, last_ID = r.split('-')
-            start, stop = int(first_ID), int(last_ID) + 1
-            for id in range(start, stop):
-                if not is_valid_ID(id):
-                    part1 += id
+    for r in ranges:
+        start, end = map(int, r.split('-'))
+        part1 += sum(id for id in range(start, end + 1) if not is_valid_ID(id))
     return part1
 
 
 def is_valid_ID(id: int) -> bool:
     id_str = str(id)
-    cut = len(id_str) // 2
-    if id_str[0:cut] == id_str[cut:]:
+    mid = len(id_str) // 2
+    if id_str[:mid] == id_str[mid:]:
         return False
     return True

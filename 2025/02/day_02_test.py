@@ -1,4 +1,4 @@
-from day_02 import add_invalid_IDs
+from day_02 import sum_invalid_IDs
 import pytest
 
 
@@ -10,5 +10,5 @@ test_cases = [
 
 
 @pytest.mark.parametrize("file, expected_part1", test_cases)
-def test_add_invalid_IDs(file, expected_part1):
-    assert add_invalid_IDs(file) == expected_part1
+def test_sum_invalid_IDs(file, expected_part1):
+    assert sum_invalid_IDs(file) == expected_part1
