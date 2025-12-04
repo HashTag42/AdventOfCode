@@ -29,26 +29,6 @@ def get_bank_max_joltage(bank: str, batteries: int) -> int:
 
 
 if __name__ == "__main__":
-
-    get_bank_max_joltage_test_cases = [
-        # bank, expected_part1, expected_part2
-        ("987654321111111", 98, 987654321111),
-        ("811111111111119", 89, 811111111119),
-        ("234234234234278", 78, 434234234278),
-        ("818181911112111", 92, 888911112111),
-    ]
-
-    get_total_output_test_cases = [
-        # file, expected_part1, expected_part2
-        ('./2025/03/example.txt', 357, 3121910778619),
-        ('./2025/03/input.txt', 17346, 172981362045136),
-    ]
-
-    for test in get_bank_max_joltage_test_cases:
-        assert get_bank_max_joltage(test[0], 2) == test[1]
-        assert get_bank_max_joltage(test[0], 12) == test[2]
-
-    for test in get_total_output_test_cases:
-        part1, part2 = get_total_ouput(test[0])
-        assert part1 == test[1]
-        assert part2 == test[2]
+    import pytest
+    import sys
+    sys.exit(pytest.main(['-v', './2025/03/day_03_test.py']))
