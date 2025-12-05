@@ -15,3 +15,9 @@ def get_password(filename: str):
             part1 += 1 if position == 0 else 0
             part2 += clicks
     return part1, part2
+
+
+if __name__ == "__main__":
+    import pytest
+    import sys
+    sys.exit(pytest.main(['-v', './2025/03/day_03_test.py']))
