@@ -39,63 +39,14 @@ def get_adjacent_rolls(diagram: list[list[str]], row: int, col: int, char: str =
     count: int = 0
     rows = len(diagram)
     cols = len(diagram[0])
-
-    try_row, try_col = row-1, col-1
-    if 0 <= try_row <= rows and 0 <= try_col <= cols:
-        try:
-            count += 1 if diagram[try_row][try_col] == char else 0
-        except IndexError:
-            pass
-
-    try_row, try_col = row-1, col
-    if 0 <= try_row <= rows and 0 <= try_col <= cols:
-        try:
-            count += 1 if diagram[try_row][try_col] == char else 0
-        except IndexError:
-            pass
-
-    try_row, try_col = row-1, col+1
-    if 0 <= try_row <= rows and 0 <= try_col <= cols:
-        try:
-            count += 1 if diagram[try_row][try_col] == char else 0
-        except IndexError:
-            pass
-
-    try_row, try_col = row, col-1
-    if 0 <= try_row <= rows and 0 <= try_col <= cols:
-        try:
-            count += 1 if diagram[try_row][try_col] == char else 0
-        except IndexError:
-            pass
-
-    try_row, try_col = row, col+1
-    if 0 <= try_row <= rows and 0 <= try_col <= cols:
-        try:
-            count += 1 if diagram[try_row][try_col] == char else 0
-        except IndexError:
-            pass
-
-    try_row, try_col = row+1, col-1
-    if 0 <= try_row <= rows and 0 <= try_col <= cols:
-        try:
-            count += 1 if diagram[try_row][try_col] == char else 0
-        except IndexError:
-            pass
-
-    try_row, try_col = row+1, col
-    if 0 <= try_row <= rows and 0 <= try_col <= cols:
-        try:
-            count += 1 if diagram[try_row][try_col] == char else 0
-        except IndexError:
-            pass
-
-    try_row, try_col = row+1, col+1
-    if 0 <= try_row <= rows and 0 <= try_col <= cols:
-        try:
-            count += 1 if diagram[try_row][try_col] == char else 0
-        except IndexError:
-            pass
-
+    neighbors = [(-1, -1), (-1, 0), (-1, +1), (0, -1), (0, +1), (+1, -1), (+1, 0), (+1, +1)]
+    for n in neighbors:
+        try_row, try_col = row + n[0], col + n[1]
+        if 0 <= try_row <= rows and 0 <= try_col <= cols:
+            try:
+                count += 1 if diagram[try_row][try_col] == char else 0
+            except IndexError:
+                pass
     return count
 
 
