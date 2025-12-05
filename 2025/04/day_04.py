@@ -7,17 +7,32 @@ ROLL = '@'
 LIMIT = 4
 
 
-def day_04(file: str, limit: int = LIMIT) -> int:
+def day_04(file: str, limit: int = LIMIT) -> tuple[int, int]:
     with open(file, 'r') as f:
         diagram = [[c for c in line.strip()] for line in f]
-        part1 = 0
-        for row in range(len(diagram)):
-            for col in range(len(diagram[0])):
-                if diagram[row][col] == ROLL and get_adjacent_rolls(diagram, row, col) < limit:
-                    part1 += 1
-        # for row in diagram:
-        #     print(row)
-    return part1
+    return part1(diagram)[0], part2(diagram)
+
+
+def part1(in_diagram: list[list[str]], limit: int = LIMIT) -> tuple[int, list[list[str]]]:
+    count = 0
+    out_diagram = [row[:] for row in in_diagram]
+    for row in range(len(in_diagram)):
+        for col in range(len(in_diagram[0])):
+            if in_diagram[row][col] == ROLL and get_adjacent_rolls(in_diagram, row, col) < limit:
+                count += 1
+                out_diagram[row][col] = 'x'
+    return count, out_diagram
+
+
+def part2(in_diagram: list[list[str]], limit: int = LIMIT) -> int:
+    count = 0
+    while True:
+        count1, out_diagram = part1(in_diagram)
+        if count1 == 0:
+            break
+        count += count1
+        in_diagram = [row[:] for row in out_diagram]
+    return count
 
 
 def get_adjacent_rolls(diagram: list[list[str]], row: int, col: int, char: str = ROLL) -> int:
