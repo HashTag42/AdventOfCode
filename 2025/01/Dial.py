@@ -70,3 +70,9 @@ class Dial():
         return direction, int(distance_str)
     # endregion
     ################################################################################
+
+
+if __name__ == "__main__":
+    import pytest
+    import sys
+    sys.exit(pytest.main(['-v', './2025/01/Dial_test.py']))

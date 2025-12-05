@@ -20,4 +20,4 @@ def get_password(filename: str):
 if __name__ == "__main__":
     import pytest
     import sys
-    sys.exit(pytest.main(['-v', './2025/03/day_03_test.py']))
+    sys.exit(pytest.main(['-v', './2025/01/get_password_test.py']))
