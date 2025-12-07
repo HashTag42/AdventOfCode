@@ -27,4 +27,3 @@ def test_solve_part1(test_data):
 def test_solve_part2(test_data):
     data, expected = test_data
     assert solve_part2(data[1]) == expected[1]
-
