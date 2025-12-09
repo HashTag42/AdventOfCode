@@ -1,0 +1,50 @@
+'''
+Advent of Code 2025 - Day 8: Playground
+Puzzle: https://adventofcode.com/2025/day/8
+'''
+from AoC_Graph import (
+    Point,
+    # Line,
+    # Circuit,
+    Graph,
+)
+
+
+def solve_2025_08(filename: str, num_connections: int) -> tuple[int, int]:
+    graph = get_data(filename, num_connections)
+    return solve_part1(graph), solve_part2(graph)
+
+
+def solve_part1(graph: Graph) -> int:
+    lengths = []
+    for c in graph.circuits:
+        lengths.append(len(c))
+    lengths.sort(reverse=True)
+    print(f"Circuit sizes: {lengths}")  # ← Add this
+    print(f"Top 3: {lengths[0]}, {lengths[1]}, {lengths[2]}")  # ← Add this
+    total = 1
+    for i in range(3):
+        total *= lengths[i]
+    return total
+
+
+def solve_part2(data) -> int:
+    result = 0
+    return result
+
+
+def get_data(filename, num_connections: int) -> Graph:
+    # Read points from the file
+    points: set[Point] = set()
+    with open(filename, 'r') as f:
+        for line in f.readlines():
+            x, y, z = map(int, line.split(','))
+            points.add(Point(x, y, z))
+    graph = Graph(points, num_connections=num_connections)
+    return graph
+
+
+if __name__ == "__main__":
+    import pytest
+    import sys
+    sys.exit(pytest.main(['-v', './2025/08/day_2025_08_test.py']))
