@@ -5,14 +5,12 @@ Puzzle: https://adventofcode.com/2025/day/7
 
 
 def solve_2025_07(file: str) -> tuple[int, int]:
-    data1, data2 = get_data(file)
-    return solve_part1(data1), solve_part2(data2)
+    data = get_data(file)
+    return solve_part1(data), solve_part2(data)
 
 
 def solve_part1(diagram) -> int:
-    # print_diagram(diagram)
     diagram[1][diagram[0].index('S')] = '|'
-    # print_diagram(diagram)
     splits = 0
     for r in range(2, len(diagram)):
         beams = [i for i, x in enumerate(diagram[r-1]) if x == '|']
@@ -29,8 +27,6 @@ def solve_part1(diagram) -> int:
                     splitted = True
                 if splitted:
                     splits += 1
-        # print(f"[DEBUG] r = {r}")
-        # print_diagram(diagram)
     return splits
 
 
@@ -39,14 +35,13 @@ def solve_part2(data) -> int:
     return result
 
 
-def get_data(file) -> tuple[list[list[str]], list[list[str]]]:
-    data1 = data2 = []
+def get_data(file) -> list[list[str]]:
+    data = []
     with open(file, 'r') as f:
         for line in f.readlines():
-            data1.append(line.strip())
-        data1 = [list(row) for row in data1]
-        data2 = data1
-        return data1, data2
+            data.append(line.strip())
+        data = [list(row) for row in data]
+        return data
 
 
 def print_diagram(diagram) -> None:
