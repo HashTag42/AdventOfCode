@@ -2,7 +2,7 @@
 Advent of Code 2025 - Day 1: Secret Entrance
 Puzzle: https://adventofcode.com/2025/day/1
 '''
-from Dial import Dial
+from Classes.Dial.Dial import Dial
 
 
 def get_password(filename: str):
