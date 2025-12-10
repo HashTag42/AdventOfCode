@@ -5,7 +5,7 @@ import pytest
 test_cases = [
     # file, expected
     ('./2025/07/example.txt', [21, 40]),
-    ('./2025/07/input.txt', [1656, 0]),
+    ('./2025/07/input.txt', [1656, 76624086587804]),
 ]
 
 

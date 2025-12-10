@@ -30,9 +30,27 @@ def solve_part1(diagram) -> int:
     return splits
 
 
-def solve_part2(data) -> int:
-    result = 0
-    return result
+def solve_part2(diagram) -> int:
+    start_col = diagram[0].index('S')
+    timelines = {start_col: 1}  # One timeline starts at S
+
+    for r in range(1, len(diagram)):
+        new_timelines = {}
+
+        for col, count in timelines.items():
+            cell = diagram[r][col]
+
+            if cell == '.':
+                # Beam continues straight - same timelines
+                new_timelines[col] = new_timelines.get(col, 0) + count
+            elif cell == '^':
+                # Splitter: each timeline splits into left AND right
+                new_timelines[col - 1] = new_timelines.get(col - 1, 0) + count
+                new_timelines[col + 1] = new_timelines.get(col + 1, 0) + count
+
+        timelines = new_timelines
+
+    return sum(timelines.values())
 
 
 def get_data(file) -> list[list[str]]:
