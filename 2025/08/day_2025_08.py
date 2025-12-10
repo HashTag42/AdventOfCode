@@ -2,10 +2,8 @@
 Advent of Code 2025 - Day 8: Playground
 Puzzle: https://adventofcode.com/2025/day/8
 '''
-from AoC_Graph import (
+from Classes.Graph.Graph import (
     Point,
-    # Line,
-    # Circuit,
     Graph,
 )
 
