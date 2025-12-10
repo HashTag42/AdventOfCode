@@ -96,6 +96,10 @@ class Graph():
                 # Both points already in same circuit - skip, don't count as connection
                 pass
 
+            if len(self.circuits) == 1 and len(self.circuits[0]) == len(self.points_set):
+                self.part2 = line.p.x * line.q.x
+                return
+
         # Add singleton circuits for unconnected points
         for point in self.points_set:
             if point not in self.point_to_circuit:

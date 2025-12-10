@@ -11,11 +11,12 @@ from AoC_Graph import (
 
 
 def solve_2025_08(filename: str, num_connections: int) -> tuple[int, int]:
-    graph = get_data(filename, num_connections)
-    return solve_part1(graph), solve_part2(graph)
+    points: set[Point] = get_data(filename)
+    return solve_part1(points, num_connections), solve_part2(points, num_connections)
 
 
-def solve_part1(graph: Graph) -> int:
+def solve_part1(points: set[Point], num_connections: int) -> int:
+    graph = Graph(points, num_connections=num_connections)
     lengths = []
     for c in graph.circuits:
         lengths.append(len(c))
@@ -28,20 +29,19 @@ def solve_part1(graph: Graph) -> int:
     return total
 
 
-def solve_part2(data) -> int:
-    result = 0
-    return result
+def solve_part2(points: set[Point], num_connections: int) -> int:
+    graph = Graph(points, num_connections=num_connections)
+    return graph.part2
 
 
-def get_data(filename, num_connections: int) -> Graph:
+def get_data(filename) -> set[Point]:
     # Read points from the file
     points: set[Point] = set()
     with open(filename, 'r') as f:
         for line in f.readlines():
             x, y, z = map(int, line.split(','))
             points.add(Point(x, y, z))
-    graph = Graph(points, num_connections=num_connections)
-    return graph
+    return points
 
 
 if __name__ == "__main__":
