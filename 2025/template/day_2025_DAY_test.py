@@ -14,7 +14,7 @@ def test_solve_part1(file, expected):
     assert solve_part1(data[0]) == expected[0]
 
 
-@pytest.mark.parametrize("test_data", test_cases, indirect=True)
-def test_solve_part2(test_data):
-    data, expected = test_data
+@pytest.mark.parametrize("file, expected", test_cases)
+def test_solve_part2(file, expected):
+    data = get_data(file)
     assert solve_part2(data[1]) == expected[1]
