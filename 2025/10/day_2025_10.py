@@ -2,13 +2,13 @@
 Advent of Code 2025 - Day 10: Factory
 Puzzle: https://adventofcode.com/2025/day/10
 
-Key insight: Since pressing a button twice cancels out, each button is pressed 0 or 1 times.
-This becomes a system of linear equations over GF(2), but we want minimum number of 1s.
-We need to find all solutions and pick the one with minimum Hamming weight.
+Part 1: XOR-based toggle problem - solve over GF(2), minimize Hamming weight
+Part 2: Integer addition problem - solve using Integer Linear Programming
 '''
 
 import re
 from itertools import product
+from pulp import LpProblem, LpMinimize, LpVariable, LpInteger, lpSum, PULP_CBC_CMD
 
 
 class Machine():
@@ -30,16 +30,17 @@ class Machine():
         joltage_match = re.search(r'\{([0-9,]+)\}', line)
         if joltage_match is not None:
             self.joltage = [int(x) for x in joltage_match.group(1).split(',')]
+        self.num_counters = len(self.joltage)
 
     def __repr__(self) -> str:
-        return f"[{self.target}] buttons={self.buttons}"
+        return f"[{self.target}] buttons={self.buttons} joltage={self.joltage}"
 
-    def get_target_vector(self):
+    def get_target_vector(self) -> list[int]:
         """Convert target pattern to binary vector"""
         return [1 if c == '#' else 0 for c in self.target]
 
-    def get_button_vectors(self):
-        """Get button effects as binary vectors"""
+    def get_button_vectors(self) -> list[list[int]]:
+        """Get button effects as binary vectors for lights"""
         vectors = []
         for button in self.buttons:
             vec = [0] * self.num_lights
@@ -48,10 +49,21 @@ class Machine():
             vectors.append(vec)
         return vectors
 
+    def get_button_counter_vectors(self) -> list[list[int]]:
+        """Get button effects on counters (for part 2)"""
+        vectors = []
+        for button in self.buttons:
+            vec = [0] * self.num_counters
+            for idx in button:
+                if idx < self.num_counters:
+                    vec[idx] = 1
+            vectors.append(vec)
+        return vectors
 
-def solve_minimum_presses(machine: Machine) -> int:
+
+def solve_minimum_presses_part1(machine: Machine) -> int:
     """
-    Find minimum button presses to reach target state.
+    Find minimum button presses to reach target state (XOR/toggle).
     Uses Gaussian elimination over GF(2) then enumerates free variables.
     """
     target = machine.get_target_vector()
@@ -70,7 +82,6 @@ def solve_minimum_presses(machine: Machine) -> int:
     pivot_cols = []
     row = 0
     for col in range(num_buttons):
-        # Find pivot
         pivot_row = None
         for r in range(row, num_lights):
             if matrix[r][col] == 1:
@@ -80,11 +91,9 @@ def solve_minimum_presses(machine: Machine) -> int:
         if pivot_row is None:
             continue
 
-        # Swap rows
         matrix[row], matrix[pivot_row] = matrix[pivot_row], matrix[row]
         pivot_cols.append(col)
 
-        # Eliminate
         for r in range(num_lights):
             if r != row and matrix[r][col] == 1:
                 for c in range(num_buttons + 1):
@@ -95,24 +104,21 @@ def solve_minimum_presses(machine: Machine) -> int:
     # Check for inconsistency
     for r in range(row, num_lights):
         if matrix[r][num_buttons] == 1:
-            return int(float('inf'))  # No solution
+            return int(float('inf'))
 
     # Free variables are columns not in pivot_cols
     free_vars = [c for c in range(num_buttons) if c not in pivot_cols]
     num_free = len(free_vars)
 
-    # Enumerate all assignments to free variables to find minimum weight solution
+    # Enumerate all assignments to free variables
     min_weight = float('inf')
 
     for free_assignment in product([0, 1], repeat=num_free):
-        # Build solution
         solution = [0] * num_buttons
 
-        # Set free variables
         for i, fv in enumerate(free_vars):
             solution[fv] = free_assignment[i]
 
-        # Back-substitute for pivot variables
         for i in range(len(pivot_cols) - 1, -1, -1):
             pc = pivot_cols[i]
             val = matrix[i][num_buttons]
@@ -126,25 +132,59 @@ def solve_minimum_presses(machine: Machine) -> int:
     return int(min_weight)
 
 
+def solve_minimum_presses_part2(machine: Machine) -> int:
+    """
+    Find minimum button presses to reach target joltage levels.
+    Each button press adds 1 to specified counters.
+    Uses Integer Linear Programming.
+    """
+    target = machine.joltage
+    button_vecs = machine.get_button_counter_vectors()
+    num_buttons = len(button_vecs)
+    num_counters = machine.num_counters
+
+    # Create ILP problem
+    prob = LpProblem("MinButtonPresses", LpMinimize)
+
+    # Variables: number of times each button is pressed (non-negative integers)
+    x = [LpVariable(f"x{i}", lowBound=0, cat=LpInteger) for i in range(num_buttons)]
+
+    # Objective: minimize total presses
+    prob += lpSum(x)
+
+    # Constraints: each counter must reach its target
+    for c in range(num_counters):
+        prob += lpSum(button_vecs[b][c] * x[b] for b in range(num_buttons)) == target[c]
+
+    # Solve
+    prob.solve(PULP_CBC_CMD(msg=False))
+
+    if prob.status != 1:  # 1 = Optimal
+        return int(float('inf'))
+
+    return int(sum(v.varValue or 0 for v in x))
+
+
 def solve_2025_10(filename: str) -> tuple[int, int]:
     machines = get_data(filename)
     return solve_part1(machines), solve_part2(machines)
 
 
-def solve_part1(machines) -> int:
-    total: int = 0
+def solve_part1(machines: list[Machine]) -> int:
+    total = 0
     for machine in machines:
-        presses: int = solve_minimum_presses(machine)
-        total += presses
+        total += solve_minimum_presses_part1(machine)
     return total
 
 
-def solve_part2(machines) -> int:
-    result = 0
-    return result
+def solve_part2(machines: list[Machine]) -> int:
+    total = 0
+    for machine in machines:
+        total += solve_minimum_presses_part2(machine)
+    return total
 
 
-def get_data(filename) -> list[Machine]:
+def get_data(filename: str) -> list[Machine]:
     machines: list[Machine] = []
     with open(filename, 'r') as file:
         for line in file.readlines():
