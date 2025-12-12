@@ -89,4 +89,4 @@ def get_data(filename: str) -> dict[str, list[str]]:
 if __name__ == "__main__":
     import pytest
     import sys
-    sys.exit(pytest.main(['-v', './2025/11/day_2025_11_test.py']))
+    sys.exit(pytest.main(['-v', './2025/11/AoC_2025_11_test.py']))
