@@ -5,8 +5,8 @@ Puzzle: https://adventofcode.com/2025/day/DAY
 
 
 def solve_2025_DAY(file: str) -> tuple[int, int]:
-    data1, data2 = get_data(file)
-    return solve_part1(data1), solve_part2(data2)
+    data = get_data(file)
+    return solve_part1(data), solve_part2(data)
 
 
 def solve_part1(data) -> int:
@@ -19,13 +19,13 @@ def solve_part2(data) -> int:
     return result
 
 
-def get_data(file) -> tuple[list[str], list[str]]:
+def get_data(file) -> list[str]:
     with open(file, 'r') as f:
-        data1 = data2 = f.readlines()
-    return data1, data2
+        data = f.readlines()
+    return data
 
 
 if __name__ == "__main__":
     import pytest
     import sys
-    sys.exit(pytest.main(['-v', './2025/DAY/day_2025_DAY_test.py']))
+    sys.exit(pytest.main(['-v', './2025/DAY/AoC_2025_DAY_test.py']))
