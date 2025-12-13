@@ -27,8 +27,12 @@ def solve_part1(graph: Graph) -> int:
 
 
 def solve_part2(graph: Graph) -> int:
-    result = 0
-    return result
+    me = GraphNode('Me')
+    graph.add_node(me)
+    for i in range(len(graph.nodes)):
+        graph.add_edge(me, graph.nodes[i], 0)
+        graph.add_edge(graph.nodes[i], me, 0)
+    return solve_part1(graph)
 
 
 def get_data(filename: Path) -> Graph:
