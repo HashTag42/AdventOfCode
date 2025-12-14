@@ -16,40 +16,50 @@ class Reindeer:
         self.speed: int = speed
         self.fly_time: int = fly_time
         self.rest_time: int = rest_time
+        self.time_in_state: int = 0
+        self.distance: int = 0
+        self.points: int = 0
+        self.state: State = State.FLYING
 
-    def travel(self, time: int) -> int:
-        distance, time_flying, time_resting = 0, 0, 0
+    def tick(self) -> None:
+        match self.state:
+            case State.FLYING:
+                self.distance += self.speed
+                self.time_in_state += 1
+                if self.time_in_state >= self.fly_time:
+                    self.state, self.time_in_state = State.RESTING, 0
+            case State.RESTING:
+                self.time_in_state += 1
+                if self.time_in_state >= self.rest_time:
+                    self.state, self.time_in_state = State.FLYING, 0
+
+    def travel(self, time: int) -> None:
+        self.distance = 0
         self.state = State.FLYING
-        for _ in range(1, time + 1):
-            if time_flying >= self.fly_time:
-                self.state = State.RESTING
-                time_flying = 0
-            elif time_resting >= self.rest_time:
-                self.state = State.FLYING
-                time_resting = 0
-
-            if self.state == State.FLYING:
-                distance += self.speed
-                time_flying += 1
-            elif self.state == State.RESTING:
-                time_resting += 1
-        return distance
+        for _ in range(time):
+            self.tick()
 
     def __repr__(self) -> str:
         return self.name
 
 
 def solve_part1(reindeers: list[Reindeer], time: int) -> int:
-    max = 0
     for r in reindeers:
-        distance = r.travel(time)
-        max = distance if distance > max else max
-    return max
+        r.travel(time)
+    return max(r.distance for r in reindeers)
 
 
-def solve_part2(reindeers: list[Reindeer]) -> int:
-    result = 0
-    return result
+def solve_part2(reindeers: list[Reindeer], time: int) -> int:
+    for _ in range(time):
+        ranking: dict[Reindeer, int] = {}
+        for r in reindeers:
+            r.tick()
+            ranking[r] = r.distance
+        top_value = max(ranking.values())
+        top_reindeers = {k: v for k, v in ranking.items() if v == top_value}
+        for top_r in top_reindeers:
+            top_r.points += 1
+    return max(r.points for r in reindeers)
 
 
 def get_data(filename: str) -> list[Reindeer]:
