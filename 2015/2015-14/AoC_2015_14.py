@@ -34,10 +34,12 @@ class Reindeer:
                     self.state, self.time_in_state = State.FLYING, 0
 
     def travel(self, time: int) -> None:
-        self.distance = 0
         self.state = State.FLYING
         for _ in range(time):
             self.tick()
+
+    def reset(self) -> None:
+        self.distance, self.time_in_state = 0, 0
 
     def __repr__(self) -> str:
         return self.name
@@ -45,11 +47,14 @@ class Reindeer:
 
 def solve_part1(reindeers: list[Reindeer], time: int) -> int:
     for r in reindeers:
+        r.reset()
         r.travel(time)
     return max(r.distance for r in reindeers)
 
 
 def solve_part2(reindeers: list[Reindeer], time: int) -> int:
+    for r in reindeers:
+        r.reset()
     for _ in range(time):
         ranking: dict[Reindeer, int] = {}
         for r in reindeers:
@@ -65,11 +70,10 @@ def solve_part2(reindeers: list[Reindeer], time: int) -> int:
 def get_data(filename: str) -> list[Reindeer]:
     with open(filename, 'r') as file:
         reindeers: list[Reindeer] = []
-        for line in file.readlines():
+        for line in file:
             # Example: "Comet can fly 14 km/s for 10 seconds, but then must rest for 127 seconds."
             parts = line.split()
-            new_reindeer = Reindeer(parts[0], int(parts[3]), int(parts[6]), int(parts[13]))
-            reindeers.append(new_reindeer)
+            reindeers.append(Reindeer(parts[0], int(parts[3]), int(parts[6]), int(parts[13])))
     return reindeers
 
 
