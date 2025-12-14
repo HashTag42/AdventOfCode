@@ -2,10 +2,9 @@
 Advent of Code YEAR - Day DAY:
 Puzzle: https://adventofcode.com/YEAR/day/DAY
 '''
-from pathlib import Path
 
 
-def solve_YEAR_DAY(filename: Path) -> tuple[int, int]:
+def solve_YEAR_DAY(filename: str) -> tuple[int, int]:
     data = get_data(filename)
     return solve_part1(data), solve_part2(data)
 
@@ -20,7 +19,7 @@ def solve_part2(data) -> int:
     return result
 
 
-def get_data(filename: Path) -> list[str]:
+def get_data(filename: str) -> list[str]:
     with open(filename, 'r') as f:
         data = f.readlines()
     return data
