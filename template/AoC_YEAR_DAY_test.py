@@ -1,4 +1,4 @@
-from YEAR_DAY import solve_part1, solve_part2, get_data
+from AoC_YEAR_DAY import solve_part1, solve_part2, get_data
 import pytest
 
 test_cases = [
