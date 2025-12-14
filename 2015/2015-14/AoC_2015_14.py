@@ -18,17 +18,15 @@ class Reindeer:
         self.rest_time: int = rest_time
 
     def travel(self, time: int) -> int:
+        distance, time_flying, time_resting = 0, 0, 0
         self.state = State.FLYING
-        distance = 0
-        time_flying = 0
-        time_resting = 0
         for _ in range(1, time + 1):
-            if self.state == State.FLYING and time_flying >= self.fly_time:
+            if time_flying >= self.fly_time:
                 self.state = State.RESTING
-                time_flying = time_resting = 0
-            elif self.state == State.RESTING and time_resting >= self.rest_time:
+                time_flying = 0
+            elif time_resting >= self.rest_time:
                 self.state = State.FLYING
-                time_resting = time_flying = 0
+                time_resting = 0
 
             if self.state == State.FLYING:
                 distance += self.speed
