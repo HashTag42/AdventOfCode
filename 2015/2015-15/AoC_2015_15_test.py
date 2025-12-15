@@ -1,4 +1,4 @@
-from AoC_2015_15 import solve_part1, solve_part2, get_data
+from AoC_2015_15 import solve_part, get_data
 import pytest
 
 test_cases = [
@@ -10,9 +10,9 @@ test_cases = [
 
 @pytest.mark.parametrize("filename, expected", test_cases)
 def test_solve_part1(filename, expected):
-    assert solve_part1(get_data(filename)) == expected[0]
+    assert solve_part(get_data(filename), 1) == expected[0]
 
 
 @pytest.mark.parametrize("filename, expected", test_cases)
 def test_solve_part2(filename, expected):
-    assert solve_part2(get_data(filename)) == expected[1]
+    assert solve_part(get_data(filename), 2) == expected[1]

@@ -60,17 +60,20 @@ class Cookie:
 
 def solve_2015_15(filename: str) -> tuple[int, int]:
     ingredients: list[Ingredient] = get_data(filename)
-    return solve_part1(ingredients), solve_part2(ingredients)
+    return solve_part(ingredients, 1), solve_part(ingredients, 2)
 
 
-def solve_part1(ingredients: list[Ingredient]) -> int:
+def solve_part(ingredients: list[Ingredient], part: int) -> int:
     max_score, TOTAL = 0, 100
     if len(ingredients) == 2:
         for i1 in (range(TOTAL + 1)):
             i2 = TOTAL - i1
             cookie = Cookie({ingredients[0]: i1, ingredients[1]: i2})
             cookie_score1, cookie_score2 = cookie.score()
-            max_score = max(max_score, cookie_score1)
+            if part == 1:
+                max_score = max(max_score, cookie_score1)
+            else:   # part == 2
+                max_score = max(max_score, cookie_score2)
     else:   # len(ingredients) == 4
         for a in range(TOTAL + 1):
             for b in range(TOTAL - a):
@@ -78,26 +81,10 @@ def solve_part1(ingredients: list[Ingredient]) -> int:
                     d = TOTAL - a - b - c
                     cookie = Cookie({ingredients[0]: a, ingredients[1]: b, ingredients[2]: c, ingredients[3]: d})
                     cookie_score1, cookie_score2 = cookie.score()
-                    max_score = max(max_score, cookie_score1)
-    return max_score
-
-
-def solve_part2(ingredients: list[Ingredient]) -> int:
-    max_score, TOTAL = 0, 100
-    if len(ingredients) == 2:
-        for i1 in (range(TOTAL + 1)):
-            i2 = TOTAL - i1
-            cookie = Cookie({ingredients[0]: i1, ingredients[1]: i2})
-            cookie_score1, cookie_score2 = cookie.score()
-            max_score = max(max_score, cookie_score2)
-    else:   # len(ingredients) == 4
-        for a in range(TOTAL + 1):
-            for b in range(TOTAL - a):
-                for c in range(TOTAL - a - b):
-                    d = TOTAL - a - b - c
-                    cookie = Cookie({ingredients[0]: a, ingredients[1]: b, ingredients[2]: c, ingredients[3]: d})
-                    cookie_score1, cookie_score2 = cookie.score()
-                    max_score = max(max_score, cookie_score2)
+                    if part == 1:
+                        max_score = max(max_score, cookie_score1)
+                    else:   # part == 2
+                        max_score = max(max_score, cookie_score2)
     return max_score
 
 
