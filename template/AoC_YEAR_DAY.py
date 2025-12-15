@@ -20,8 +20,8 @@ def solve_part2(data) -> int:
 
 
 def get_data(filename: str) -> list[str]:
-    with open(filename, 'r') as f:
-        data = f.readlines()
+    with open(filename, 'r') as file:
+        data = file.readlines()
     return data
 
 
