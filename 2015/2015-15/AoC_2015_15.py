@@ -25,19 +25,18 @@ class Ingredient:
         yield self.calories
 
     def __repr__(self) -> str:
-        return f"""{self.name}:
-        capacity {self.capacity},
-        durability {self.durability},
-        flavor {self.flavor},
-        texture {self.texture},
-        calories {self.calories}"""
+        return (
+            f"{self.name}: capacity {self.capacity}, "
+            f"durability {self.durability}, flavor {self.flavor}, "
+            f"texture {self.texture}, calories {self.calories}"
+        )
 
 
 class Cookie:
     def __init__(self, ingredients: dict[Ingredient, int]) -> None:
         self.ingredients: dict[Ingredient, int] = ingredients
 
-    def score(self) -> int:
+    def score(self) -> tuple[int, int]:
         capacity, durability, flavor, texture, calories = 0, 0, 0, 0, 0
         for ingredient, amount in self.ingredients.items():
             capacity += ingredient.capacity * amount
@@ -45,14 +44,12 @@ class Cookie:
             flavor += ingredient.flavor * amount
             texture += ingredient.texture * amount
             calories += ingredient.calories * amount
-        capacity = max(capacity, 0)
-        durability = max(durability, 0)
-        flavor = max(flavor, 0)
-        texture = max(texture, 0)
-        calories = max(calories, 0)
-        # Part 1 does not include calories
-        score = capacity * durability * flavor * texture
-        return score
+        # Part 1 score does not include calories
+        score1 = max(capacity, 0) * max(durability, 0) * max(flavor, 0) * max(texture, 0)
+        score2 = 0
+        if calories == 500:
+            score2 = score1
+        return score1, score2
 
     def __repr__(self) -> str:
         string = ""
@@ -72,19 +69,36 @@ def solve_part1(ingredients: list[Ingredient]) -> int:
         for i1 in (range(TOTAL + 1)):
             i2 = TOTAL - i1
             cookie = Cookie({ingredients[0]: i1, ingredients[1]: i2})
-            max_score = max(max_score, cookie.score())
+            cookie_score1, cookie_score2 = cookie.score()
+            max_score = max(max_score, cookie_score1)
     else:   # len(ingredients) == 4
         for a in range(TOTAL + 1):
             for b in range(TOTAL - a):
                 for c in range(TOTAL - a - b):
                     d = TOTAL - a - b - c
                     cookie = Cookie({ingredients[0]: a, ingredients[1]: b, ingredients[2]: c, ingredients[3]: d})
-                    max_score = max(max_score, cookie.score())
+                    cookie_score1, cookie_score2 = cookie.score()
+                    max_score = max(max_score, cookie_score1)
     return max_score
 
 
-def solve_part2(data) -> int:
-    return 0
+def solve_part2(ingredients: list[Ingredient]) -> int:
+    max_score, TOTAL = 0, 100
+    if len(ingredients) == 2:
+        for i1 in (range(TOTAL + 1)):
+            i2 = TOTAL - i1
+            cookie = Cookie({ingredients[0]: i1, ingredients[1]: i2})
+            cookie_score1, cookie_score2 = cookie.score()
+            max_score = max(max_score, cookie_score2)
+    else:   # len(ingredients) == 4
+        for a in range(TOTAL + 1):
+            for b in range(TOTAL - a):
+                for c in range(TOTAL - a - b):
+                    d = TOTAL - a - b - c
+                    cookie = Cookie({ingredients[0]: a, ingredients[1]: b, ingredients[2]: c, ingredients[3]: d})
+                    cookie_score1, cookie_score2 = cookie.score()
+                    max_score = max(max_score, cookie_score2)
+    return max_score
 
 
 def get_data(filename: str) -> list[Ingredient]:
