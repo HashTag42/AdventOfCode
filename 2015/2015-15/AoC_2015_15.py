@@ -2,7 +2,6 @@
 Advent of Code 2015 - Day 15: Science for Hungry People
 Puzzle: https://adventofcode.com/2015/day/15
 '''
-from typing import Iterator
 
 
 class Ingredient:
@@ -16,13 +15,6 @@ class Ingredient:
         self.flavor: int = int(parts[6].rstrip(','))
         self.texture: int = int(parts[8].rstrip(','))
         self.calories: int = int(parts[10])
-
-    def __iter__(self) -> Iterator[int]:
-        yield self.capacity
-        yield self.durability
-        yield self.flavor
-        yield self.texture
-        yield self.calories
 
     def __repr__(self) -> str:
         return (
@@ -53,7 +45,7 @@ class Cookie:
 
     def __repr__(self) -> str:
         string = ""
-        for ingredient, amount in self.ingredients:
+        for ingredient, amount in self.ingredients.items():
             string += f"{ingredient} = {amount}"
         return string
 
@@ -66,7 +58,7 @@ def solve_2015_15(filename: str) -> tuple[int, int]:
 def solve_part(ingredients: list[Ingredient], part: int) -> int:
     max_score, TOTAL = 0, 100
     if len(ingredients) == 2:
-        for i1 in (range(TOTAL + 1)):
+        for i1 in range(TOTAL + 1):
             i2 = TOTAL - i1
             cookie = Cookie({ingredients[0]: i1, ingredients[1]: i2})
             cookie_score1, cookie_score2 = cookie.score()
@@ -77,7 +69,7 @@ def solve_part(ingredients: list[Ingredient], part: int) -> int:
     else:   # len(ingredients) == 4
         for a in range(TOTAL + 1):
             for b in range(TOTAL - a):
-                for c in range(TOTAL - a - b):
+                for c in range(TOTAL - a - b + 1):
                     d = TOTAL - a - b - c
                     cookie = Cookie({ingredients[0]: a, ingredients[1]: b, ingredients[2]: c, ingredients[3]: d})
                     cookie_score1, cookie_score2 = cookie.score()
@@ -89,11 +81,8 @@ def solve_part(ingredients: list[Ingredient], part: int) -> int:
 
 
 def get_data(filename: str) -> list[Ingredient]:
-    ingredients: list[Ingredient] = []
-    with open(filename, 'r') as f:
-        for line in f.readlines():
-            ingredients.append(Ingredient(line))
-        return ingredients
+    with open(filename, 'r') as file:
+        return [Ingredient(line) for line in file]
 
 
 if __name__ == "__main__":
