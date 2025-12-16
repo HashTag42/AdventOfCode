@@ -3,7 +3,7 @@ import pytest
 
 solve_test_cases = [
     # filename, expected
-    ('./2015/2015-16/input.txt', [103, 0]),
+    ('./2015/2015-16/input.txt', [103, 405]),
 ]
 
 
@@ -28,7 +28,7 @@ compare_test_cases = [
 
 
 @pytest.mark.parametrize("sue1, sue2, expected", compare_test_cases)
-def test_Sue_compare(sue1, sue2, expected):
+def test_Sue_compare1(sue1, sue2, expected):
     s1 = Sue(sue1)
     s2 = Sue(sue2)
-    assert s1.compare(s2) == expected
+    assert s1.compare1(s2) == expected
