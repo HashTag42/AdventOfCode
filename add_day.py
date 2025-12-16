@@ -2,7 +2,8 @@ from pathlib import Path
 import shutil
 
 YEAR = "2015"
-DAY = "16"
+DAY = "19"
+FOLDER = f"{YEAR}-{DAY}"
 
 source_dir: Path = Path("./template/")
 py_files = ["AoC_YEAR_DAY_test.py", "AoC_YEAR_DAY.py"]
@@ -15,12 +16,12 @@ def main(year: str, day: str) -> None:
 
 
 def create_target_directories(year: str, day: str) -> None:
-    target_dir = Path(year) / day
+    target_dir = Path(year) / FOLDER
     target_dir.mkdir(parents=True, exist_ok=True)
 
 
 def copy_template_files(year: str, day: str) -> None:
-    target_dir: Path = Path(year) / day
+    target_dir: Path = Path(year) / FOLDER
     files = py_files + txt_files
     for file in files:
         source_path: Path = source_dir / file
@@ -38,6 +39,7 @@ def update_file_contents(filepath: Path, year: str, day: str) -> None:
     content = filepath.read_text()
     content = content.replace("YEAR", year)
     content = content.replace("DAY", day)
+    content = content.replace("FOLDER", FOLDER)
     filepath.write_text(content)
 
 

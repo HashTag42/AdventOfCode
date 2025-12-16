@@ -28,4 +28,4 @@ def get_data(filename: str) -> list[str]:
 if __name__ == "__main__":
     import pytest
     import sys
-    sys.exit(pytest.main(['-v', './YEAR/DAY/AoC_YEAR_DAY_test.py']))
+    sys.exit(pytest.main(['-v', './YEAR/FOLDER/AoC_YEAR_DAY_test.py']))
