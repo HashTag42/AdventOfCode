@@ -24,7 +24,7 @@ def part1(in_diagram: list[list[str]], limit: int = LIMIT) -> tuple[int, list[li
     return count, out_diagram
 
 
-def part2(in_diagram: list[list[str]], limit: int = LIMIT) -> int:
+def part2(in_diagram: list[list[str]]) -> int:
     count = 0
     while True:
         count1, out_diagram = part1(in_diagram)
