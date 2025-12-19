@@ -2,6 +2,7 @@
 Advent of Code 2015 - Day 19: Medicine for Rudolph
 Puzzle: https://adventofcode.com/2015/day/19
 '''
+import random
 
 
 def solve_2015_19(filename: str) -> tuple[int, int]:
@@ -10,17 +11,15 @@ def solve_2015_19(filename: str) -> tuple[int, int]:
 
 
 def solve_part1(data) -> int:
-    lines = data.strip().split('\n')
     # Parse replacements and molecule
     replacements = []
     molecule = ""
-    for line in lines:
+    for line in data:
         if '=>' in line:
             source, dest = line.split(' => ')
             replacements.append((source, dest))
         elif line.strip():  # Non-empty line that's not a rule = the molecule
             molecule = line.strip()
-
     # Generate all possible molecules after one replacement
     distinct = set()
     for source, dest in replacements:
@@ -38,13 +37,40 @@ def solve_part1(data) -> int:
 
 
 def solve_part2(data) -> int:
-    result = 0
-    return result
+    # Parse replacements and molecule
+    replacements = []
+    molecule = ""
+    for line in data:
+        if '=>' in line:
+            source, dest = line.split(' => ')
+            replacements.append((source, dest))
+        elif line.strip():
+            molecule = line.strip()
+    target = molecule
+    # Work backwards with randomized greedy approach
+    while True:
+        random.shuffle(replacements)
+        current = target
+        count = 0
+        while current != 'e':
+            replaced = False
+            for source, dest in replacements:
+                if dest in current:
+                    # Replace ONE occurrence (going backwards: dest -> source)
+                    current = current.replace(dest, source, 1)
+                    count += 1
+                    replaced = True
+                    break
+            if not replaced:
+                # Stuck - restart with different rule order
+                break
+        if current == 'e':
+            return count
 
 
-def get_data(filename: str) -> str:
+def get_data(filename: str) -> list[str]:
     with open(filename, 'r') as file:
-        data = file.read()
+        data = file.read().strip().split('\n')
     return data
 
 
