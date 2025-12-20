@@ -2,7 +2,6 @@
 Advent of Code 2015 - Day 22: Wizard Simulator 20XX
 Puzzle: https://adventofcode.com/2015/day/22
 '''
-
 import heapq
 from dataclasses import dataclass
 
@@ -33,7 +32,6 @@ class GameState:
         """Apply all active effects and return new state."""
         new_boss_hp = self.boss_hp - (3 if self.poison_timer > 0 else 0)
         new_mana = self.player_mana + (101 if self.recharge_timer > 0 else 0)
-
         return GameState(
             self.player_hp, new_mana, new_boss_hp, self.boss_damage,
             max(0, self.shield_timer - 1),
@@ -58,11 +56,9 @@ class GameState:
     def cast_spell(self, spell_name):
         """Cast a spell and return the new state."""
         spell = SPELLS[spell_name]
-
         new_shield = 6 if spell_name == 'shield' else self.shield_timer
         new_poison = 6 if spell_name == 'poison' else self.poison_timer
         new_recharge = 5 if spell_name == 'recharge' else self.recharge_timer
-
         return GameState(
             self.player_hp + spell['heal'],
             self.player_mana - spell['cost'],
@@ -72,9 +68,9 @@ class GameState:
             self.mana_spent + spell['cost']
         )
 
-    def boss_attack(self):
+    def boss_attack(self, armor):
         """Boss attacks player, return new state."""
-        damage = max(1, self.boss_damage - self.get_armor())
+        damage = max(1, self.boss_damage - armor)
         return GameState(
             self.player_hp - damage, self.player_mana, self.boss_hp, self.boss_damage,
             self.shield_timer, self.poison_timer, self.recharge_timer, self.mana_spent
@@ -82,57 +78,56 @@ class GameState:
 
 
 def solve_part1(player_hp, player_mana, boss_hp, boss_damage) -> int | None:
+    return find_minimum_mana(player_hp, player_mana, boss_hp, boss_damage, hard_mode=False)
+
+
+def solve_part2(player_hp, player_mana, boss_hp, boss_damage) -> int | None:
+    return find_minimum_mana(player_hp, player_mana, boss_hp, boss_damage, hard_mode=True)
+
+
+def find_minimum_mana(player_hp, player_mana, boss_hp, boss_damage, hard_mode=False) -> int | None:
     """Use Dijkstra's algorithm to find minimum mana to win."""
     initial_state = GameState(player_hp, player_mana, boss_hp, boss_damage)
-
     counter = 0
     pq = [(0, counter, initial_state)]
     visited = set()
-
     while pq:
         mana_spent, _, state = heapq.heappop(pq)
-
+        # Hard mode: player loses 1 HP at start of their turn
+        if hard_mode:
+            state = GameState(
+                state.player_hp - 1, state.player_mana, state.boss_hp, state.boss_damage,
+                state.shield_timer, state.poison_timer, state.recharge_timer, state.mana_spent
+            )
+            if state.player_hp <= 0:
+                continue  # Player died
+        # Check visited AFTER hard mode penalty
         state_key = (state.player_hp, state.player_mana, state.boss_hp,
                      state.shield_timer, state.poison_timer, state.recharge_timer)
-
         if state_key in visited:
             continue
         visited.add(state_key)
-
         # Player turn: apply effects
         state = state.apply_effects()
         if state.boss_hp <= 0:
             return mana_spent
-
         # Try each spell
         for spell_name in SPELLS:
             if state.can_cast(spell_name):
                 new_state = state.cast_spell(spell_name)
-
                 if new_state.boss_hp <= 0:
                     return new_state.mana_spent
-
                 # Boss turn: apply effects
+                armor = new_state.get_armor()  # Armor based on timer BEFORE decrement
                 boss_turn_state = new_state.apply_effects()
-
                 if boss_turn_state.boss_hp <= 0:
-                    counter += 1
-                    heapq.heappush(pq, (boss_turn_state.mana_spent, counter, boss_turn_state))
-                    continue
-
+                    return boss_turn_state.mana_spent  # Boss died from effects
                 # Boss attacks
-                after_attack = boss_turn_state.boss_attack()
-
+                after_attack = boss_turn_state.boss_attack(armor)
                 if after_attack.player_hp > 0:
                     counter += 1
                     heapq.heappush(pq, (after_attack.mana_spent, counter, after_attack))
-
     return None
-
-
-def solve_part2(data) -> int:
-    result = 0
-    return result
 
 
 def get_data(filename: str) -> tuple[int, int]:

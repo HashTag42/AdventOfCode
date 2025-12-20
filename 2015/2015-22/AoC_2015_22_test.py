@@ -3,7 +3,7 @@ import pytest
 
 test_cases = [
     # filename, player_hp, player_mana, expected
-    ('./2015/2015-22/input.txt', 50, 500, [900, 0]),
+    ('./2015/2015-22/input.txt', 50, 500, [900, 1216]),
 ]
 
 
