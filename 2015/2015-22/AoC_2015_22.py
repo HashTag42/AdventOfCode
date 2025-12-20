@@ -6,15 +6,18 @@ import heapq
 from dataclasses import dataclass
 
 SPELLS = {
-    'magic_missile': {'cost': 53, 'damage': 4, 'heal': 0, 'effect': None},
-    'drain': {'cost': 73, 'damage': 2, 'heal': 2, 'effect': None},
-    'shield': {'cost': 113, 'damage': 0, 'heal': 0, 'effect': ('shield', 6)},
-    'poison': {'cost': 173, 'damage': 0, 'heal': 0, 'effect': ('poison', 6)},
-    'recharge': {'cost': 229, 'damage': 0, 'heal': 0, 'effect': ('recharge', 5)},
+    'magic_missile': {'cost': 53, 'damage': 4, 'heal': 0},
+    'drain': {'cost': 73, 'damage': 2, 'heal': 2},
+    'shield': {'cost': 113, 'damage': 0, 'heal': 0},
+    'poison': {'cost': 173, 'damage': 0, 'heal': 0},
+    'recharge': {'cost': 229, 'damage': 0, 'heal': 0},
 }
 
+player_hp = 50
+player_mana = 500
 
-@dataclass(frozen=True)
+
+@dataclass(frozen=True, slots=True)
 class GameState:
     player_hp: int
     player_mana: int
@@ -25,10 +28,10 @@ class GameState:
     recharge_timer: int = 0
     mana_spent: int = 0
 
-    def get_armor(self):
+    def get_armor(self) -> int:
         return 7 if self.shield_timer > 0 else 0
 
-    def apply_effects(self):
+    def apply_effects(self) -> 'GameState':
         """Apply all active effects and return new state."""
         new_boss_hp = self.boss_hp - (3 if self.poison_timer > 0 else 0)
         new_mana = self.player_mana + (101 if self.recharge_timer > 0 else 0)
@@ -40,8 +43,11 @@ class GameState:
             self.mana_spent
         )
 
-    def can_cast(self, spell_name):
-        """Check if a spell can be cast."""
+    def can_cast(self, spell_name) -> bool:
+        """Check if a spell can be cast.
+        Note: Called after apply_effects(), so timer=0 means effect
+        just ended and can be recast this turn.
+        """
         spell = SPELLS[spell_name]
         if self.player_mana < spell['cost']:
             return False
@@ -53,7 +59,7 @@ class GameState:
             return False
         return True
 
-    def cast_spell(self, spell_name):
+    def cast_spell(self, spell_name) -> 'GameState':
         """Cast a spell and return the new state."""
         spell = SPELLS[spell_name]
         new_shield = 6 if spell_name == 'shield' else self.shield_timer
@@ -68,13 +74,20 @@ class GameState:
             self.mana_spent + spell['cost']
         )
 
-    def boss_attack(self, armor):
+    def boss_attack(self, armor) -> 'GameState':
         """Boss attacks player, return new state."""
         damage = max(1, self.boss_damage - armor)
         return GameState(
             self.player_hp - damage, self.player_mana, self.boss_hp, self.boss_damage,
             self.shield_timer, self.poison_timer, self.recharge_timer, self.mana_spent
         )
+
+
+def solve(filename: str) -> tuple[int | None, int | None]:
+    boss_hp, boss_damage = get_data(filename)
+    result1 = solve_part1(player_hp, player_mana, boss_hp, boss_damage)
+    result2 = solve_part2(player_hp, player_mana, boss_hp, boss_damage)
+    return result1, result2
 
 
 def solve_part1(player_hp, player_mana, boss_hp, boss_damage) -> int | None:
@@ -140,6 +153,6 @@ def get_data(filename: str) -> tuple[int, int]:
 
 
 if __name__ == "__main__":
-    import pytest
-    import sys
-    sys.exit(pytest.main(['-v', './2015/2015-22/AoC_2015_22_test.py']))
+    result1, result2 = solve('./2015/2015-22/input.txt')
+    print(f"Part1 : {result1}")
+    print(f"Part2 : {result2}")
