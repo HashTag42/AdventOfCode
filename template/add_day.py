@@ -2,7 +2,7 @@ from pathlib import Path
 import shutil
 
 YEAR = "2015"
-DAY = "19"
+DAY = "21"
 FOLDER = f"{YEAR}-{DAY}"
 
 source_dir: Path = Path("./template/")
