@@ -73,9 +73,23 @@ def generate_ring_combinations():
     return ring_combos
 
 
-def solve_part2(data) -> int:
-    result = 0
-    return result
+def solve_part2(boss_hp, boss_damage, boss_armor) -> int:
+    """Find maximum gold to still lose the fight."""
+    player_hp = 100
+    max_cost = 0
+    ring_combos = generate_ring_combinations()
+    # Try all combinations
+    for weapon in WEAPONS:
+        for armor in ARMOR:
+            for rings in ring_combos:
+                # Calculate totals
+                cost = weapon[1] + armor[1] + sum(r[1] for r in rings)
+                damage = weapon[2] + armor[2] + sum(r[2] for r in rings)
+                defense = weapon[3] + armor[3] + sum(r[3] for r in rings)
+                # Check if we LOSE
+                if not simulate_fight(player_hp, damage, defense, boss_hp, boss_damage, boss_armor):
+                    max_cost = max(max_cost, cost)
+    return max_cost
 
 
 def get_data(filename: str) -> tuple[int, int, int]:
