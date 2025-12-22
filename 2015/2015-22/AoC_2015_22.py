@@ -154,5 +154,4 @@ def get_data(filename: str) -> tuple[int, int]:
 
 if __name__ == "__main__":
     result1, result2 = solve('./2015/2015-22/input.txt')
-    print(f"Part1 : {result1}")
-    print(f"Part2 : {result2}")
+    print(f"Part 1: {result1}, Part 2: {result2}")
