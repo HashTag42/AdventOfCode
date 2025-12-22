@@ -7,44 +7,43 @@ Puzzle: https://adventofcode.com/2015/day/23
 class Instruction:
     def __init__(self, line: str) -> None:
         self.line: str = line.strip()
-        self.tuple: tuple = tuple(line.replace(",", " ").split())
-        self.instruction: str = self.tuple[0]
+        self.parts: tuple = tuple(line.replace(",", " ").split())
+        self.opcode: str = self.parts[0]
 
     def __repr__(self) -> str:
         return self.line
 
 
 class Runbook:
-    def __init__(self, instructions: list[Instruction] = []) -> None:
-        self.instructions: list[Instruction] = instructions
+    def __init__(self, instructions: list[Instruction] | None = None) -> None:
+        self.instructions: list[Instruction] = instructions if instructions is not None else []
         self.registers: dict[str, int] = {'a': 0, 'b': 0}
 
     def run(self) -> None:
         index: int = 0
-        while True:
-            if index >= len(self.instructions):
-                break
+        length = len(self.instructions)
+        while index < length:
             instruction: Instruction = self.instructions[index]
-            match instruction.instruction:
+            match instruction.opcode:
                 case 'hlf':
-                    self.registers[instruction.tuple[1]] //= 2
+                    self.registers[instruction.parts[1]] //= 2
                     index += 1
                 case 'tpl':
-                    self.registers[instruction.tuple[1]] *= 3
+                    self.registers[instruction.parts[1]] *= 3
                     index += 1
                 case 'inc':
-                    self.registers[instruction.tuple[1]] += 1
+                    self.registers[instruction.parts[1]] += 1
                     index += 1
                 case 'jmp':
-                    index += int(instruction.tuple[1])
+                    index += int(instruction.parts[1])
                 case 'jie':
-                    if self.registers[instruction.tuple[1]] % 2 == 0:
-                        index += int(instruction.tuple[2])
+                    if self.registers[instruction.parts[1]] % 2 == 0:
+                        index += int(instruction.parts[2])
                     else:
                         index += 1
                 case 'jio':
-                    if self.registers[instruction.tuple[1]] == 1:
-                        index += int(instruction.tuple[2])
+                    if self.registers[instruction.parts[1]] == 1:
+                        index += int(instruction.parts[2])
                     else:
                         index += 1
                 case _:
