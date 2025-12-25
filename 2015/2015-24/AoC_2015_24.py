@@ -64,12 +64,12 @@ class PackageCombinator:
 
     def get_first_group_qe(self) -> int:
         # Calculate the target weight
-        target_weight = self.__all_packages_group.get_group_weight() / self.__groups
+        target_weight = self.__all_packages_group.get_group_weight() // self.__groups
         # print(f"[DEBUG] {target_weight=}")
 
         # Create all possible combinations and filter only those that produce package groups of equal weight
         valid_combinations = []
-        for r in range(2, len(self.__all_packages_group.get_packages())):
+        for r in range(1, len(self.__all_packages_group.get_packages())):
             valid_combinations = [
                 c for c in combinations(self.__all_packages_group.get_packages(), r)
                 if sum(p for p in c) == target_weight
