@@ -1,10 +1,9 @@
 from pathlib import Path
 import shutil
 
-YEAR = "2016"
-DAY = "01"
-# FOLDER = f"{YEAR}-{DAY}"
-FOLDER = DAY
+YEAR = "2015"
+DAY = "21"
+FOLDER = f"{YEAR}-{DAY}"
 
 source_dir: Path = Path("./template/")
 py_files = ["AoC_YEAR_DAY_test.py", "AoC_YEAR_DAY.py"]
