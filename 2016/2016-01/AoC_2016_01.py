@@ -16,33 +16,12 @@ class Direction:
         self.y_dir: int = y_dir
 
     def turn(self, turn_direction: str) -> None:
-        match turn_direction:
-            case 'R':
-                match (self.x_dir, self.y_dir):
-                    case (0, 1):
-                        self.x_dir, self.y_dir = 1, 0
-                    case (1, 0):
-                        self.x_dir, self.y_dir = 0, -1
-                    case (0, -1):
-                        self.x_dir, self.y_dir = -1, 0
-                    case (-1, 0):
-                        self.x_dir, self.y_dir = 0, 1
-                    case _:
-                        raise ValueError("Invalid direction")
-            case 'L':
-                match (self.x_dir, self.y_dir):
-                    case (0, 1):
-                        self.x_dir, self.y_dir = -1, 0
-                    case (-1, 0):
-                        self.x_dir, self.y_dir = 0, -1
-                    case (0, -1):
-                        self.x_dir, self.y_dir = 1, 0
-                    case (1, 0):
-                        self.x_dir, self.y_dir = 0, 1
-                    case _:
-                        raise ValueError("Invalid direction")
-            case _:
-                raise ValueError("Invalid turn direction.")
+        if turn_direction == 'R':
+            self.x_dir, self.y_dir = self.y_dir, -self.x_dir
+        elif turn_direction == 'L':
+            self.x_dir, self.y_dir = -self.y_dir, self.x_dir
+        else:
+            raise ValueError("Invalid turn direction.")
 
 
 class Vector:
