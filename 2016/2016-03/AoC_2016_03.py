@@ -19,31 +19,38 @@ class Shape:
 
 
 def solve(filename: str) -> tuple[int, int]:
-    data = get_data(filename)
-    return solve_part1(data), solve_part2(data)
+    tuples = get_data(filename)
+    return solve_part1(tuples), solve_part2(tuples)
 
 
-def solve_part1(shapes: list[Shape]) -> int:
-    total = 0
-    for shape in shapes:
-        if shape.isTriangle:
-            total += 1
-    return total
+def solve_part1(tuples: list[tuple[int, int, int]]) -> int:
+    triangles = 0
+    for item in tuples:
+        shape: Shape = Shape(item)
+        triangles += 1 if shape.isTriangle else 0
+    return triangles
 
 
-def solve_part2(data) -> int:
-    result = 0
-    return result
+def solve_part2(tuples: list[tuple[int, int, int]]) -> int:
+    triangles, row, length = 0, 0, len(tuples)
+    while True:
+        for i in range(3):
+            shape: Shape = Shape((tuples[row][i], tuples[row+1][i], tuples[row+2][i]))
+            triangles += 1 if shape.isTriangle else 0
+        row = row + 3
+        if row >= length:
+            break
+    return triangles
 
 
-def get_data(filename: str) -> list[Shape]:
-    shapes: list[Shape] = []
+def get_data(filename: str) -> list[tuple[int, int, int]]:
+    tuples: list[tuple[int, int, int]] = []
     with open(filename, 'r') as file:
         for line in file.readlines():
             values: list[str] = [val for val in line.split()]
-            shape: Shape = Shape((int(values[0]), int(values[1]), int(values[2])))
-            shapes.append(shape)
-    return shapes
+            item: tuple[int, int, int] = (int(values[0]), int(values[1]), int(values[2]))
+            tuples.append(item)
+    return tuples
 
 
 if __name__ == "__main__":
