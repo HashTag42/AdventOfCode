@@ -21,8 +21,7 @@ def solve_part2(data) -> int:
 
 def get_data(filename: str) -> list[str]:
     with open(filename, 'r') as file:
-        data = file.readlines()
-    return data
+        return [line.strip() for line in file]
 
 
 if __name__ == "__main__":
