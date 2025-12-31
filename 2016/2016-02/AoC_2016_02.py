@@ -14,18 +14,20 @@ class ClassicKeypad:
         ]
 
     def move(self, direction: str) -> tuple[int, int]:
+        row_edge = len(self.buttons) - 1
+        col_edge = len(self.buttons[0]) - 1
         match direction:
             case 'U':
                 if self.position[0] > 0:
                     self.position = (self.position[0] - 1, self.position[1])
             case 'D':
-                if self.position[0] < 2:
+                if self.position[0] < row_edge:
                     self.position = (self.position[0] + 1, self.position[1])
             case 'L':
                 if self.position[1] > 0:
                     self.position = (self.position[0], self.position[1] - 1)
             case 'R':
-                if self.position[1] < 2:
+                if self.position[1] < col_edge:
                     self.position = (self.position[0], self.position[1] + 1)
             case _:
                 raise ValueError(f'Invalid direction: {direction=}')
@@ -50,6 +52,8 @@ class ModernKeypad:
         ]
 
     def move(self, direction: str) -> tuple[int, int]:
+        row_edge = len(self.buttons) - 1
+        col_edge = len(self.buttons[0]) - 1
         match direction:
             case 'U':
                 row_target, col_target = self.position[0] - 1, self.position[1]
@@ -57,7 +61,7 @@ class ModernKeypad:
                     self.position = (row_target, col_target)
             case 'D':
                 row_target, col_target = self.position[0] + 1, self.position[1]
-                if self.position[0] < 4 and self.buttons[row_target][col_target] != ' ':
+                if self.position[0] < row_edge and self.buttons[row_target][col_target] != ' ':
                     self.position = (row_target, col_target)
             case 'L':
                 row_target, col_target = self.position[0], self.position[1] - 1
@@ -65,7 +69,7 @@ class ModernKeypad:
                     self.position = (row_target, col_target)
             case 'R':
                 row_target, col_target = self.position[0], self.position[1] + 1
-                if self.position[1] < 4 and self.buttons[row_target][col_target] != ' ':
+                if self.position[1] < col_edge and self.buttons[row_target][col_target] != ' ':
                     self.position = (row_target, col_target)
             case _:
                 raise ValueError(f'Invalid direction: {direction=}')
