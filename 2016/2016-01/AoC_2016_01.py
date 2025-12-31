@@ -10,6 +10,7 @@ class Position:
         self.y: int = y
 
     def get_blocks(self) -> int:
+        """Returns the absolute distance between the current position and position(0,0)"""
         return abs(self.x) + abs(self.y)
 
     def __eq__(self, other: object) -> bool:
@@ -30,19 +31,20 @@ class Direction:
         self.y_dir: int = y_dir
 
     def turn(self, turn_direction: str) -> None:
-        if turn_direction == 'R':
-            self.x_dir, self.y_dir = self.y_dir, -self.x_dir
-        elif turn_direction == 'L':
-            self.x_dir, self.y_dir = -self.y_dir, self.x_dir
-        else:
-            raise ValueError("Invalid turn direction.")
+        match turn_direction:
+            case 'R':
+                self.x_dir, self.y_dir = self.y_dir, -self.x_dir
+            case 'L':
+                self.x_dir, self.y_dir = -self.y_dir, self.x_dir
+            case _:
+                raise ValueError("Invalid turn direction.")
 
     def __repr__(self) -> str:
         return f"[{self.x_dir}, {self.y_dir}]"
 
 
 class Vector:
-    def __init__(self, position: Position, direction: Direction, length: int = 0) -> None:
+    def __init__(self, position: Position = Position(0, 0), direction: Direction = Direction(0, 1)) -> None:
         self.position: Position = position
         self.direction: Direction = direction
 
@@ -51,9 +53,12 @@ class Vector:
         distance: int = int(move[1:])
         self.direction.turn(turn)
         steps: list[Position] = []
-        new_x: int = self.position.x + self.direction.x_dir * distance
-        new_y: int = self.position.y + self.direction.y_dir * distance
-        self.position = Position(new_x, new_y)
+        for _ in range(distance):
+            self.position = Position(
+                self.position.x + self.direction.x_dir,
+                self.position.y + self.direction.y_dir
+            )
+            steps.append(self.position)
         return steps
 
     def __repr__(self) -> str:
@@ -61,27 +66,17 @@ class Vector:
 
 
 def solve(filename: str) -> tuple[int, int]:
-    steps: list[str] = get_data(filename)
-    position = Position(0, 0)
-    direction = Direction(0, 1)
-    visited: set[Position] = {position}
+    moves: list[str] = get_data(filename)
+    vector: Vector = Vector()
+    visited: set[Position] = {vector.position}
     double_blocks: int | None = None
-
-    for step in steps:
-        direction.turn(step[0])
-        distance = int(step[1:])
-
-        for _ in range(distance):
-            position = Position(
-                position.x + direction.x_dir,
-                position.y + direction.y_dir
-            )
-            if double_blocks is None and position in visited:
-                double_blocks = abs(position.x) + abs(position.y)
-            visited.add(position)
-
-    part1 = abs(position.x) + abs(position.y)
-    return part1, double_blocks or 0
+    for move in moves:
+        steps = vector.travel(move)
+        for step in steps:
+            if double_blocks is None and step in visited:
+                double_blocks = step.get_blocks()
+            visited.add(step)
+    return vector.position.get_blocks(), double_blocks or 0
 
 
 def get_data(filename: str) -> list[str]:
@@ -95,6 +90,5 @@ def get_data(filename: str) -> list[str]:
 if __name__ == "__main__":
     result1, result2 = solve('./2016/2016-01/example.txt')
     print(f"example.txt: Results: Part 1 = {result1}, Part 2 = {result2}")
-
     result1, result2 = solve('./2016/2016-01/input.txt')
     print(f"input.txt: Results: Part 1 = {result1}, Part 2 = {result2}")
