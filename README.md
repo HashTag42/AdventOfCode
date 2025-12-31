@@ -1,7 +1,9 @@
 # AdventOfCode
+
 Solutions to the [Advent of Code](https://adventofcode.com/) puzzles
 
 ---
+
 ## [2021](https://adventofcode.com/2021)
 
 ### 2021 Day 18: [Snailfish](https://adventofcode.com/2021/day/18)
@@ -25,7 +27,6 @@ Solutions to the [Advent of Code](https://adventofcode.com/) puzzles
 * [My Solution](https://github.com/HashTag42/AdventOfCode/tree/main/2021/2021-13)
 * An efficient solution is similar to that in 2021-06 (Lanternfish). Keep a list of buckets for the pairs, calculate the next step per bucket, and multiply the results per the number pairs in each bucket.
 * Fully implemented the [.NET IEquatable interface](https://docs.microsoft.com/en-us/dotnet/api/system.iequatable-1.equals).
-
 
 ### 2021 Day 13: [Transparent Origami](https://adventofcode.com/2021/day/13)
 
@@ -85,7 +86,7 @@ Solutions to the [Advent of Code](https://adventofcode.com/) puzzles
 
 * [My Solution](https://github.com/HashTag42/AdventOfCode/tree/main/2021/2021-02)
 
-### 2021 Day 1: [ Sonar Sweep](https://adventofcode.com/2021/day/1)
+### 2021 Day 1: [Sonar Sweep](https://adventofcode.com/2021/day/1)
 
 * [My Solution](https://github.com/HashTag42/AdventOfCode/tree/main/2021/2021-01)
 
@@ -113,7 +114,7 @@ Solutions to the [Advent of Code](https://adventofcode.com/) puzzles
 
 * [My Solution](https://github.com/HashTag42/AdventOfCode/tree/main/2015/2015-09)
 * Classic [Travelling Salesman Problem](https://en.wikipedia.org/wiki/Travelling_salesman_problem)
-* Reused the GetPermutationss algorithm found [here](https://stackoverflow.com/questions/756055/listing-all-permutations-of-a-string-integer).
+* Used the [GetPermutationss algorithm](https://stackoverflow.com/questions/756055/listing-all-permutations-of-a-string-integer).
 
 ### 2015 Day 8: [Matchsticks](https://adventofcode.com/2015/day/8)
 
@@ -151,4 +152,4 @@ Solutions to the [Advent of Code](https://adventofcode.com/) puzzles
 
 * [My Solution](https://github.com/HashTag42/AdventOfCode/tree/main/2015/2015-01)
 
-___
+---
