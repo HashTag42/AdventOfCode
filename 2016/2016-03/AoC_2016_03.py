@@ -2,55 +2,33 @@
 Advent of Code 2016 - Day 03:
 Puzzle: https://adventofcode.com/2016/day/03
 '''
-from itertools import permutations
 
 
-class Shape:
-    def __init__(self, sides: tuple[int, int, int]) -> None:
-        self.sides: tuple[int, int, int] = sides
-        self.isTriangle: bool = self.__is_triangle()
-
-    def __is_triangle(self) -> bool:
-        perms = permutations(self.sides)
-        for perm in perms:
-            if perm[0] + perm[1] <= perm[2]:
-                return False
-        return True
+def is_triangle(sides: tuple[int, ...]) -> bool:
+    a, b, c = sorted(sides)
+    return a + b > c
 
 
 def solve(filename: str) -> tuple[int, int]:
-    tuples = get_data(filename)
-    return solve_part1(tuples), solve_part2(tuples)
+    data = get_data(filename)
+    return solve_part1(data), solve_part2(data)
 
 
-def solve_part1(tuples: list[tuple[int, int, int]]) -> int:
-    triangles = 0
-    for item in tuples:
-        shape: Shape = Shape(item)
-        triangles += 1 if shape.isTriangle else 0
-    return triangles
+def solve_part1(data: list[tuple[int, ...]]) -> int:
+    return sum(is_triangle(sides) for sides in data)
 
 
-def solve_part2(tuples: list[tuple[int, int, int]]) -> int:
-    triangles, row, length = 0, 0, len(tuples)
-    while True:
-        for i in range(3):
-            shape: Shape = Shape((tuples[row][i], tuples[row+1][i], tuples[row+2][i]))
-            triangles += 1 if shape.isTriangle else 0
-        row = row + 3
-        if row >= length:
-            break
-    return triangles
+def solve_part2(data: list[tuple[int, ...]]) -> int:
+    total = 0
+    for i in range(0, len(data), 3):
+        for col in zip(data[i], data[i+1], data[i+2]):
+            total += 1 if is_triangle(col) else 0
+    return total
 
 
-def get_data(filename: str) -> list[tuple[int, int, int]]:
-    tuples: list[tuple[int, int, int]] = []
+def get_data(filename: str) -> list[tuple[int, ...]]:
     with open(filename, 'r') as file:
-        for line in file.readlines():
-            values: list[str] = [val for val in line.split()]
-            item: tuple[int, int, int] = (int(values[0]), int(values[1]), int(values[2]))
-            tuples.append(item)
-    return tuples
+        return [tuple(map(int, line.split())) for line in file]
 
 
 if __name__ == "__main__":
