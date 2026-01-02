@@ -30,7 +30,8 @@
 # There are two new instructions you'll need to handle:
 # The do() instruction enables future mul instructions.
 # The don't() instruction disables future mul instructions.
-# Only the most recent do() or don't() instruction applies. At the beginning of the program, mul instructions are enabled.
+# Only the most recent do() or don't() instruction applies. At the beginning of the program, mul instructions are
+# enabled.
 # For example:
 # xmul(2,4)&mul[3,7]!^don't()_mul(5,5)+mul(32,64](mul(11,8)undo()?mul(8,5))
 # This corrupted memory is similar to the example from before, but this time the mul(5,5) and mul(11,8) instructions are
@@ -47,6 +48,7 @@ import re
 
 logging.basicConfig(level=logging.INFO, format='%(levelname)s: %(message)s')
 
+
 ################################################################################
 def main():
     calculate_part1("inputTest.txt")    # 161
@@ -54,6 +56,7 @@ def main():
     calculate_part2("inputTest2.txt")   # 48
     calculate_part2("input.txt")        # 95411583
 ################################################################################
+
 
 ################################################################################
 def calculate_part1(filename):
@@ -66,6 +69,7 @@ def calculate_part1(filename):
 
     print(f"File: [{filename}]. Part 1 result = {total}")
 ################################################################################
+
 
 ################################################################################
 def calculate_part2(filename):
@@ -96,6 +100,7 @@ def calculate_part2(filename):
     print(f"File: [{filename}]. Part 2 result = {total_muls}")
 ################################################################################
 
+
 ################################################################################
 def addup_muls(text):
     logging.debug(f"addup_muls text: [{text}]")
@@ -109,6 +114,7 @@ def addup_muls(text):
             total += int(numbers[0]) * int(numbers[1])
     return total
 ################################################################################
+
 
 ################################################################################
 if __name__ == "__main__":
