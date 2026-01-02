@@ -6,7 +6,6 @@ from Ingredient import Ingredient
 from Cookie import Cookie
 
 
-
 def solve_2015_15(filename: str) -> tuple[int, int]:
     ingredients: list[Ingredient] = get_data(filename)
     return solve_part(ingredients, 1), solve_part(ingredients, 2)
