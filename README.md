@@ -94,6 +94,11 @@ Solutions to the [Advent of Code](https://adventofcode.com/) puzzles
 
 ## [2016](https://adventofcode.com/2016)
 
+### [2016 Day 4: Security Through Obscurity](https://adventofcode.com/2016/day/4)
+
+* [My Solution](https://github.com/HashTag42/AdventOfCode/tree/main/2016/2016-04)
+* Class implemented: `Room`
+
 ### 2016 Day 3: [Squares With Three Sides](https://adventofcode.com/2016/day/3)
 
 * [My Solution](https://github.com/HashTag42/AdventOfCode/tree/main/2016/2016-03)

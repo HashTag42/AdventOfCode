@@ -15,10 +15,7 @@ logging.basicConfig(
 class Room:
     def __init__(self, room: str) -> None:
         self.full_name: str = room
-        parse_results = self._parse_full_name()
-        self.encrypted_name: str = parse_results[0]
-        self.sector_id: int = parse_results[1]
-        self.checksum: str = parse_results[2]
+        self.encrypted_name, self.sector_id, self.checksum = self._parse_full_name()
         self.is_real: bool = self._is_real()
 
     def _parse_full_name(self) -> tuple[str, int, str]:
