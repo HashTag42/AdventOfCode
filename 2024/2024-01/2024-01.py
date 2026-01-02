@@ -7,8 +7,9 @@ DEBUG = True
 # DEBUG = False
 
 # UNCOMMENT ONE OF THE FOLLOWING LINES
-# filename = "input.txt"
-filename = "inputTest.txt"
+filename = "./2024/2024-01/input.txt"
+# filename = "./2024/2024-01/inputTest.txt"
+
 
 ################################################################################
 def main():
@@ -37,9 +38,10 @@ def main():
     similarity_score = 0
     for i, a in enumerate(list1):
         dif += abs(int(a) - int(list2[i]))
+        factor = 0
         try:
             factor = int(dict2[list1[i]])
-        except:
+        except KeyError:
             factor = 0
         finally:
             similarity_score += int(list1[i]) * factor
@@ -49,22 +51,25 @@ def main():
 
 ################################################################################
 
+
 ################################################################################
 def increaseDictCount(dict, key):
     p = 0
     try:
         p = dict[key]
-    except KeyError as e:
+    except KeyError:
         dict[key] = 0
     finally:
         dict[key] = p+1
 ################################################################################
+
 
 ################################################################################
 def printDebug(text):
     if DEBUG:
         print(f"[DEBUG] {text}")
 ################################################################################
+
 
 if __name__ == "__main__":
     main()
