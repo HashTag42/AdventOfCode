@@ -3,8 +3,8 @@ import pytest
 
 test_cases = [
     # door_id, expected
-    ('abc', ['18f47a30', 0]),
-    ('ojvtpuvg', ['4543c154', 0]),
+    ('abc', ['18f47a30', '05ace8e3']),
+    ('ojvtpuvg', ['4543c154', '1050cbbd']),
 ]
 
 
