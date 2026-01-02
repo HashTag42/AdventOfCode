@@ -2,67 +2,8 @@
 Advent of Code 2016 - Day 1: No Time for a Taxicab
 Puzzle: https://adventofcode.com/2016/day/1
 '''
-
-
-class Position:
-    def __init__(self, x: int = 0, y: int = 0) -> None:
-        self.x: int = x
-        self.y: int = y
-
-    def get_blocks(self) -> int:
-        """Returns the absolute distance between the current position and position(0,0)"""
-        return abs(self.x) + abs(self.y)
-
-    def __eq__(self, other: object) -> bool:
-        if not isinstance(other, Position):
-            return NotImplemented
-        return self.x == other.x and self.y == other.y
-
-    def __hash__(self) -> int:
-        return hash((self.x, self.y))
-
-    def __repr__(self) -> str:
-        return f"({self.x}, {self.y})"
-
-
-class Direction:
-    def __init__(self, x_dir: int = 0, y_dir: int = 0) -> None:
-        self.x_dir: int = x_dir
-        self.y_dir: int = y_dir
-
-    def turn(self, turn_direction: str) -> None:
-        match turn_direction:
-            case 'R':
-                self.x_dir, self.y_dir = self.y_dir, -self.x_dir
-            case 'L':
-                self.x_dir, self.y_dir = -self.y_dir, self.x_dir
-            case _:
-                raise ValueError("Invalid turn direction.")
-
-    def __repr__(self) -> str:
-        return f"[{self.x_dir}, {self.y_dir}]"
-
-
-class Vector:
-    def __init__(self, position: Position = Position(0, 0), direction: Direction = Direction(0, 1)) -> None:
-        self.position: Position = position
-        self.direction: Direction = direction
-
-    def travel(self, move: str) -> list[Position]:
-        turn: str = move[0]
-        distance: int = int(move[1:])
-        self.direction.turn(turn)
-        steps: list[Position] = []
-        for _ in range(distance):
-            self.position = Position(
-                self.position.x + self.direction.x_dir,
-                self.position.y + self.direction.y_dir
-            )
-            steps.append(self.position)
-        return steps
-
-    def __repr__(self) -> str:
-        return f"{self.position} - {self.direction}"
+from Position import Position
+from Vector import Vector
 
 
 def solve(filename: str) -> tuple[int, int]:
