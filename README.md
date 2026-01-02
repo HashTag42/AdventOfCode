@@ -94,6 +94,10 @@ Solutions to the [Advent of Code](https://adventofcode.com/) puzzles
 
 ## [2016](https://adventofcode.com/2016)
 
+### [2016 Day 5: How About a Nice Game of Chess?](https://adventofcode.com/2016/day/5)
+
+* [My Solution](https://github.com/HashTag42/AdventOfCode/tree/main/2016/2016-05)
+
 ### [2016 Day 4: Security Through Obscurity](https://adventofcode.com/2016/day/4)
 
 * [My Solution](https://github.com/HashTag42/AdventOfCode/tree/main/2016/2016-04)
