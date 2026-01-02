@@ -92,6 +92,24 @@ Solutions to the [Advent of Code](https://adventofcode.com/) puzzles
 
 ---
 
+## [2016](https://adventofcode.com/2016)
+
+### 2016 Day 3: [Squares With Three Sides](https://adventofcode.com/2016/day/3)
+
+* [My Solution](https://github.com/HashTag42/AdventOfCode/tree/main/2016/2016-03)
+
+### 2016 Day 2: [Bathroom Security](https://adventofcode.com/2016/day/2)
+
+* [My Solution](https://github.com/HashTag42/AdventOfCode/tree/main/2016/2016-02)
+* Classes implemented: `ClassicKeypad`, `ModernKeypad`
+
+### 2016 Day 1: [No Time for a Taxicab](https://adventofcode.com/2016/day/1)
+
+* [My Solution](https://github.com/HashTag42/AdventOfCode/blob/main/2016/2016-01)
+* Classes implemented: `Position`, `Direction`, and `Vector`
+
+---
+
 ## [2015](https://adventofcode.com/2015)
 
 ### 2015 Day 12: [JSAbacusFramework.io](https://adventofcode.com/2015/day/12)
