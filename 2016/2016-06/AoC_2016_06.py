@@ -11,15 +11,10 @@ def solve(filename: str) -> tuple[str, int]:
 
 
 def solve_part1(matrix: list[str]) -> str:
-    corrected_message: str = ""
-    length = len(matrix[0])
-    counters: list[Counter] = [Counter() for _ in range(length)]
-    for row in matrix:
-        for col in range(length):
-            counters[col].update(row[col])
-    for col in range(length):
-        corrected_message += counters[col].most_common(1)[0][0]
-    return corrected_message
+    return ''.join(
+        Counter(column).most_common(1)[0][0]
+        for column in zip(*matrix)
+    )
 
 
 def solve_part2(matrix: list[str]) -> int:
