@@ -1,0 +1,18 @@
+from AoC_2016_06 import solve_part1, solve_part2, get_data
+import pytest
+
+test_cases = [
+    # filename, expected
+    ('./2016/2016-06/example.txt', ['easter', 0]),
+    ('./2016/2016-06/input.txt', ['umcvzsmw', 0]),
+]
+
+
+@pytest.mark.parametrize("filename, expected", test_cases)
+def test_solve_part1(filename, expected):
+    assert solve_part1(get_data(filename)) == expected[0]
+
+
+@pytest.mark.parametrize("filename, expected", test_cases)
+def test_solve_part2(filename, expected):
+    assert solve_part2(get_data(filename)) == expected[1]

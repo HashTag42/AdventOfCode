@@ -141,6 +141,10 @@ Solutions to the [Advent of Code](https://adventofcode.com/) puzzles
 
 ## [2016](https://adventofcode.com/2016)
 
+### [2016 Day 6: Signals and Nose](https://adventofcode.com/2016/day/6)
+
+* [My Solution (Python)](https://github.com/HashTag42/AdventOfCode/blob/main/2016/2016-06/AoC_2016_06.py)
+
 ### [2016 Day 5: How About a Nice Game of Chess?](https://adventofcode.com/2016/day/5)
 
 * [My Solution (Python)](https://github.com/HashTag42/AdventOfCode/blob/main/2016/2016-05/AoC_2016_05.py)
