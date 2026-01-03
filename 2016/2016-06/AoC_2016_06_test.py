@@ -3,8 +3,8 @@ import pytest
 
 test_cases = [
     # filename, expected
-    ('./2016/2016-06/example.txt', ['easter', 0]),
-    ('./2016/2016-06/input.txt', ['umcvzsmw', 0]),
+    ('./2016/2016-06/example.txt', ['easter', 'advent']),
+    ('./2016/2016-06/input.txt', ['umcvzsmw', 'rwqoacfz']),
 ]
 
 

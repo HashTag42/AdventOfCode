@@ -5,7 +5,7 @@ Puzzle: https://adventofcode.com/2016/day/6
 from collections import Counter
 
 
-def solve(filename: str) -> tuple[str, int]:
+def solve(filename: str) -> tuple[str, str]:
     matrix: list[str] = get_data(filename)
     return solve_part1(matrix), solve_part2(matrix)
 
@@ -17,9 +17,11 @@ def solve_part1(matrix: list[str]) -> str:
     )
 
 
-def solve_part2(matrix: list[str]) -> int:
-    result = 0
-    return result
+def solve_part2(matrix: list[str]) -> str:
+    return ''.join(
+        Counter(column).most_common()[-1][0]
+        for column in zip(*matrix)
+    )
 
 
 def get_data(filename: str) -> list[str]:
