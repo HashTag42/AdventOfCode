@@ -112,7 +112,7 @@ def get_data(filename: str) -> list[Address]:
 ###############################################################################
 # region Main
 if __name__ == "__main__":
-    filepaths: list[str] = [
+    filepaths = [
         './2016/2016-07/example1.txt',
         './2016/2016-07/example2.txt',
         './2016/2016-07/input.txt',
