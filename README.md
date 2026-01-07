@@ -141,6 +141,16 @@ Solutions to the [Advent of Code](https://adventofcode.com/) puzzles
 
 ## [2016](https://adventofcode.com/2016)
 
+### [2016 Day 8: Two-Factor Authentication](https://adventofcode.com/2016/day/8)
+
+* [My Solution (Python)](https://github.com/HashTag42/AdventOfCode/blob/main/2016/2016-08/AoC_2016_08.py)
+* Implemented class: [`Screen`](https://github.com/HashTag42/AdventOfCode/blob/main/2016/2016-08/Screen.py)
+
+### [2016 Day 7: Internet Protocol Version 7](https://adventofcode.com/2016/day/7)
+
+* [My Solution (Python)](https://github.com/HashTag42/AdventOfCode/blob/main/2016/2016-07/AoC_2016_07.py)
+* Implemented classes: [`IPv7Address`](https://github.com/HashTag42/AdventOfCode/blob/main/2016/2016-07/IPv7Address.py), [`IPv7Segment`](https://github.com/HashTag42/AdventOfCode/blob/main/2016/2016-07/IPv7Segment.py)
+
 ### [2016 Day 6: Signals and Nose](https://adventofcode.com/2016/day/6)
 
 * [My Solution (Python)](https://github.com/HashTag42/AdventOfCode/blob/main/2016/2016-06/AoC_2016_06.py)
