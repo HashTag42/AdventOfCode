@@ -3,6 +3,7 @@ Advent of Code 2016 - Day 8: Two-Factor Authentication
 Puzzle: https://adventofcode.com/2016/day/8
 '''
 from Screen import Screen, State
+from pathlib import Path
 import logging
 
 logging.basicConfig(
@@ -12,8 +13,7 @@ logging.basicConfig(
 
 
 def solve(filename: str, cols: int, rows: int) -> int:
-    operations = get_data(filename)
-    return solve_part1(operations, cols, rows)
+    return solve_part1(get_data(filename), cols, rows)
 
 
 def solve_part1(operations: list[str], cols: int, rows: int) -> int:
@@ -23,12 +23,12 @@ def solve_part1(operations: list[str], cols: int, rows: int) -> int:
         logging.debug(f"{op=}")
         screen.execute(op)
         logging.debug(screen)
-    return screen.count(State.ON.value)
+    logging.info(screen)
+    return screen.count(State.ON)
 
 
 def get_data(filename: str) -> list[str]:
-    with open(filename, 'r') as file:
-        return [line.strip() for line in file]
+    return Path(filename).read_text().splitlines()
 
 
 if __name__ == "__main__":
