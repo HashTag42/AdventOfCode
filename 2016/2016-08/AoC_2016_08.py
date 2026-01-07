@@ -11,12 +11,9 @@ logging.basicConfig(
     )
 
 
-def solve(filename: str, cols: int, rows: int) -> tuple[int, int]:
+def solve(filename: str, cols: int, rows: int) -> int:
     operations = get_data(filename)
-    return (
-        solve_part1(operations, cols, rows),
-        solve_part2(operations, cols, rows)
-        )
+    return solve_part1(operations, cols, rows)
 
 
 def solve_part1(operations: list[str], cols: int, rows: int) -> int:
@@ -29,11 +26,6 @@ def solve_part1(operations: list[str], cols: int, rows: int) -> int:
     return screen.count(State.ON.value)
 
 
-def solve_part2(operations: list[str], cols: int, rows: int) -> int:
-    result = 0
-    return result
-
-
 def get_data(filename: str) -> list[str]:
     with open(filename, 'r') as file:
         return [line.strip() for line in file]
@@ -41,9 +33,9 @@ def get_data(filename: str) -> list[str]:
 
 if __name__ == "__main__":
     input_file, cols, rows = './2016/2016-08/example.txt', 7, 3
-    result1, result2 = solve(input_file, cols, rows)
-    print(f"{input_file=}: {result1=}, {result2=}")
+    result1 = solve(input_file, cols, rows)
+    print(f"{input_file=}: {result1=}")
 
     input_file, cols, rows = './2016/2016-08/input.txt', 50, 6
-    result1, result2 = solve(input_file, cols, rows)
-    print(f"{input_file=}: {result1=}, {result2=}")
+    result1 = solve(input_file, cols, rows)
+    print(f"{input_file=}: {result1=}")
