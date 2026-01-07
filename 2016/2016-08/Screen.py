@@ -17,18 +17,57 @@ class Screen:
 
     def execute(self, operation: str) -> None:
         tokens = operation.split()
-        match tokens[0]:
-            case 'rect':
-                cols, rows = map(int, tokens[1].split('x'))
+        command = tokens[0]
+
+        match command:
+            case "rect":
+                cols, rows = self._parse_rect(tokens)
                 self._rect(cols, rows)
-            case 'rotate':
-                axis = tokens[1]          # "row" or "column"
-                index = int(tokens[2].split('=')[1])
-                amount = int(tokens[4])   # number after "by"
-                if axis == 'row':
+
+            case "rotate":
+                axis, index, amount = self._parse_rotate(tokens)
+                if axis == "row":
                     self._rotate_row(index, amount)
-                elif axis == 'column':
+                elif axis == "column":
                     self._rotate_col(index, amount)
+                else:
+                    raise ValueError(f"Invalid rotate axis: {axis}")
+
+            case _:
+                raise ValueError(f"Unknown operation: {operation}")
+
+    def _parse_rect(self, tokens: list[str]) -> tuple[int, int]:
+        if len(tokens) != 2:
+            raise ValueError(f"Invalid rect syntax: {' '.join(tokens)}")
+
+        try:
+            cols, rows = map(int, tokens[1].split("x"))
+        except ValueError as exc:
+            raise ValueError(f"Invalid rect dimensions: {tokens[1]}") from exc
+
+        return cols, rows
+
+    def _parse_rotate(self, tokens: list[str]) -> tuple[str, int, int]:
+        if len(tokens) != 5 or tokens[3] != "by":
+            raise ValueError(f"Invalid rotate syntax: {' '.join(tokens)}")
+
+        axis = tokens[1]
+
+        try:
+            index = int(tokens[2].split("=")[1])
+            amount = int(tokens[4])
+        except (IndexError, ValueError) as exc:
+            raise ValueError(f"Invalid rotate arguments: {' '.join(tokens)}") from exc
+
+        return axis, index, amount
+
+    def _parse_rotate_row(self, tokens: list[str]) -> tuple[int, int]:
+        _, _, y_part, _, amount = tokens
+        return int(y_part.split("=")[1]), int(amount)
+
+    def _parse_rotate_column(self, tokens: list[str]) -> tuple[int, int]:
+        _, _, x_part, _, amount = tokens
+        return int(x_part.split("=")[1]), int(amount)
 
     def _rect(self, cols: int, rows: int) -> None:
         for row in range(rows):
@@ -50,5 +89,7 @@ class Screen:
             self.screen[index][-amount:] + self.screen[index][:-amount]
         )
 
-    def __repr__(self) -> str:
+    def __str__(self) -> str:
         return "\n".join("".join(c.value for c in row) for row in self.screen)
+
+    __repr__ = __str__
