@@ -12,10 +12,6 @@ logging.basicConfig(
     )
 
 
-def solve(filename: str, cols: int, rows: int) -> int:
-    return solve_part1(get_data(filename), cols, rows)
-
-
 def solve_part1(operations: list[str], cols: int, rows: int) -> int:
     screen = Screen(cols, rows)
     logging.debug(screen)
@@ -32,10 +28,10 @@ def get_data(filename: str) -> list[str]:
 
 
 if __name__ == "__main__":
-    input_file, cols, rows = './2016/2016-08/example.txt', 7, 3
-    result1 = solve(input_file, cols, rows)
-    print(f"{input_file=}: {result1=}")
+    filename, cols, rows = './2016/2016-08/example.txt', 7, 3
+    result1 = solve_part1(get_data(filename), cols, rows)
+    print(f"{filename=}: {result1=}")
 
-    input_file, cols, rows = './2016/2016-08/input.txt', 50, 6
-    result1 = solve(input_file, cols, rows)
-    print(f"{input_file=}: {result1=}")
+    filename, cols, rows = './2016/2016-08/input.txt', 50, 6
+    result1 = solve_part1(get_data(filename), cols, rows)
+    print(f"{filename=}: {result1=}")
