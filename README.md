@@ -141,6 +141,10 @@ Solutions to the [Advent of Code](https://adventofcode.com/) puzzles
 
 ## [2016](https://adventofcode.com/2016)
 
+### [2016 Day 9: Explosives in Cyberspace](https://adventofcode.com/2016/day/9)
+
+* [My Solution (Python)](https://github.com/HashTag42/AdventOfCode/blob/main/2016/2016-09/AoC_2016_09.py)
+
 ### [2016 Day 8: Two-Factor Authentication](https://adventofcode.com/2016/day/8)
 
 * [My Solution (Python)](https://github.com/HashTag42/AdventOfCode/blob/main/2016/2016-08/AoC_2016_08.py)
