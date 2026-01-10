@@ -81,7 +81,55 @@ def find_acting_bot(bots: dict[int, list[int]]) -> int | None:
 
 
 def solve_part2(lines: list[str], search_ids: list[int]) -> int:
-    ...
+    bots: dict[int, list[int]] = {}
+    bins: dict[int, list[int]] = {}
+
+    # Process value instructions
+    value_instructions = [line for line in lines if line.split()[0] == 'value']
+    for instruction in value_instructions:
+        tokens = instruction.split()
+        chip_id, bot_id = int(tokens[1]), int(tokens[5])
+        bots.setdefault(bot_id, []).append(chip_id)
+
+    # Process bot rules
+    rules: dict[int, tuple[str, int, str, int]] = {}
+    bot_instructions = [line for line in lines if line.split()[0] == 'bot']
+    for instruction in bot_instructions:
+        tokens = instruction.split()
+        bot_id, low_type, low_id, high_type, high_id = (
+            int(tokens[1]), tokens[5], int(tokens[6]), tokens[10], int(tokens[11])
+        )
+        rules[bot_id] = (low_type, low_id, high_type, high_id)
+
+    # Run full simulation (no early exit)
+    while True:
+        acting_bot_id = find_acting_bot(bots)
+        if acting_bot_id is None:
+            break
+
+        chips = sorted(bots[acting_bot_id])
+        low, high = chips
+
+        if acting_bot_id not in rules:
+            raise KeyError(f"No rule for bot {acting_bot_id}")
+        low_type, low_id, high_type, high_id = rules[acting_bot_id]
+
+        # Give low chip
+        if low_type == 'bot':
+            bots.setdefault(low_id, []).append(low)
+        else:
+            bins.setdefault(low_id, []).append(low)
+
+        # Give high chip
+        if high_type == 'bot':
+            bots.setdefault(high_id, []).append(high)
+        else:
+            bins.setdefault(high_id, []).append(high)
+
+        bots[acting_bot_id] = []
+
+    # After simulation, compute product of outputs 0, 1, 2
+    return bins[0][0] * bins[1][0] * bins[2][0]
 
 
 def get_data(filename: str) -> list[str]:

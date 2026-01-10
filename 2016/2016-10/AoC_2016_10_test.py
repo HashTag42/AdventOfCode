@@ -3,8 +3,8 @@ import pytest
 
 test_cases = [
     # filename, chip_ids, expected
-    ('./2016/2016-10/example.txt', [2, 5], [2, 0]),
-    ('./2016/2016-10/input.txt', [17, 61], [147, 0]),
+    ('./2016/2016-10/example.txt', [2, 5], [2, 30]),
+    ('./2016/2016-10/input.txt', [17, 61], [147, 55637]),
 ]
 
 
